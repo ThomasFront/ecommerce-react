@@ -8,7 +8,7 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    color: #DDDDDD;
+    color: black;
     background-color: #DDDDDD;
     font-family: 'Montserrat', sans-serif;
   }

@@ -1,19 +1,12 @@
 import styled from "styled-components";
 
 export const CategoriesList = styled.aside`
-display: flex;
-justify-content: flex-start;
-align-items: center;
-flex-direction: column;
 margin-top: -20px;
-height: 93.8vh;
-padding-top: 20px;
-width: 100px;
-  background-color: #222831;
-
-  @media (min-width: 576px){
-    width: 200px;
-  }
+margin-bottom: 15px;
+padding: 20px 0;
+width: 100%;
+background-color: #222831;
+box-shadow: 0 0 10px black;
 `
 
 export const CategoryBox = styled.div`
@@ -21,7 +14,6 @@ display: flex;
 justify-content: center;
 align-items: center;
 flex-direction: column;
-  background-color: #222831;
 `
 
 export const CategoryName = styled.h1`
@@ -37,13 +29,26 @@ margin-bottom: 0.5em;
   }
 `
 
+export const CategoryContainer = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-start;
+`
+
 export const Category = styled.h2`
 text-align: center;
 width: 100%;
 margin-bottom: 0.2em;
 padding: 0.2em;
 font-size: 14px;
+color: rgb(201, 201, 199);
 cursor: pointer;
+transition: transform 0.2s, color 0.2s;
+
+&:hover {
+  transform: scale(1.15);
+  color: white;
+}
 
 @media (min-width: 576px) {
   font-size: 18px;

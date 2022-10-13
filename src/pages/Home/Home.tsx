@@ -1,13 +1,16 @@
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 import ProductsCategories from '../../components/ProductsCategories/ProductsCategories'
 import { TextWrapper } from '../../components/TextWrapper/TextWrapper'
+import { toogleShowSelector } from '../../store/slices/categoriesSlice'
 
 
 function Home() {
-  const [showProductsCategories, setShowProductsCategories] = useState(true)
+  const toggleVisible = useSelector(toogleShowSelector)
   return (
     <>
-      {showProductsCategories && <ProductsCategories />}
+      {toggleVisible && <ProductsCategories />}
+      <TextWrapper>homepage</TextWrapper>
     </>
   )
 }
