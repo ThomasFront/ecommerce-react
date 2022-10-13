@@ -1,14 +1,10 @@
 import { Link, NavLink } from "react-router-dom";
 import styled, { css } from "styled-components";
 
-type LinkItemProps = {
-  isActive?: boolean | null
-}
-
 export const NavbarDesign = styled.nav`
   position: fixed;
   margin: 0 auto;
-  background-color: white;
+  background-color: #222831;
   height: 60px;
   width: 100%;
 `
@@ -17,12 +13,12 @@ export const LinkItem = styled(NavLink)`
 padding: 0.5em;
 font-size: 30px;
   text-decoration: none;
-  color: black;
+  color: #eeeeee;
   cursor: pointer;
 
 
   &.active {
-    color: #573788;
+    color: #F05454;
   }
 `
 
@@ -43,6 +39,7 @@ export const BurgerIcon = styled.button`
   background-color: transparent;
   font-size: 30px;
   cursor: pointer;
+  color: #eeeeee;
 `
 
 export const LinkWrapper = styled.div`
