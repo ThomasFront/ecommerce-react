@@ -1,10 +1,11 @@
 import React from 'react'
 import { Wrapper } from '../Navbar/Navbar.styles'
+import { TextWrap } from '../TextWrapper/TextWrapper.styles'
 import { CategoriesList, Category, CategoryBox, CategoryName } from './ProductsCategories.styles'
 
 function ProductsCategories() {
   return (
-    <Wrapper>
+    <TextWrap>
       <CategoriesList>
         <CategoryBox>
           <CategoryName>Gender:</CategoryName>
@@ -21,7 +22,7 @@ function ProductsCategories() {
           <Category>Vans</Category>
         </CategoryBox>
       </CategoriesList>
-    </Wrapper>
+    </TextWrap>
   )
 }
 
