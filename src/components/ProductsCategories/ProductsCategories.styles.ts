@@ -6,10 +6,10 @@ justify-content: flex-start;
 align-items: center;
 flex-direction: column;
 margin-top: -20px;
-height: 100vh;
+height: 93.8vh;
 padding-top: 20px;
 width: 100px;
-  background-color: white;
+  background-color: #222831;
 
   @media (min-width: 576px){
     width: 200px;
@@ -21,11 +21,11 @@ display: flex;
 justify-content: center;
 align-items: center;
 flex-direction: column;
-  background-color: white;
+  background-color: #222831;
 `
 
 export const CategoryName = styled.h1`
-color: rgba(0, 0, 0, 0.6);
+color: #F05454;
 border-bottom: 2px solid gray;
 font-size: 16px;
 margin-top: 0.5em;
