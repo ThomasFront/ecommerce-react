@@ -16,7 +16,7 @@ export function Navbar() {
       <NavbarDesign>
         <Wrapper>
           <BurgerIcon><GiHamburgerMenu /></BurgerIcon>
-          <LinkItem to="/" style={{ fontSize: '22px', textAlign: 'center' }}><GiConverseShoe />FUTURE</LinkItem>
+          <LinkItem to="/" style={{ fontSize: '22px', textAlign: 'center', display: 'flex', alignItems: 'center' }}><GiConverseShoe />FUTURE</LinkItem>
           <RightSection>
             <LinkItem to="/profile"><BsFillPersonFill /></LinkItem>
             <LinkItem to="/cart"><FaShoppingCart /></LinkItem>
