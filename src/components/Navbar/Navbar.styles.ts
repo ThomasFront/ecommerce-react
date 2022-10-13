@@ -60,6 +60,5 @@ export const RightSection = styled.div`
   justify-content: space-between;
   align-items: center;
   height: 100%;
-  margin-right: 2em;
 `
 
