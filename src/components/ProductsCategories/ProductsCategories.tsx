@@ -7,7 +7,7 @@ function ProductsCategories() {
       <TextWrap>
         <CategoryContainer>
           <CategoryBox>
-            <CategoryName>Gender:</CategoryName>
+            <CategoryName>Categories:</CategoryName>
             <Category>All</Category>
             <Category>Man</Category>
             <Category>Woman</Category>
