@@ -7,6 +7,7 @@ margin-bottom: 15px;
 padding: 20px 0;
 width: 100%;
 background-color: #222831;
+z-index: 100;
 `
 
 export const CategoryBox = styled.div`

@@ -11,6 +11,7 @@ function ProductsCategories() {
             <Category>All</Category>
             <Category>Man</Category>
             <Category>Woman</Category>
+            <Category>Kids</Category>
           </CategoryBox>
           <CategoryBox>
             <CategoryName>Brand:</CategoryName>
