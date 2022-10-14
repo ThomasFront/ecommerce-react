@@ -19,6 +19,7 @@ width: 100%;
 max-width: 500px;
 height: 100%;
 border-radius: 6px;
+box-shadow: 0 0 15px gray;
 
 @media (min-width: 992px) {
     height: 400px;
