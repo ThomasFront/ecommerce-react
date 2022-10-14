@@ -1,6 +1,10 @@
 import { Link, NavLink } from "react-router-dom";
 import styled, { css } from "styled-components";
 
+type ButtonProps = {
+  isOpen?: boolean
+}
+
 export const NavbarDesign = styled.nav`
   position: fixed;
   margin: 0 auto;
@@ -8,6 +12,11 @@ export const NavbarDesign = styled.nav`
   height: 60px;
   width: 100%;
   z-index: 100;
+  
+
+  a:hover, button:hover {
+    color: #F05454;
+  }
 `
 
 export const LinkItem = styled(NavLink)`
@@ -33,13 +42,16 @@ export const Wrapper = styled.div`
 
 `
 
-export const BurgerIcon = styled.button`
+export const BurgerIcon = styled.button<ButtonProps>`
   margin-left: 0.5em;
   border: none;
   background-color: transparent;
   font-size: 30px;
   cursor: pointer;
   color: #eeeeee;
+  ${({ isOpen }) => isOpen && css`
+    color: #F05454;
+  `}
 `
 
 

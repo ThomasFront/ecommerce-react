@@ -4,17 +4,19 @@ import { FaShoppingCart } from 'react-icons/fa'
 import { BsFillPersonFill } from 'react-icons/bs'
 import { GiHamburgerMenu, GiConverseShoe } from 'react-icons/gi'
 import { useDispatch } from 'react-redux'
-import { toggleShow } from '../../store/slices/categoriesSlice'
+import { useSelector } from 'react-redux'
+import { toggleShow, toogleShowSelector } from '../../store/slices/categoriesSlice'
 
 
 export function Navbar() {
   const dispatch = useDispatch()
   const location = useLocation()
+  const burgerSelector = useSelector(toogleShowSelector)
   return (
     <>
       <NavbarDesign>
         <Wrapper>
-          {location.pathname === '/' && <BurgerIcon onClick={() => dispatch(toggleShow())}><GiHamburgerMenu /></BurgerIcon>}
+          {location.pathname === '/' && <BurgerIcon isOpen={burgerSelector} onClick={() => dispatch(toggleShow())}><GiHamburgerMenu /></BurgerIcon>}
           <LinkItem to="/" style={{ fontSize: '20px', textAlign: 'center', display: 'flex', alignItems: 'center', fontWeight: 'bold' }}><GiConverseShoe />FUTURE</LinkItem>
           <RightSection>
             <LinkItem to="/profile"><BsFillPersonFill /></LinkItem>
