@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import ProductsCategories from '../../components/ProductsCategories/ProductsCategories'
 import { TextWrapper } from '../../components/TextWrapper/TextWrapper'
-import { toogleShowSelector } from '../../store/slices/categoriesSlice'
+import { toggleShowSelector } from '../../store/slices/categoriesSlice'
 import { CategoryText, ShoesContainer } from './Home.styles'
 import { shoes, ShoesType } from '../../data/shoesdata'
 import ShoeItem from '../../components/ShoeItem/ShoeItem'
@@ -19,7 +19,7 @@ export type ShoeType = {
 
 
 function Home() {
-  const toggleVisible = useSelector(toogleShowSelector)
+  const toggleVisible = useSelector(toggleShowSelector)
   return (
     <>
       {toggleVisible && <ProductsCategories />}

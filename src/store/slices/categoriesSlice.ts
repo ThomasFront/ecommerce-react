@@ -25,5 +25,5 @@ export const categoriesSlice = createSlice({
 })
 
 export const { toggleShow } = categoriesSlice.actions
-export const toogleShowSelector = (state: RootState) => state.categories.isShow
+export const toggleShowSelector = (state: RootState) => state.categories.isShow
 export default categoriesSlice.reducer

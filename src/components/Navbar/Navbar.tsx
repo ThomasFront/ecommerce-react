@@ -5,13 +5,13 @@ import { BsFillPersonFill } from 'react-icons/bs'
 import { GiHamburgerMenu, GiConverseShoe } from 'react-icons/gi'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
-import { toggleShow, toogleShowSelector } from '../../store/slices/categoriesSlice'
+import { toggleShow, toggleShowSelector } from '../../store/slices/categoriesSlice'
 
 
 export function Navbar() {
   const dispatch = useDispatch()
   const location = useLocation()
-  const burgerSelector = useSelector(toogleShowSelector)
+  const burgerSelector = useSelector(toggleShowSelector)
   return (
     <>
       <NavbarDesign>
