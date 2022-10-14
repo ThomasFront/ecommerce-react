@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
 export const CategoriesList = styled.aside`
+position: fixed;
 margin-top: -20px;
 margin-bottom: 15px;
 padding: 20px 0;
 width: 100%;
 background-color: #222831;
-box-shadow: 0 0 10px black;
 `
 
 export const CategoryBox = styled.div`
