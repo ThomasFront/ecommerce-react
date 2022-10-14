@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from 'react-router'
 import { Desc, Price, ShoeCard, ShoeDescription, ShoeImage } from './ShoeItem.styles'
 
 type ShoeItemType = {
@@ -14,11 +15,11 @@ type ShoeItemType = {
 }
 
 function ShoeItem({ shoe }: ShoeItemType) {
-  const {id, price, category, brand, shortBrand, description, images } = shoe
-  console.log(images[0])
+  const { id, price, category, brand, shortBrand, description, images } = shoe
+  const navigate = useNavigate()
   return (
-    <ShoeCard>
-      <ShoeImage src={images[0]}/>
+    <ShoeCard onClick={() => navigate(`/product/${id}`)}>
+      <ShoeImage src={images[0]} />
       <ShoeDescription>
         <p>{brand}</p>
         <Desc>{description}</Desc>
