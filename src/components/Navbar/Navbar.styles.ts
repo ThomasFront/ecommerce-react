@@ -7,10 +7,10 @@ export const NavbarDesign = styled.nav`
   background-color: #222831;
   height: 60px;
   width: 100%;
+  z-index: 100;
 `
 
 export const LinkItem = styled(NavLink)`
-padding: 0.5em;
 font-size: 30px;
   text-decoration: none;
   color: #eeeeee;
@@ -42,11 +42,6 @@ export const BurgerIcon = styled.button`
   color: #eeeeee;
 `
 
-export const LinkWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`
 
 export const LogoWrapper = styled.div`
 display: flex;
@@ -60,5 +55,9 @@ export const RightSection = styled.div`
   justify-content: space-between;
   align-items: center;
   height: 100%;
+
+  a {
+    padding: 5px;
+  }
 `
 
