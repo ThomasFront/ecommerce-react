@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import ProductsCategories from '../../components/ProductsCategories/ProductsCategories'
 import { TextWrapper } from '../../components/TextWrapper/TextWrapper'
 import { toggleShowSelector } from '../../store/slices/categoriesSlice'
-import { CategoryText, ShoesContainer } from './Home.styles'
+import { Categories, Category, ShoesContainer } from './Home.styles'
 import { shoes, ShoesType } from '../../data/shoesdata'
 import ShoeItem from '../../components/ShoeItem/ShoeItem'
 
@@ -20,13 +20,19 @@ export type ShoeType = {
 
 function Home() {
   const toggleVisible = useSelector(toggleShowSelector)
+  const [activeCategory, setActiveCategory] = useState('')
   return (
     <>
       {toggleVisible && <ProductsCategories />}
       <TextWrapper>
-        <CategoryText>All products</CategoryText>
+        <Categories>
+          <Category onClick={() => setActiveCategory('')} isActive={!activeCategory}>All</Category>
+          <Category onClick={() => setActiveCategory('man')} isActive={activeCategory === 'man'}>Men</Category>
+          <Category onClick={() => setActiveCategory('woman')} isActive={activeCategory === 'woman'}>Women</Category>
+          <Category onClick={() => setActiveCategory('kids')} isActive={activeCategory === 'kids'}>Kids</Category>
+        </Categories>
         <ShoesContainer>
-          {shoes.map((shoe: ShoeType) => <ShoeItem key={shoe.id} shoe={shoe} />)}
+          {shoes.filter(({ category }) => !activeCategory || category === activeCategory).map((shoe) => <ShoeItem key={shoe.id} shoe={shoe} />)}
         </ShoesContainer>
       </TextWrapper>
     </>
