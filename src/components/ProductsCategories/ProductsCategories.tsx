@@ -7,13 +7,6 @@ function ProductsCategories() {
       <TextWrap>
         <CategoryContainer>
           <CategoryBox>
-            <CategoryName>Categories:</CategoryName>
-            <Category>All</Category>
-            <Category>Man</Category>
-            <Category>Woman</Category>
-            <Category>Kids</Category>
-          </CategoryBox>
-          <CategoryBox>
             <CategoryName>Brand:</CategoryName>
             <Category>All</Category>
             <Category>Adidas</Category>
