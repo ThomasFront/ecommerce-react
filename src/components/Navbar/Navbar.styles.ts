@@ -12,10 +12,11 @@ export const NavbarDesign = styled.nav`
   height: 60px;
   width: 100%;
   z-index: 100;
-  
 
-  a:hover, button:hover {
-    color: #F05454;
+  @media (min-width: 768px) {
+    a {
+      margin: 0 10px;
+    }
   }
 `
 
@@ -40,6 +41,19 @@ export const Wrapper = styled.div`
   max-width: 1400px;
   width: 100%;
 
+  @media (min-width: 768px) {
+    section {
+      display: none;
+    }
+  }
+
+  a, button {
+    transition: color 0.15s;
+  }
+
+  a:hover, button:hover {
+    color: #F05454;
+  }
 `
 
 export const BurgerIcon = styled.button<ButtonProps>`

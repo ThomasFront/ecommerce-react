@@ -18,7 +18,7 @@ function Product() {
     <TextWrapper>
       <Container>
         <Images>
-          <BigImage src={activeImage} alt="default image"/>
+          <BigImage src={activeImage} alt="default image" />
           <SmallImages>
             <img src={images[0]} alt="default mini image" onClick={() => handleImage(images[0])} />
             <img src={images[1]} alt="example mini image 1" onClick={() => handleImage(images[1])} />

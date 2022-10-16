@@ -1,4 +1,8 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+
+type CategoryProps =  {
+  isHiglighted?: boolean
+}
 
 export const CategoriesList = styled.aside`
 position: fixed;
@@ -8,6 +12,10 @@ padding: 20px 0;
 width: 100%;
 background-color: #222831;
 z-index: 100;
+
+@media (min-width: 768px){
+  display: none;
+}
 `
 
 export const CategoryBox = styled.div`
@@ -36,15 +44,18 @@ export const CategoryContainer = styled.div`
   align-items: flex-start;
 `
 
-export const Category = styled.h2`
+export const Category = styled.h2<CategoryProps>`
 text-align: center;
-width: 100%;
-margin-bottom: 0.2em;
+margin-bottom: 10px;
 padding: 0.2em;
 font-size: 14px;
 color: rgb(201, 201, 199);
 cursor: pointer;
 transition: transform 0.2s, color 0.2s;
+
+${({ isHighlighted }) => isHighlighted && css`
+  color: #F05454;;
+`}
 
 &:hover {
   transform: scale(1.15);

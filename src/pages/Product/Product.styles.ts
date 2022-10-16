@@ -105,7 +105,7 @@ h1 {
 }
 
 h2 {
-  font-weight: lighter;
+  font-weight: 400;
   margin-bottom: 20px;
   font-size: 18px;
 }

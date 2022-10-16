@@ -1,18 +1,29 @@
+import { useState } from 'react'
+import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import { brandSelector, changeBrand, toggleShow } from '../../store/slices/categoriesSlice'
 import { TextWrap } from '../TextWrapper/TextWrapper.styles'
 import { CategoriesList, Category, CategoryBox, CategoryContainer, CategoryName } from './ProductsCategories.styles'
 
 function ProductsCategories() {
+  const dispatch = useDispatch()
+  const brandSelect = useSelector(brandSelector)
+
+  const handleCategory = (brand: string) => {
+    dispatch(changeBrand(brand))
+    dispatch(toggleShow())
+  }
   return (
     <CategoriesList>
       <TextWrap>
         <CategoryContainer>
           <CategoryBox>
             <CategoryName>Brand:</CategoryName>
-            <Category>All</Category>
-            <Category>Adidas</Category>
-            <Category>Nike</Category>
-            <Category>New Balance</Category>
-            <Category>Vans</Category>
+            <Category onClick={() => handleCategory('')} isHighlighted={brandSelect === ''}>All</Category>
+            <Category onClick={() => handleCategory('Adidas')} isHighlighted={brandSelect === 'Adidas'}>Adidas</Category>
+            <Category onClick={() => handleCategory('Nike')} isHighlighted={brandSelect === 'Nike'}>Nike</Category>
+            <Category onClick={() => handleCategory('New Balance')} isHighlighted={brandSelect === 'New Balance'}>New Balance</Category>
+            <Category onClick={() => handleCategory('Vans')} isHighlighted={brandSelect === 'Vans'}>Vans</Category>
           </CategoryBox>
         </CategoryContainer>
       </TextWrap>
