@@ -39,7 +39,6 @@ flex-direction: column;
   }
 
   input {
-    margin-bottom: 15px;
     padding: 10px 20px;
     border-radius: 6px;
     border: none;
@@ -97,4 +96,13 @@ export const LoginButtons = styled.button`
     @media (min-width: 576px) {
       font-size: 20px;
     }
+  `
+
+  export const ErrorMsg = styled.p`
+  font-size: 10px;
+  border-bottom: 1px solid #F05454;
+  
+  @media (min-width: 576px) {
+    font-size: 12px;
+  }
   `
