@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router'
 import Layout from './components/Layout/Layout'
 import Cart from './pages/Cart/Cart'
 import Home from './pages/Home/Home'
+import Login from './pages/Login/Login'
 import Product from './pages/Product/Product'
 import Profile from './pages/Profile/Profile'
 
@@ -15,6 +16,7 @@ function App() {
         <Route path='/profile' element={<Profile />} />
         <Route path='/cart' element={<Cart />} />
         <Route path='/product/:productId' element={<Product />} />
+        <Route path='/login' element={<Login />} />
       </Routes>
     </Layout>
   )

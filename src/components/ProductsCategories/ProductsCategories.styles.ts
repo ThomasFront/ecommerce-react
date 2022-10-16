@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 type CategoryProps =  {
-  isHiglighted?: boolean
+  isHighlighted?: boolean
 }
 
 export const CategoriesList = styled.aside`
@@ -54,7 +54,7 @@ cursor: pointer;
 transition: transform 0.2s, color 0.2s;
 
 ${({ isHighlighted }) => isHighlighted && css`
-  color: #F05454;;
+  color: #F05454;
 `}
 
 &:hover {
