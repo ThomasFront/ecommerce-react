@@ -16,7 +16,9 @@ export function Navbar() {
     <>
       <NavbarDesign>
         <Wrapper>
-          {location.pathname === '/' && <BurgerIcon isOpen={burgerSelector} onClick={() => dispatch(toggleShow())}><GiHamburgerMenu /></BurgerIcon>}
+          <section>
+            {location.pathname === '/' && <BurgerIcon isOpen={burgerSelector} onClick={() => dispatch(toggleShow())}><GiHamburgerMenu /></BurgerIcon>}
+          </section>
           <LinkItem to="/" style={{ fontSize: '20px', textAlign: 'center', display: 'flex', alignItems: 'center', fontWeight: 'bold' }}><GiConverseShoe />FUTURE</LinkItem>
           <RightSection>
             <LinkItem to="/profile"><BsFillPersonFill /></LinkItem>

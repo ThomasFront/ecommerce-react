@@ -41,8 +41,8 @@ export const Price = styled.p`
   color: gold;
 `
 export const Desc = styled.p`
-font-weight: lighter;
-padding: 4px 0;
+  font-weight: lighter;
+  padding: 4px 0;
   color: #eeeeee;
   font-size: 12px;
 `
