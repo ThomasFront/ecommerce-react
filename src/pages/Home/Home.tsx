@@ -6,6 +6,7 @@ import { toggleShowSelector } from '../../store/slices/categoriesSlice'
 import { Categories, Category, ShoesContainer } from './Home.styles'
 import { shoes, ShoesType } from '../../data/shoesdata'
 import ShoeItem from '../../components/ShoeItem/ShoeItem'
+import Footer from '../../components/Footer/Footer'
 
 export type ShoeType = {
   id: number,
@@ -27,14 +28,15 @@ function Home() {
       <TextWrapper>
         <Categories>
           <Category onClick={() => setActiveCategory('')} isActive={!activeCategory}>All</Category>
-          <Category onClick={() => setActiveCategory('man')} isActive={activeCategory === 'man'}>Men</Category>
           <Category onClick={() => setActiveCategory('woman')} isActive={activeCategory === 'woman'}>Women</Category>
+          <Category onClick={() => setActiveCategory('man')} isActive={activeCategory === 'man'}>Men</Category>
           <Category onClick={() => setActiveCategory('kids')} isActive={activeCategory === 'kids'}>Kids</Category>
         </Categories>
         <ShoesContainer>
           {shoes.filter(({ category }) => !activeCategory || category === activeCategory).map((shoe) => <ShoeItem key={shoe.id} shoe={shoe} />)}
         </ShoesContainer>
       </TextWrapper>
+      <Footer />
     </>
   )
 }
