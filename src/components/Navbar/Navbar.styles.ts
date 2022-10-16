@@ -87,3 +87,11 @@ export const RightSection = styled.div`
   }
 `
 
+export const LoginButton = styled.button`
+color: white;
+text-transform: uppercase;
+background-color: transparent;
+padding: 5px 10px;
+border: none;
+cursor: pointer;
+`

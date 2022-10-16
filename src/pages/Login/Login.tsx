@@ -1,25 +1,62 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { TextWrapper } from '../../components/TextWrapper/TextWrapper'
-import { Container, LoginButtons, LogInWrapper, RegisterButton, RegisterText } from './Login.styles'
+import { Container, ErrorMsg, LoginButtons, LogInWrapper, RegisterButton, RegisterText } from './Login.styles'
+import { SubmitHandler, useForm } from "react-hook-form";
+import * as yup from 'yup'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { auth, logInWithEmailAndPassword, signInWithGoogle } from '../../firebase/firebase';
+import { useNavigate } from 'react-router';
+import { useAuthState } from 'react-firebase-hooks/auth';
+
+type Inputs = {
+  email: string,
+  password: string,
+};
 
 function Login() {
+  const navigate = useNavigate()
+  const [user, loading, error] = useAuthState(auth);
+
+  const onSubmit: SubmitHandler<Inputs> = ({email, password}) => {
+    logInWithEmailAndPassword(email, password)
+  };
+
+  const schema = yup.object().shape({
+    email: yup.string().required(),
+    password: yup.string().required(),
+  })
+
+  const { register, handleSubmit, formState: { errors } } = useForm<Inputs>({
+    resolver: yupResolver(schema)
+  });
+
+  useEffect(() => {
+    if (user) {
+      navigate('/')
+    }
+  }, [user])
+
 
   return (
     <TextWrapper>
       <Container>
         <LogInWrapper>
-          <form>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <input
               type="email"
-              placeholder='E-mail Address' />
+              placeholder='E-mail Address'
+              {...register('email')} />
+            <ErrorMsg>{errors.email?.message}</ErrorMsg>
             <input
               type="password"
-              placeholder='Password' />
+              placeholder='Password'
+              {...register('password')} />
+            <ErrorMsg>{errors.password?.message}</ErrorMsg>
             <LoginButtons>Login</LoginButtons>
           </form>
           <p>or</p>
-          <LoginButtons>Login with Google</LoginButtons>
-          <RegisterText>Don't have an account? <RegisterButton>Register</RegisterButton> now</RegisterText>
+          <LoginButtons onClick={signInWithGoogle}>Login with Google</LoginButtons>
+          <RegisterText>Don't have an account? <RegisterButton onClick={() => navigate('/register')}>Register</RegisterButton> now</RegisterText>
         </LogInWrapper>
       </Container>
     </TextWrapper>
