@@ -19,7 +19,7 @@ function ShoeItem({ shoe }: ShoeItemType) {
   const navigate = useNavigate()
   return (
     <ShoeCard onClick={() => navigate(`/product/${id}`)}>
-      <ShoeImage loading='lazy' width={250} height={360} src={images[0]} />
+      <ShoeImage loading='lazy' width={250} height={360} src={images[0]}/>
       <ShoeDescription>
         <p>{brand}</p>
         <Desc>{description}</Desc>

@@ -95,3 +95,17 @@ padding: 5px 10px;
 border: none;
 cursor: pointer;
 `
+export const CartContainer = styled.div`
+  position: relative;
+
+p {
+  position: absolute;
+  top: -5px;
+  right: 10px;
+  background-color: red;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  text-align: center;
+}
+`
