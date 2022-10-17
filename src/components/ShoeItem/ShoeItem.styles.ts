@@ -12,7 +12,7 @@ cursor: pointer;
 transition: transform 0.2s;
 
 &:hover {
-  transform: scale(1.05);
+  transform: translateY(-10px);
 
 }
 
