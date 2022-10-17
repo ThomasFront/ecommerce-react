@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import ProductsCategories from '../../components/ProductsCategories/ProductsCategories'
 import { TextWrapper } from '../../components/TextWrapper/TextWrapper'
 import { brandSelector, changeBrand, toggleShowSelector } from '../../store/slices/categoriesSlice'
-import { Brand, Brands, BrandTitle, Categories, Category, CategoryTitle, ShoesContainer } from './Home.styles'
+import { Brand, Brands, BrandTitle, Categories, Category, CategoryTitle, SelectContainer, ShoesContainer } from './Home.styles'
 import { shoes, ShoesType } from '../../data/shoesdata'
 import ShoeItem from '../../components/ShoeItem/ShoeItem'
 import { useDispatch } from 'react-redux'
@@ -24,6 +24,9 @@ function Home() {
   const brandSelect = useSelector(brandSelector)
   const dispatch = useDispatch()
   const [activeCategory, setActiveCategory] = useState('')
+  const [selectedValue, setSelectedValue] = useState(0)
+  console.log(selectedValue)
+
   return (
     <>
       {toggleVisible && <ProductsCategories />}
@@ -43,6 +46,14 @@ function Home() {
           <Brand onClick={() => dispatch(changeBrand('New Balance'))} isHighlighted={brandSelect === 'New Balance'}>New Balance</Brand>
           <Brand onClick={() => dispatch(changeBrand('Vans'))} isHighlighted={brandSelect === 'Vans'}>Vans</Brand>
         </Brands>
+        <SelectContainer>
+          <CategoryTitle>Sort by:</CategoryTitle>
+          <select defaultValue={selectedValue} onChange={e => setSelectedValue(parseInt(e.target.value))}>
+            <option value={0}>Most popular</option>
+            <option value={1}>Lowest price</option>
+            <option value={2}>Highest price</option>
+          </select>
+        </SelectContainer>
         <ShoesContainer>
           {shoes.filter(({ category }) => !activeCategory || category === activeCategory).filter(({ shortBrand }) => shortBrand === brandSelect || !brandSelect).map((shoe) => <ShoeItem key={shoe.id} shoe={shoe} />)}
         </ShoesContainer>

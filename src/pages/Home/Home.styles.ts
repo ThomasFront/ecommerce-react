@@ -111,3 +111,15 @@ export const Brand = styled.button<ButtonProps>`
     padding: 12px 24px;
   }
 `
+
+export const SelectContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 20px;
+
+  select {
+    margin-top: 10px;
+  }
+`
