@@ -4,13 +4,13 @@ import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, signInWith
 import { query, where, collection, getDocs, getFirestore, addDoc } from 'firebase/firestore'
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCeUtuFKTgYo7rD7uYNg6QiantwCrwlSDs",
-  authDomain: "futureproject-95796.firebaseapp.com",
-  projectId: "futureproject-95796",
-  storageBucket: "futureproject-95796.appspot.com",
-  messagingSenderId: "987228157409",
-  appId: "1:987228157409:web:a6ad147c056d1c0700cea0",
-  measurementId: "G-L4RJ12W8QP"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
 
 const app = initializeApp(firebaseConfig);
