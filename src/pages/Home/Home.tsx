@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import ProductsCategories from '../../components/ProductsCategories/ProductsCategories'
 import { TextWrapper } from '../../components/TextWrapper/TextWrapper'
@@ -7,6 +7,8 @@ import { Brand, Brands, BrandTitle, Categories, Category, CategoryTitle, SelectC
 import { shoes, ShoesType } from '../../data/shoesdata'
 import ShoeItem from '../../components/ShoeItem/ShoeItem'
 import { useDispatch } from 'react-redux'
+import { collection, getDocs } from 'firebase/firestore'
+import { db } from '../../firebase/firebase'
 
 export type ShoeType = {
   id: number,
@@ -18,13 +20,13 @@ export type ShoeType = {
   images: Array<string>
 }
 
-
 function Home() {
   const toggleVisible = useSelector(toggleShowSelector)
   const brandSelect = useSelector(brandSelector)
   const dispatch = useDispatch()
   const [activeCategory, setActiveCategory] = useState('')
   const [selectedValue, setSelectedValue] = useState('Popular')
+  const [allShoes, setAllShoes] = useState<ShoesType | null>(null)
 
   const handleSort = (a: ShoeType, b: ShoeType) => {
     switch (selectedValue) {
@@ -36,6 +38,16 @@ function Home() {
         return 0
     }
   }
+
+  const getAllShoes = async () => {
+    const docs = await getDocs(collection(db, "products"))
+    const shoes = docs.docs.map((doc) => doc.data()) as ShoesType
+    setAllShoes(shoes)
+  }  
+
+  useEffect(() => {
+    getAllShoes()
+  }, [])
 
   return (
     <>
@@ -65,8 +77,8 @@ function Home() {
           </select>
         </SelectContainer>
         <ShoesContainer>
-          {shoes
-            .filter(({ category }) => !activeCategory || category === activeCategory)
+          {allShoes
+            ?.filter(({ category }) => !activeCategory || category === activeCategory)
             .filter(({ shortBrand }) => shortBrand === brandSelect || !brandSelect)
             .sort((a, b) => handleSort(a, b))
             .map((shoe) => <ShoeItem key={shoe.id} shoe={shoe} />

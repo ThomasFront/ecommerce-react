@@ -5,9 +5,10 @@ import { BsFillPersonFill } from 'react-icons/bs'
 import { GiHamburgerMenu, GiConverseShoe } from 'react-icons/gi'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
-import { cartSelector, toggleShow, toggleShowSelector } from '../../store/slices/categoriesSlice'
+import { toggleShow, toggleShowSelector } from '../../store/slices/categoriesSlice'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth, logout } from '../../firebase/firebase'
+import { cartSelector } from '../../store/slices/userSlice'
 
 
 export function Navbar() {
@@ -16,7 +17,7 @@ export function Navbar() {
   const navigate = useNavigate()
   const burgerSelector = useSelector(toggleShowSelector)
   const [user, loading, error] = useAuthState(auth);
-  const cartAmount = useSelector(cartSelector)
+  const cart = useSelector(cartSelector)
   return (
     <>
       <NavbarDesign>
@@ -30,7 +31,7 @@ export function Navbar() {
             {user && <LinkItem to="/profile"><BsFillPersonFill /></LinkItem>}
             <CartContainer>
               <LinkItem to="/cart"><FaShoppingCart /></LinkItem>
-              {cartAmount.length > 0 ? <p>{cartAmount.length}</p> : ''}
+              <p>{cart.length}</p>
             </CartContainer>
           </RightSection>
         </Wrapper>
