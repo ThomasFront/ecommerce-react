@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import ProductsCategories from '../../components/ProductsCategories/ProductsCategories'
 import { TextWrapper } from '../../components/TextWrapper/TextWrapper'
@@ -7,6 +7,8 @@ import { Brand, Brands, BrandTitle, Categories, Category, CategoryTitle, SelectC
 import { shoes, ShoesType } from '../../data/shoesdata'
 import ShoeItem from '../../components/ShoeItem/ShoeItem'
 import { useDispatch } from 'react-redux'
+import { addDoc, collection, getDocs } from 'firebase/firestore'
+import { db } from '../../firebase/firebase'
 
 export type ShoeType = {
   id: number,
@@ -24,8 +26,42 @@ function Home() {
   const brandSelect = useSelector(brandSelector)
   const dispatch = useDispatch()
   const [activeCategory, setActiveCategory] = useState('')
-  const [selectedValue, setSelectedValue] = useState(0)
-  console.log(selectedValue)
+  const [selectedValue, setSelectedValue] = useState<ProductSortEnum>(0)
+  const [allShoes, setAllShoes] = useState<ShoesType | null>(null)
+  const [loading, setLoading] = useState(true)
+
+  const getShoes = async () => {
+    const docs = await getDocs(collection(db, "products"));
+    const data = docs.docs.map(doc => doc.data()) as ShoesType
+    setAllShoes(data)
+  }
+
+  useEffect(() => {
+    getShoes()
+  }, [])
+
+  useEffect(() => {
+    if(!!allShoes){
+    setLoading(false)
+    }
+  }, [allShoes])
+
+  enum ProductSortEnum {
+    mostPopular = 0,
+    lowestPrice = 1,
+    highestPrice = 2
+  }
+
+  const handleSort = (a: ShoeType, b: ShoeType) => {
+    switch (selectedValue) {
+      case ProductSortEnum.highestPrice:
+        return b.price - a.price
+      case ProductSortEnum.lowestPrice:
+        return a.price - b.price
+      default:
+        return 0
+    }
+  }
 
   return (
     <>
@@ -48,14 +84,15 @@ function Home() {
         </Brands>
         <SelectContainer>
           <CategoryTitle>Sort by:</CategoryTitle>
-          <select defaultValue={selectedValue} onChange={e => setSelectedValue(parseInt(e.target.value))}>
-            <option value={0}>Most popular</option>
-            <option value={1}>Lowest price</option>
-            <option value={2}>Highest price</option>
+          <select value={selectedValue} onChange={e => setSelectedValue(parseInt(e.target.value))}>
+            <option value={ProductSortEnum.mostPopular}>Most popular</option>
+            <option value={ProductSortEnum.lowestPrice}>Lowest price</option>
+            <option value={ProductSortEnum.highestPrice}>Highest price</option>
           </select>
         </SelectContainer>
+        {loading && 'loading'}
         <ShoesContainer>
-          {shoes.filter(({ category }) => !activeCategory || category === activeCategory).filter(({ shortBrand }) => shortBrand === brandSelect || !brandSelect).map((shoe) => <ShoeItem key={shoe.id} shoe={shoe} />)}
+          {allShoes?.filter(({ category }) => !activeCategory || category === activeCategory).filter(({ shortBrand }) => shortBrand === brandSelect || !brandSelect).sort((a, b) => handleSort(a, b)).map((shoe) => <ShoeItem key={shoe.id} shoe={shoe} />)}
         </ShoesContainer>
       </TextWrapper>
     </>

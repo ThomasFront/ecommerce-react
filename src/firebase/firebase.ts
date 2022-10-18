@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
-import { query, where, collection, getDocs, getFirestore, addDoc } from 'firebase/firestore'
+import { query, where, collection, getDocs, getFirestore, addDoc, setDoc, doc } from 'firebase/firestore'
 
 const firebaseConfig = {
   apiKey: "AIzaSyCeUtuFKTgYo7rD7uYNg6QiantwCrwlSDs",
@@ -28,7 +28,7 @@ export const signInWithGoogle = async () => {
     const q = query(collection(db, "users"), where("uid", "==", user.uid));
     const docs = await getDocs(q);
     if (docs.docs.length === 0) {
-      await addDoc(collection(db, "users"), {
+      await setDoc(doc(db, "users", user.uid), {
         uid: user.uid,
         name: user.displayName,
         authProvider: "google",
@@ -56,7 +56,7 @@ export const registerWithEmailAndPassword = async (name: string, email: string, 
   try {
     const res = await createUserWithEmailAndPassword(auth, email, password);
     const user = res.user;
-    await addDoc(collection(db, "users"), {
+    await setDoc(doc(db, "users", user.uid), {
       uid: user.uid,
       name,
       email,

@@ -1,4 +1,6 @@
-export type ShoesType = Array<{
+export type ShoesType = Array<ShoeType>
+
+export type ShoeType = {
   id: number,
   price: number,
   category:string,
@@ -6,7 +8,7 @@ export type ShoesType = Array<{
   shortBrand: string,
   description: string,
   images: Array<string>
-}>
+}
 
 export const shoes: ShoesType = [
 	{

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useParams } from 'react-router'
 import { TextWrapper } from '../../components/TextWrapper/TextWrapper'
@@ -8,7 +8,10 @@ import { AboutProduct, BigImage, Container, Images, SmallImages, SpaceContainer 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch } from 'react-redux'
-import { addItemToCart } from '../../store/slices/categoriesSlice'
+import { doc, setDoc } from 'firebase/firestore'
+import { addProduct, addToCart, cartSelector } from '../../store/slices/userSlice'
+import { unwrapResult } from '@reduxjs/toolkit'
+import { useSelector } from 'react-redux'
 
 type ProductType = Array<{
   id: number,
@@ -26,13 +29,14 @@ function Product() {
   const { brand, category, description, id, images, shortBrand, price } = product[0]
   const [activeImage, setActiveImage] = useState(images[0])
   const [user, loading, error] = useAuthState(auth);
+  const cart = useSelector(cartSelector)
   const dispatch = useDispatch()
 
   const handleImage = (clickedImage: string) => {
     setActiveImage(clickedImage)
   }
 
-  const addProductToCart = async (product: ProductType) => {
+  const addProductToCart = async (product: number) => {
     if (!user) {
       toast.error('You must log in to add a product', {
         position: "bottom-left",
@@ -45,7 +49,10 @@ function Product() {
         theme: "dark",
       });
     } else {
-      dispatch(addItemToCart(product[0]))
+      dispatch(addToCart(parseInt(productId as string)))
+      await setDoc(doc(db, "users", user.uid), {
+        cart: addProduct(cart, parseInt(productId as string))
+      }, { merge: true });
       toast.success('The product has been added to the cart', {
         position: "bottom-left",
         autoClose: 4000,
@@ -58,6 +65,14 @@ function Product() {
       })
     }
   }
+
+  useEffect(() => {
+    if(!!cart.length){
+      setDoc(doc(db, "users", user?.uid as string), {
+        cart,
+      }, { merge: true });
+    }
+  }, [cart])
 
   return (
     <TextWrapper>
@@ -77,7 +92,7 @@ function Product() {
           <h2>{description}</h2>
           <SpaceContainer>
             <h3>${price}</h3>
-            <button onClick={() => addProductToCart(product)}>Add to cart</button>
+            <button onClick={() => addProductToCart(parseInt(productId as string))}>Add to cart</button>
           </SpaceContainer>
         </AboutProduct>
       </Container>
