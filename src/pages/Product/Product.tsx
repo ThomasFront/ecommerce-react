@@ -5,10 +5,12 @@ import { TextWrapper } from '../../components/TextWrapper/TextWrapper'
 import { shoes } from '../../data/shoesdata'
 import { auth, db } from '../../firebase/firebase'
 import { AboutProduct, BigImage, Container, Images, SmallImages, SpaceContainer } from './Product.styles'
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast, ToastPosition, Theme, ToastOptions } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch } from 'react-redux'
-import { addItemToCart } from '../../store/slices/categoriesSlice'
+import { doc, updateDoc } from 'firebase/firestore'
+import { cartSelector, handleAddToCart, overwriteCart } from '../../store/slices/userSlice'
+import { useSelector } from 'react-redux'
 
 type ProductType = Array<{
   id: number,
@@ -27,35 +29,34 @@ function Product() {
   const [activeImage, setActiveImage] = useState(images[0])
   const [user, loading, error] = useAuthState(auth);
   const dispatch = useDispatch()
+  const cart = useSelector(cartSelector)
 
   const handleImage = (clickedImage: string) => {
     setActiveImage(clickedImage)
   }
 
-  const addProductToCart = async (product: ProductType) => {
+  const toastOptions: ToastOptions = {
+    position: "bottom-left",
+    autoClose: 4000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+  }
+
+  const addProductToCart = async (id: number) => {
     if (!user) {
-      toast.error('You must log in to add a product', {
-        position: "bottom-left",
-        autoClose: 4000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
+      toast.error('You must log in to add a product', toastOptions);
     } else {
-      dispatch(addItemToCart(product[0]))
-      toast.success('The product has been added to the cart', {
-        position: "bottom-left",
-        autoClose: 4000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
+      const userRef = doc(db, "users", user.uid)
+      const newCart = handleAddToCart(cart, id)
+      await updateDoc(userRef, {
+        cart: newCart
       })
+      dispatch(overwriteCart(newCart))
+      toast.success('The product has been added to the cart', toastOptions)
     }
   }
 
@@ -77,7 +78,7 @@ function Product() {
           <h2>{description}</h2>
           <SpaceContainer>
             <h3>${price}</h3>
-            <button onClick={() => addProductToCart(product)}>Add to cart</button>
+            <button onClick={() => addProductToCart(parseInt(productId as string))}>Add to cart</button>
           </SpaceContainer>
         </AboutProduct>
       </Container>
