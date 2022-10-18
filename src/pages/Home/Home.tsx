@@ -24,8 +24,18 @@ function Home() {
   const brandSelect = useSelector(brandSelector)
   const dispatch = useDispatch()
   const [activeCategory, setActiveCategory] = useState('')
-  const [selectedValue, setSelectedValue] = useState(0)
-  console.log(selectedValue)
+  const [selectedValue, setSelectedValue] = useState('Popular')
+
+  const handleSort = (a: ShoeType, b: ShoeType) => {
+    switch (selectedValue) {
+      case 'Lowest':
+        return a.price - b.price
+      case 'Highest':
+        return b.price - a.price
+      default:
+        return 0
+    }
+  }
 
   return (
     <>
@@ -48,14 +58,19 @@ function Home() {
         </Brands>
         <SelectContainer>
           <CategoryTitle>Sort by:</CategoryTitle>
-          <select defaultValue={selectedValue} onChange={e => setSelectedValue(parseInt(e.target.value))}>
-            <option value={0}>Most popular</option>
-            <option value={1}>Lowest price</option>
-            <option value={2}>Highest price</option>
+          <select value={selectedValue} onChange={e => setSelectedValue(e.target.value)}>
+            <option value="Popular">Most popular</option>
+            <option value="Lowest">Lowest price</option>
+            <option value="Highest">Highest price</option>
           </select>
         </SelectContainer>
         <ShoesContainer>
-          {shoes.filter(({ category }) => !activeCategory || category === activeCategory).filter(({ shortBrand }) => shortBrand === brandSelect || !brandSelect).map((shoe) => <ShoeItem key={shoe.id} shoe={shoe} />)}
+          {shoes
+            .filter(({ category }) => !activeCategory || category === activeCategory)
+            .filter(({ shortBrand }) => shortBrand === brandSelect || !brandSelect)
+            .sort((a, b) => handleSort(a, b))
+            .map((shoe) => <ShoeItem key={shoe.id} shoe={shoe} />
+            )}
         </ShoesContainer>
       </TextWrapper>
     </>
