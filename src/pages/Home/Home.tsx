@@ -4,13 +4,13 @@ import ProductsCategories from '../../components/ProductsCategories/ProductsCate
 import { TextWrapper } from '../../components/TextWrapper/TextWrapper'
 import { brandSelector, changeBrand, toggleShowSelector } from '../../store/slices/categoriesSlice'
 import { Brand, Brands, BrandTitle, Categories, Category, CategoryTitle, SelectContainer, ShoesContainer } from './Home.styles'
-import { shoes, ShoesType } from '../../data/shoesdata'
 import ShoeItem from '../../components/ShoeItem/ShoeItem'
 import { useDispatch } from 'react-redux'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth, db } from '../../firebase/firebase'
 import { collection, getDocs, query, where } from 'firebase/firestore'
 import { addUserInfo, userInfoType } from '../../store/slices/userSlice'
+import { addAllProducts, productsSelector, ShoesType } from '../../store/slices/productsSlice'
 
 export type ShoeType = {
   id: number,
@@ -29,12 +29,25 @@ function Home() {
   const [activeCategory, setActiveCategory] = useState('')
   const [selectedValue, setSelectedValue] = useState('Popular')
   const [user, loading, error] = useAuthState(auth)
+  const allShoes = useSelector(productsSelector)
 
   const getUser = async () => {
     const q = query(collection(db, "users"), where("uid", "==", user?.uid));
     const docs = await getDocs(q);
     dispatch(addUserInfo(docs.docs[0].data() as userInfoType))
   }
+
+  const getAllShoes = async () => {
+    const docs = await getDocs(collection(db, "products"))
+    const data = docs.docs.map((product) => {
+      return product.data()
+    })
+    dispatch(addAllProducts(data as ShoesType))
+  }
+
+  useEffect(() => {
+    getAllShoes()
+  }, [allShoes])
 
   useEffect(() => {
     getUser()
@@ -79,8 +92,8 @@ function Home() {
           </select>
         </SelectContainer>
         <ShoesContainer>
-          {shoes
-            .filter(({ category }) => !activeCategory || category === activeCategory)
+          {allShoes
+            ?.filter(({ category }) => !activeCategory || category === activeCategory)
             .filter(({ shortBrand }) => shortBrand === brandSelect || !brandSelect)
             .sort((a, b) => handleSort(a, b))
             .map((shoe) => <ShoeItem key={shoe.id} shoe={shoe} />
