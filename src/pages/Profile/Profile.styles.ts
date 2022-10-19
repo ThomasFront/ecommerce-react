@@ -64,6 +64,9 @@ export const DeleteAccountInfo = styled.div`
   align-items: flex-end;
 
   button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #f05454;
     padding: 5px 10px;
     border: none;
@@ -78,6 +81,71 @@ export const DeleteAccountInfo = styled.div`
 
     @media (min-width: 576px){
       padding: 10px 20px;    
+    }
+  }
+`
+
+export const DeleteModal = styled.div`
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+`
+
+export const ModalWrapper = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+padding: 10px;
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+background-color: white;
+min-width: 250px;
+height: 300px;
+border-radius: 10px;
+
+@media (min-width: 576px){
+  justify-content: space-evenly;
+  width: 500px;
+ }
+
+p{
+  text-align: center;
+
+  @media (min-width: 576px){
+      font-size: 22px;
+    }
+}
+`
+
+export const ButtonsWrapper = styled.div`
+display: flex;
+justify-content: space-evenly;
+align-items: center;
+  margin-top: 40px;
+
+  button{
+    padding: 5px 10px;
+    margin: 0 40px;
+    background-color: #222831;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    transition: background-color 0.3s, color 0.3s;
+    cursor: pointer;
+
+    &:hover {
+      background-color: gray;
+      color: black;
+    }
+
+    @media (min-width: 576px){
+      font-size: 18px;
+      padding: 7px 14px;
     }
   }
 `
