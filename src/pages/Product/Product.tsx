@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch } from 'react-redux'
 import { addItemToCart } from '../../store/slices/categoriesSlice'
 import { useSelector } from 'react-redux'
+import { ShoeType } from '../Home/Home'
 import { productsSelector } from '../../store/slices/productsSlice'
 
 type ProductType = Array<{
@@ -24,7 +25,7 @@ type ProductType = Array<{
 function Product() {
   const { productId } = useParams()
   const allShoes = useSelector(productsSelector)
-  const product = allShoes?.filter((shoe) => shoe.id === parseInt(productId as string))
+  const product = allShoes?.filter((shoe: ShoeType) => shoe.id === parseInt(productId as string))
   const { brand, category, description, id, images, shortBrand, price } = product[0]
   const [activeImage, setActiveImage] = useState(images[0])
   const [user, loading, error] = useAuthState(auth);

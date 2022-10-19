@@ -93,10 +93,10 @@ function Home() {
         </SelectContainer>
         <ShoesContainer>
           {allShoes
-            ?.filter(({ category }) => !activeCategory || category === activeCategory)
-            .filter(({ shortBrand }) => shortBrand === brandSelect || !brandSelect)
-            .sort((a, b) => handleSort(a, b))
-            .map((shoe) => <ShoeItem key={shoe.id} shoe={shoe} />
+            ?.filter(({ category }: ShoeType) => !activeCategory || category === activeCategory)
+            .filter(({ shortBrand }: ShoeType) => shortBrand === brandSelect || !brandSelect)
+            .sort((a: ShoeType, b: ShoeType) => handleSort(a, b))
+            .map((shoe: ShoeType) => <ShoeItem key={shoe.id} shoe={shoe} />
             )}
         </ShoesContainer>
       </TextWrapper>
