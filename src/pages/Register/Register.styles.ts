@@ -10,7 +10,7 @@ export const Container = styled.div`
 export const ErrorMsg = styled.p`
   font-size: 10px;
   border-bottom: 1px solid #F05454;
-  color: white;
+  color: black;
   
   @media (min-width: 576px) {
     font-size: 12px;
@@ -57,8 +57,8 @@ export const RegisterWrapper = styled.div`
   max-width: 700px;
   width: 100%;
   border-radius: 6px;
-  box-shadow: 0 0 10px black;
-  background-color: rgba(0, 0, 0, 0.8);
+  box-shadow: 0 0 10px gray;
+  background-color: white;
 
   form {
     display: flex;
@@ -93,7 +93,10 @@ export const RegisterWrapper = styled.div`
     margin: 10px 0;
     padding: 10px 20px;
     border-radius: 6px;
-    border: none;
+    background-color: rgba(0, 0, 0, 0.8);
+    box-shadow: 0 0 10px gray;
+    border: 1px solid black;
+    color: white;
     font-family: 'Montserrat', sans-serif;
 
     &:focus {

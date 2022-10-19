@@ -25,8 +25,8 @@ flex-direction: column;
   max-width: 700px;
   width: 100%;
   border-radius: 6px;
-  box-shadow: 0 0 10px black;
-  background-color: rgba(0, 0, 0, 0.8);
+  box-shadow: 0 0 10px gray;
+  background-color: white;
 
   form {
     display: flex;
@@ -41,8 +41,11 @@ flex-direction: column;
   input {
     padding: 10px 20px;
     border-radius: 6px;
-    border: none;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    border: 1px solid black;
     font-family: 'Montserrat', sans-serif;
+    box-shadow: 0 0 10px gray;
 
     &:focus {
       outline: transparent;
@@ -54,7 +57,7 @@ flex-direction: column;
   }
 
   p {
-    color: white;
+    color: black;
     margin: 10px 0;
   }
 `

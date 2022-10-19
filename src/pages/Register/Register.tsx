@@ -46,17 +46,17 @@ function Register() {
           <form onSubmit={handleSubmit(onSubmit)}>
             <input
               type="email"
-              placeholder='email'
+              placeholder='Email'
               {...register('email')} />
             <ErrorMsg>{errors.email?.message}</ErrorMsg>
             <input
               type="password"
-              placeholder='password'
+              placeholder='Password'
               {...register('password')} />
             <ErrorMsg>{errors.password?.message}</ErrorMsg>
             <input
               type="text"
-              placeholder='name'
+              placeholder='Name'
               {...register('name')} />
             <ErrorMsg>{errors.name?.message}</ErrorMsg>
             <button>Register</button>
