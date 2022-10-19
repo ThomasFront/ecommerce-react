@@ -10,7 +10,11 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth, db } from '../../firebase/firebase'
 import { collection, getDocs, query, where } from 'firebase/firestore'
 import { addUserInfo, userInfoType } from '../../store/slices/userSlice'
-import { addAllProducts, productsSelector, ShoesType } from '../../store/slices/productsSlice'
+import { addAllProducts, handleLoading, loadingSelector, productsSelector, ShoesType } from '../../store/slices/productsSlice'
+import {
+  MutatingDots
+
+} from 'react-loader-spinner'
 
 export type ShoeType = {
   id: number,
@@ -28,13 +32,15 @@ function Home() {
   const dispatch = useDispatch()
   const [activeCategory, setActiveCategory] = useState('')
   const [selectedValue, setSelectedValue] = useState('Popular')
-  const [user, loading, error] = useAuthState(auth)
+  const [user, error] = useAuthState(auth)
   const allShoes = useSelector(productsSelector)
+  const loading = useSelector(loadingSelector)
 
   const getUser = async () => {
     const q = query(collection(db, "users"), where("uid", "==", user?.uid));
     const docs = await getDocs(q);
-    dispatch(addUserInfo(docs.docs[0].data() as userInfoType))
+    const userData = docs.docs[0].data() as userInfoType
+    dispatch(addUserInfo(userData))
   }
 
   const getAllShoes = async () => {
@@ -43,6 +49,7 @@ function Home() {
       return product.data()
     })
     dispatch(addAllProducts(data as ShoesType))
+    dispatch(handleLoading(false))
   }
 
   useEffect(() => {
@@ -50,7 +57,9 @@ function Home() {
   }, [allShoes])
 
   useEffect(() => {
-    getUser()
+    if(!!user){
+      getUser()
+    }
   }, [user])
 
   const handleSort = (a: ShoeType, b: ShoeType) => {
@@ -92,12 +101,21 @@ function Home() {
           </select>
         </SelectContainer>
         <ShoesContainer>
-          {allShoes
-            ?.filter(({ category }: ShoeType) => !activeCategory || category === activeCategory)
-            .filter(({ shortBrand }: ShoeType) => shortBrand === brandSelect || !brandSelect)
-            .sort((a: ShoeType, b: ShoeType) => handleSort(a, b))
-            .map((shoe: ShoeType) => <ShoeItem key={shoe.id} shoe={shoe} />
-            )}
+          {loading ?
+            <MutatingDots
+              color='#ef5454'
+              secondaryColor='#ef5454'
+            />
+            :
+            <>
+              {allShoes
+                ?.filter(({ category }: ShoeType) => !activeCategory || category === activeCategory)
+                .filter(({ shortBrand }: ShoeType) => shortBrand === brandSelect || !brandSelect)
+                .sort((a: ShoeType, b: ShoeType) => handleSort(a, b))
+                .map((shoe: ShoeType) => <ShoeItem key={shoe.id} shoe={shoe} />
+                )}
+            </>
+          }
         </ShoesContainer>
       </TextWrapper>
     </>
