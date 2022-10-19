@@ -10,14 +10,12 @@ import { useDispatch } from 'react-redux'
 import { addItemToCart } from '../../store/slices/categoriesSlice'
 import { useSelector } from 'react-redux'
 import { ShoeType } from '../Home/Home'
-import { loadingSelector, productsSelector } from '../../store/slices/productsSlice'
 import { collection, getDocs, query, where } from 'firebase/firestore'
 import { MutatingDots } from 'react-loader-spinner'
 
 
 function Product() {
   const { productId } = useParams()
-  const allShoes = useSelector(productsSelector)
   const [activeImage, setActiveImage] = useState<string | null>(null)
   const [user, error] = useAuthState(auth);
   const [loading, setLoading] = useState(true)
