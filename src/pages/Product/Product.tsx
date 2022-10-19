@@ -2,13 +2,14 @@ import React, { useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useParams } from 'react-router'
 import { TextWrapper } from '../../components/TextWrapper/TextWrapper'
-import { shoes } from '../../data/shoesdata'
 import { auth, db } from '../../firebase/firebase'
 import { AboutProduct, BigImage, Container, Images, SmallImages, SpaceContainer } from './Product.styles'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch } from 'react-redux'
 import { addItemToCart } from '../../store/slices/categoriesSlice'
+import { useSelector } from 'react-redux'
+import { productsSelector } from '../../store/slices/productsSlice'
 
 type ProductType = Array<{
   id: number,
@@ -22,7 +23,8 @@ type ProductType = Array<{
 
 function Product() {
   const { productId } = useParams()
-  const product = shoes.filter((shoe) => shoe.id === parseInt(productId as string))
+  const allShoes = useSelector(productsSelector)
+  const product = allShoes?.filter((shoe) => shoe.id === parseInt(productId as string))
   const { brand, category, description, id, images, shortBrand, price } = product[0]
   const [activeImage, setActiveImage] = useState(images[0])
   const [user, loading, error] = useAuthState(auth);
