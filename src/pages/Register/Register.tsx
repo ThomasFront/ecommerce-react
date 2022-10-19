@@ -12,15 +12,14 @@ type Inputs = {
   email: string,
   password: string,
   name: string,
-  country: string
 };
 
 function Register() {
   const navigate = useNavigate()
   const [user, loading, error] = useAuthState(auth);
 
-  const onSubmit: SubmitHandler<Inputs> = ({ email, password, name, country }) => {
-    registerWithEmailAndPassword(name, email, password, country)
+  const onSubmit: SubmitHandler<Inputs> = ({ email, password, name }) => {
+    registerWithEmailAndPassword(name, email, password)
     navigate('/')
   };
   
@@ -28,7 +27,6 @@ function Register() {
     email: yup.string().email().required(),
     password: yup.string().required().min(3).max(20),
     name: yup.string().required().min(3),
-    country: yup.string().required().min(3),
   })
   const { register, handleSubmit, watch, formState: { errors } } = useForm<Inputs>({
     resolver: yupResolver(schema)
@@ -61,11 +59,6 @@ function Register() {
               placeholder='name'
               {...register('name')} />
             <ErrorMsg>{errors.name?.message}</ErrorMsg>
-            <input
-              type="text"
-              placeholder='country'
-              {...register('country')} />
-            <ErrorMsg>{errors.country?.message}</ErrorMsg>
             <button>Register</button>
           </form>
         </RegisterWrapper>

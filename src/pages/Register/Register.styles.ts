@@ -106,8 +106,7 @@ export const RegisterWrapper = styled.div`
   }
   
   @media (min-width: 576px) {
-      
-      height: 500px;
+      height: 400px;
     }
   `
   

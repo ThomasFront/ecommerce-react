@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
-import { query, where, collection, getDocs, getFirestore, addDoc } from 'firebase/firestore'
+import { query, where, collection, getDocs, getFirestore, addDoc, setDoc, doc } from 'firebase/firestore'
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -28,11 +28,11 @@ export const signInWithGoogle = async () => {
     const q = query(collection(db, "users"), where("uid", "==", user.uid));
     const docs = await getDocs(q);
     if (docs.docs.length === 0) {
-      await addDoc(collection(db, "users"), {
+      await setDoc(doc(db, "users", user.uid), {
         uid: user.uid,
+        email: user.email,
         name: user.displayName,
         authProvider: "google",
-        email: user.email,
       });
     }
   } catch (err) {
@@ -52,15 +52,15 @@ export const logInWithEmailAndPassword = async (email: string, password: string)
 
 // REGISTER WITH EMAIL AND PASSWORD
 
-export const registerWithEmailAndPassword = async (name: string, email: string, password: string, country: string) => {
+
+export const registerWithEmailAndPassword = async (name: string, email: string, password: string) => {
   try {
     const res = await createUserWithEmailAndPassword(auth, email, password);
     const user = res.user;
-    await addDoc(collection(db, "users"), {
+    await setDoc(doc(db, "users", user.uid), {
       uid: user.uid,
-      name,
       email,
-      country,
+      name,
     });
   } catch (err) {
     console.error(err);

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import ProductsCategories from '../../components/ProductsCategories/ProductsCategories'
 import { TextWrapper } from '../../components/TextWrapper/TextWrapper'
@@ -7,6 +7,10 @@ import { Brand, Brands, BrandTitle, Categories, Category, CategoryTitle, SelectC
 import { shoes, ShoesType } from '../../data/shoesdata'
 import ShoeItem from '../../components/ShoeItem/ShoeItem'
 import { useDispatch } from 'react-redux'
+import { useAuthState } from 'react-firebase-hooks/auth'
+import { auth, db } from '../../firebase/firebase'
+import { collection, getDocs, query, where } from 'firebase/firestore'
+import { addUserInfo, userInfoType } from '../../store/slices/userSlice'
 
 export type ShoeType = {
   id: number,
@@ -18,13 +22,23 @@ export type ShoeType = {
   images: Array<string>
 }
 
-
 function Home() {
   const toggleVisible = useSelector(toggleShowSelector)
   const brandSelect = useSelector(brandSelector)
   const dispatch = useDispatch()
   const [activeCategory, setActiveCategory] = useState('')
   const [selectedValue, setSelectedValue] = useState('Popular')
+  const [user, loading, error] = useAuthState(auth)
+
+  const getUser = async () => {
+    const q = query(collection(db, "users"), where("uid", "==", user?.uid));
+    const docs = await getDocs(q);
+    dispatch(addUserInfo(docs.docs[0].data() as userInfoType))
+  }
+
+  useEffect(() => {
+    getUser()
+  }, [user])
 
   const handleSort = (a: ShoeType, b: ShoeType) => {
     switch (selectedValue) {
