@@ -8,13 +8,9 @@ import ShoeItem from '../../components/ShoeItem/ShoeItem'
 import { useDispatch } from 'react-redux'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth, db } from '../../firebase/firebase'
-import { collection, getDocs, query, where } from 'firebase/firestore'
+import { addDoc, collection, doc, getDocs, query, where } from 'firebase/firestore'
 import { addUserInfo, userInfoType } from '../../store/slices/userSlice'
-import { addAllProducts, handleLoading, loadingSelector, productsSelector, ShoesType } from '../../store/slices/productsSlice'
-import {
-  MutatingDots
-
-} from 'react-loader-spinner'
+import { MutatingDots } from 'react-loader-spinner'
 
 export type ShoeType = {
   id: number,
@@ -26,6 +22,17 @@ export type ShoeType = {
   images: Array<string>
 }
 
+export type ShoesType = Array<{
+  id: number,
+  price: number,
+  category:string,
+  brand: string,
+  shortBrand: string,
+  description: string,
+  images: Array<string>
+}>
+
+
 function Home() {
   const toggleVisible = useSelector(toggleShowSelector)
   const brandSelect = useSelector(brandSelector)
@@ -33,8 +40,9 @@ function Home() {
   const [activeCategory, setActiveCategory] = useState('')
   const [selectedValue, setSelectedValue] = useState('Popular')
   const [user, error] = useAuthState(auth)
-  const allShoes = useSelector(productsSelector)
-  const loading = useSelector(loadingSelector)
+  const [allShoes, setAllShoes] = useState<ShoesType | null>(null)
+  const [loading, setLoading] = useState(true)
+
 
   const getUser = async () => {
     const q = query(collection(db, "users"), where("uid", "==", user?.uid));
@@ -48,19 +56,17 @@ function Home() {
     const data = docs.docs.map((product) => {
       return product.data()
     })
-    dispatch(addAllProducts(data as ShoesType))
-    dispatch(handleLoading(false))
+    setAllShoes(data as ShoesType)
+    setLoading(false)
   }
 
   useEffect(() => {
     getAllShoes()
-  }, [allShoes])
+  }, [])
 
   useEffect(() => {
-    if(!!user){
-      getUser()
-    }
-  }, [user])
+    getUser()
+  }, [])
 
   const handleSort = (a: ShoeType, b: ShoeType) => {
     switch (selectedValue) {
