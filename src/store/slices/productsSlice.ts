@@ -14,10 +14,12 @@ export type ShoesType = Array<{
 
 export interface InitialTypes {
   allProducts: ShoesType
+  isLoading: boolean
 }
 
 const initialState: InitialTypes = {
-  allProducts: []
+  allProducts: [],
+  isLoading: true
 }
 
 export const productsSlice = createSlice({
@@ -26,10 +28,14 @@ export const productsSlice = createSlice({
   reducers: {
     addAllProducts: (state, action: PayloadAction<ShoesType>) => {
       state.allProducts = action.payload
+    },
+    handleLoading: (state, action: PayloadAction<boolean>) => {
+      state.isLoading = action.payload
     }
   },
 })
 
-export const { addAllProducts } = productsSlice.actions
+export const { addAllProducts, handleLoading } = productsSlice.actions
 export const productsSelector = (state: RootState) => state.products.allProducts
+export const loadingSelector = (state: RootState) => state.products.isLoading
 export default productsSlice.reducer

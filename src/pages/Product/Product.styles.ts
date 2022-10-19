@@ -1,4 +1,8 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+
+type ShoeImageProps = {
+  isHighlighted?: boolean
+}
 
 export const Container = styled.div`
 display: flex;
@@ -32,21 +36,23 @@ justify-content: center;
 align-items: center;
 margin-top: 10px;
   height: 20%;
+`
 
-  
-  img {
+export const ShoeImage = styled.img<ShoeImageProps>`
     width: 50px;
     height: 50px;
     object-fit: cover;
     margin: 0 5px;
     border-radius: 6px;
     cursor: pointer;
+    ${({isHighlighted}) => isHighlighted && css`
+      border: 1px solid black;
+    `}
 
     @media (min-width: 992px) {
-      padding-top: 25px;
+      margin-top: 40px;
     width: 90px;
     height: 90px;
-  }
   }
 `
 

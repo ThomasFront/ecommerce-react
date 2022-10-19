@@ -1,41 +1,47 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useParams } from 'react-router'
 import { TextWrapper } from '../../components/TextWrapper/TextWrapper'
 import { auth, db } from '../../firebase/firebase'
-import { AboutProduct, BigImage, Container, Images, SmallImages, SpaceContainer } from './Product.styles'
+import { AboutProduct, BigImage, Container, Images, ShoeImage, SmallImages, SpaceContainer } from './Product.styles'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch } from 'react-redux'
 import { addItemToCart } from '../../store/slices/categoriesSlice'
 import { useSelector } from 'react-redux'
 import { ShoeType } from '../Home/Home'
-import { productsSelector } from '../../store/slices/productsSlice'
+import { loadingSelector, productsSelector } from '../../store/slices/productsSlice'
+import { collection, getDocs, query, where } from 'firebase/firestore'
+import { MutatingDots } from 'react-loader-spinner'
 
-type ProductType = Array<{
-  id: number,
-  price: number,
-  shortBrand: string,
-  description: string,
-  brand: string,
-  category: string,
-  images: Array<string>
-}>
 
 function Product() {
   const { productId } = useParams()
   const allShoes = useSelector(productsSelector)
-  const product = allShoes?.filter((shoe: ShoeType) => shoe.id === parseInt(productId as string))
-  const { brand, category, description, id, images, shortBrand, price } = product[0]
-  const [activeImage, setActiveImage] = useState(images[0])
-  const [user, loading, error] = useAuthState(auth);
+  const [activeImage, setActiveImage] = useState<string | null>(null)
+  const [user, error] = useAuthState(auth);
+  const [loading, setLoading] = useState(true)
   const dispatch = useDispatch()
+  const [product, setProduct] = useState<ShoeType | null>(null)
 
   const handleImage = (clickedImage: string) => {
     setActiveImage(clickedImage)
   }
 
-  const addProductToCart = async (product: ProductType) => {
+  const getProduct = async () => {
+    const q = query(collection(db, "products"), where("id", "==", parseInt(productId as string)));
+    const docs = await getDocs(q);
+    const tempProduct = docs.docs[0].data() as ShoeType
+    setProduct(tempProduct)
+    setActiveImage(tempProduct.images[0])
+    setLoading(false)
+  }
+
+  useEffect(() => {
+    getProduct()
+  }, [])
+
+  const addProductToCart = async (product: ShoeType) => {
     if (!user) {
       toast.error('You must log in to add a product', {
         position: "bottom-left",
@@ -48,7 +54,7 @@ function Product() {
         theme: "dark",
       });
     } else {
-      dispatch(addItemToCart(product[0]))
+      dispatch(addItemToCart(product))
       toast.success('The product has been added to the cart', {
         position: "bottom-left",
         autoClose: 4000,
@@ -66,21 +72,55 @@ function Product() {
     <TextWrapper>
       <Container>
         <Images>
-          <BigImage src={activeImage} alt="default image" />
-          <SmallImages>
-            <img src={images[0]} alt="default mini image" onClick={() => handleImage(images[0])} />
-            <img src={images[1]} alt="example mini image 1" onClick={() => handleImage(images[1])} />
-            <img src={images[2]} alt="example mini image 2" onClick={() => handleImage(images[2])} />
-            <img src={images[3]} alt="example mini image 3" onClick={() => handleImage(images[3])} />
-            <img src={images[4]} alt="example mini image 4" onClick={() => handleImage(images[4])} />
-          </SmallImages>
+          {loading ?
+            <MutatingDots
+            color='#ef5454'
+            secondaryColor='#ef5454'
+          />
+            :
+            <>
+              {activeImage && <BigImage src={activeImage} alt="default image" />}
+              <SmallImages>
+                <ShoeImage
+                  src={product?.images[0]}
+                  alt="default mini image"
+                  onClick={() => handleImage(product?.images[0] as string)}
+                  isHighlighted={activeImage === product?.images[0]}
+                />
+                <ShoeImage
+                  src={product?.images[1]}
+                  alt="example mini image 1"
+                  onClick={() => handleImage(product?.images[1] as string)}
+                  isHighlighted={activeImage === product?.images[1]}
+                />
+                <ShoeImage
+                  src={product?.images[2]}
+                  alt="example mini image 2"
+                  onClick={() => handleImage(product?.images[2] as string)}
+                  isHighlighted={activeImage === product?.images[2]}
+                />
+                <ShoeImage
+                  src={product?.images[3]}
+                  alt="example mini image 3"
+                  onClick={() => handleImage(product?.images[3] as string)}
+                  isHighlighted={activeImage === product?.images[3]}
+                />
+                <ShoeImage
+                  src={product?.images[4]}
+                  alt="example mini image 4"
+                  onClick={() => handleImage(product?.images[4] as string)}
+                  isHighlighted={activeImage === product?.images[4]}
+                />
+              </SmallImages>
+            </>
+          }
         </Images>
         <AboutProduct>
-          <h1>{brand}</h1>
-          <h2>{description}</h2>
+          <h1>{product?.brand}</h1>
+          <h2>{product?.description}</h2>
           <SpaceContainer>
-            <h3>${price}</h3>
-            <button onClick={() => addProductToCart(product)}>Add to cart</button>
+            <h3>${product?.price}</h3>
+            <button onClick={() => product && addProductToCart(product)}>Add to cart</button>
           </SpaceContainer>
         </AboutProduct>
       </Container>
