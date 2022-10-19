@@ -16,12 +16,14 @@ export interface InitialTypes {
   isShow: boolean
   selectedBrand: string
   cart: Array<ProductType>
+  showModal: boolean
 }
 
 const initialState: InitialTypes = {
   isShow: false,
   selectedBrand: '',
-  cart: []
+  cart: [],
+  showModal: false
 }
 
 export const categoriesSlice = createSlice({
@@ -40,12 +42,16 @@ export const categoriesSlice = createSlice({
     },
     addItemToCart: (state, action: PayloadAction<ProductType>) => {
       state.cart.push(action.payload)
+    },
+    openModal: (state, action: PayloadAction<boolean>) => {
+      state.showModal = action.payload
     }
   },
 })
 
-export const { toggleShow, changeBrand, addItemToCart } = categoriesSlice.actions
+export const { toggleShow, changeBrand, addItemToCart, openModal } = categoriesSlice.actions
 export const toggleShowSelector = (state: RootState) => state.categories.isShow
+export const modalSelector = (state: RootState) => state.categories.showModal
 export const brandSelector = (state: RootState) => state.categories.selectedBrand
 export const cartSelector = (state: RootState) => state.categories.cart
 export default categoriesSlice.reducer
