@@ -41,6 +41,14 @@ export const Wrapper = styled.div`
   max-width: 1400px;
   width: 100%;
 
+  section {
+    width: 33%;
+
+    button {
+      margin-left: 5px;
+    }
+  }
+
   @media (min-width: 768px) {
     section {
       display: none;
@@ -57,15 +65,46 @@ export const Wrapper = styled.div`
 `
 
 export const BurgerIcon = styled.button<ButtonProps>`
-  margin-left: 0.5em;
   border: none;
   background-color: transparent;
-  font-size: 30px;
+  font-size: 18px;
   cursor: pointer;
   color: #eeeeee;
   ${({ isOpen }) => isOpen && css`
     color: #F05454;
   `}
+
+  @media (min-width: 370px) {
+      font-size: 24px;
+    }
+
+    @media (min-width: 580px) {
+      font-size: 28px;
+    }
+`
+
+export const LogoContainer = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
+  width: 33%;
+
+  a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px; 
+    text-align: center;
+    font-weight: bold;
+
+    @media (min-width: 580px){
+      font-size: 20px;
+    }
+  }
+
+  @media (min-width: 768px){
+    justify-content: flex-start;
+  }
 `
 
 
@@ -78,12 +117,37 @@ justify-content: center;
 
 export const RightSection = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
+  margin-right: 5px;
   height: 100%;
+  width: 33%;
+  font-size: 8px;
 
   a {
-    padding: 5px;
+    padding: 0 2px;
+    font-size: 18px;
+
+    @media (min-width: 370px) {
+      font-size: 24px;
+    }
+
+    @media (min-width: 580px) {
+      font-size: 28px;
+      padding: 0 5px;
+    }
+  }
+  
+  button {
+    font-size: 10px;
+
+    @media (min-width: 370px) {
+      font-size: 12px;
+    }
+
+    @media (min-width: 580px) {
+      font-size: 13px;
+    }
   }
 `
 
