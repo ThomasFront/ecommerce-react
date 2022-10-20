@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { TextWrapper } from '../../components/TextWrapper/TextWrapper'
-import { Container, ErrorMsg, LoginButtons, LogInWrapper, RegisterButton, RegisterText } from './Login.styles'
+import { Container, ErrorMsg, LoginButtons, LoginPageWrapper, LogInWrapper, RegisterButton, RegisterText } from './Login.styles'
 import { SubmitHandler, useForm } from "react-hook-form";
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -19,7 +19,7 @@ function Login() {
   const navigate = useNavigate()
   const [user, loading, error] = useAuthState(auth);
 
-  const onSubmit: SubmitHandler<Inputs> = ({email, password}) => {
+  const onSubmit: SubmitHandler<Inputs> = ({ email, password }) => {
     logInWithEmailAndPassword(email, password)
   };
 
@@ -40,32 +40,32 @@ function Login() {
 
 
   return (
-    <>
-    <TextWrapper>
-      <Container>
-        <LogInWrapper>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <input
-              type="email"
-              placeholder='E-mail Address'
-              {...register('email')} />
-            <ErrorMsg>{errors.email?.message}</ErrorMsg>
-            <input
-              type="password"
-              placeholder='Password'
-              {...register('password')} />
-            <ErrorMsg>{errors.password?.message}</ErrorMsg>
-            <LoginButtons>Login</LoginButtons>
-          </form>
-          <p>or</p>
-          <LoginButtons onClick={signInWithGoogle}>Login with Google</LoginButtons>
-          <RegisterText>Don't have an account? <RegisterButton onClick={() => navigate('/register')}>Register</RegisterButton> now</RegisterText>
-          <img src={profilePhoto} alt="" />
-        </LogInWrapper>
-      </Container>
-    </TextWrapper>
-    <Wave />
-    </>
+    <LoginPageWrapper>
+      <TextWrapper>
+        <Container>
+          <LogInWrapper>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <input
+                type="email"
+                placeholder='E-mail Address'
+                {...register('email')} />
+              <ErrorMsg>{errors.email?.message}</ErrorMsg>
+              <input
+                type="password"
+                placeholder='Password'
+                {...register('password')} />
+              <ErrorMsg>{errors.password?.message}</ErrorMsg>
+              <LoginButtons>Login</LoginButtons>
+            </form>
+            <p>or</p>
+            <LoginButtons onClick={signInWithGoogle}>Login with Google</LoginButtons>
+            <RegisterText>Don't have an account? <RegisterButton onClick={() => navigate('/register')}>Register</RegisterButton> now</RegisterText>
+            <img src={profilePhoto} alt="" />
+          </LogInWrapper>
+        </Container>
+      </TextWrapper>
+      <Wave />
+    </LoginPageWrapper>
   )
 }
 

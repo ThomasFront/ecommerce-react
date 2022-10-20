@@ -120,3 +120,8 @@ export const LoginButtons = styled.button`
     font-size: 12px;
   }
   `
+
+export const LoginPageWrapper = styled.div`
+  position: relative;
+  min-height: 100vh;
+`
