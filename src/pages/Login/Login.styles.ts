@@ -21,12 +21,23 @@ display: flex;
 justify-content: center;
 align-items: center;
 flex-direction: column;
-  height: 350px;
+position: relative;
+  min-height: 350px;
   max-width: 700px;
   width: 100%;
   border-radius: 6px;
   box-shadow: 0 0 10px gray;
   background-color: white;
+
+  img {
+    display: none;
+
+    @media (min-width: 576px){
+    display: block;
+    width: 75px;
+    height: 75px;
+    }
+  }
 
   form {
     display: flex;

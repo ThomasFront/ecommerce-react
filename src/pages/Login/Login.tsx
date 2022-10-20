@@ -7,6 +7,8 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { auth, logInWithEmailAndPassword, signInWithGoogle } from '../../firebase/firebase';
 import { useNavigate } from 'react-router';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import profilePhoto from '../../assets/undraw_pic_profile_re_1865.svg'
+import { Wave } from '../../components/Wave/Wave';
 
 type Inputs = {
   email: string,
@@ -38,6 +40,7 @@ function Login() {
 
 
   return (
+    <>
     <TextWrapper>
       <Container>
         <LogInWrapper>
@@ -57,9 +60,12 @@ function Login() {
           <p>or</p>
           <LoginButtons onClick={signInWithGoogle}>Login with Google</LoginButtons>
           <RegisterText>Don't have an account? <RegisterButton onClick={() => navigate('/register')}>Register</RegisterButton> now</RegisterText>
+          <img src={profilePhoto} alt="" />
         </LogInWrapper>
       </Container>
     </TextWrapper>
+    <Wave />
+    </>
   )
 }
 

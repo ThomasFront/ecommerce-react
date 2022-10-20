@@ -7,6 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, registerWithEmailAndPassword } from '../../firebase/firebase';
 import { useNavigate } from 'react-router';
+import { Wave } from '../../components/Wave/Wave';
 
 type Inputs = {
   email: string,
@@ -22,7 +23,7 @@ function Register() {
     registerWithEmailAndPassword(name, email, password)
     navigate('/')
   };
-  
+
   const schema = yup.object().shape({
     email: yup.string().email().required(),
     password: yup.string().required().min(3).max(20),
@@ -36,34 +37,37 @@ function Register() {
     return <RegisteredText>
       <p>You are already registered</p>
       <button onClick={() => navigate('/')}>Back to shop</button>
-      </RegisteredText>
+    </RegisteredText>
   }
 
   return (
-    <TextWrapper>
-      <Container>
-        <RegisterWrapper>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <input
-              type="email"
-              placeholder='Email'
-              {...register('email')} />
-            <ErrorMsg>{errors.email?.message}</ErrorMsg>
-            <input
-              type="password"
-              placeholder='Password'
-              {...register('password')} />
-            <ErrorMsg>{errors.password?.message}</ErrorMsg>
-            <input
-              type="text"
-              placeholder='Name'
-              {...register('name')} />
-            <ErrorMsg>{errors.name?.message}</ErrorMsg>
-            <button>Register</button>
-          </form>
-        </RegisterWrapper>
-      </Container>
-    </TextWrapper>
+    <>
+      <TextWrapper>
+        <Container>
+          <RegisterWrapper>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <input
+                type="email"
+                placeholder='Email'
+                {...register('email')} />
+              <ErrorMsg>{errors.email?.message}</ErrorMsg>
+              <input
+                type="password"
+                placeholder='Password'
+                {...register('password')} />
+              <ErrorMsg>{errors.password?.message}</ErrorMsg>
+              <input
+                type="text"
+                placeholder='Name'
+                {...register('name')} />
+              <ErrorMsg>{errors.name?.message}</ErrorMsg>
+              <button>Register</button>
+            </form>
+          </RegisterWrapper>
+        </Container>
+      </TextWrapper>
+      <Wave/>
+    </>
   )
 }
 
