@@ -8,7 +8,6 @@ import { auth, logInWithEmailAndPassword, signInWithGoogle } from '../../firebas
 import { useNavigate } from 'react-router';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import profilePhoto from '../../assets/undraw_pic_profile_re_1865.svg'
-import { Wave } from '../../components/Wave/Wave';
 
 type Inputs = {
   email: string,
@@ -64,7 +63,6 @@ function Login() {
         </LogInWrapper>
       </Container>
     </TextWrapper>
-    <Wave />
     </>
   )
 }
