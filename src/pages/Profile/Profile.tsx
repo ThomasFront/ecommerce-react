@@ -54,8 +54,8 @@ function Profile() {
           </ProfileWrapper>
         </ProfileContainer>
       </TextWrapper>
-      {modal &&
-        <DeleteModal>
+      
+        <DeleteModal showModal={modal}>
           <ModalWrapper>
             <p>Are you sure you want to delete your account?</p>
             <ButtonsWrapper>
@@ -63,7 +63,7 @@ function Profile() {
               <button onClick={() => dispatch(openModal(false))}>No</button>
             </ButtonsWrapper>
           </ModalWrapper>
-        </DeleteModal>}
+        </DeleteModal>
     </>
   )
 }

@@ -81,7 +81,7 @@ function Home() {
 
   return (
     <>
-      {toggleVisible && <ProductsCategories />}
+      <ProductsCategories />
       <TextWrapper>
         <CategoryTitle>Category:</CategoryTitle>
         <Categories>

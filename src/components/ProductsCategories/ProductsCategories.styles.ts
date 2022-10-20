@@ -4,14 +4,27 @@ type CategoryProps =  {
   isHighlighted?: boolean
 }
 
-export const CategoriesList = styled.aside`
+type CategoriesListProps = {
+  showCategories?: boolean
+}
+
+export const CategoriesList = styled.aside<CategoriesListProps>`
 position: fixed;
 margin-top: -20px;
 margin-bottom: 15px;
+transform: translateX(-105%);
 padding: 20px 0;
 width: 100%;
 background-color: #222831;
 z-index: 100;
+opacity: 0;
+transition: transform 0.3s, opacity 0.3s;
+
+
+${({showCategories}) => showCategories && css`
+  transform: translate(0);
+  opacity: 1;
+`}
 
 @media (min-width: 768px){
   display: none;

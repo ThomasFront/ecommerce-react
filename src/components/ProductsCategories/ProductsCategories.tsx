@@ -1,20 +1,21 @@
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
-import { brandSelector, changeBrand, toggleShow } from '../../store/slices/categoriesSlice'
+import { brandSelector, changeBrand, toggleShow, toggleShowSelector } from '../../store/slices/categoriesSlice'
 import { TextWrap } from '../TextWrapper/TextWrapper.styles'
 import { CategoriesList, Category, CategoryBox, CategoryContainer, CategoryName } from './ProductsCategories.styles'
 
 function ProductsCategories() {
   const dispatch = useDispatch()
   const brandSelect = useSelector(brandSelector)
+  const burger = useSelector(toggleShowSelector)
 
   const handleCategory = (brand: string) => {
     dispatch(changeBrand(brand))
     dispatch(toggleShow())
   }
   return (
-    <CategoriesList>
+    <CategoriesList showCategories={burger}>
       <TextWrap>
         <CategoryContainer>
           <CategoryBox>
