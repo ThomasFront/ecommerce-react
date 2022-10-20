@@ -11,7 +11,6 @@ import { auth, db } from '../../firebase/firebase'
 import { addDoc, collection, doc, getDocs, query, where } from 'firebase/firestore'
 import { addUserInfo, userInfoType } from '../../store/slices/userSlice'
 import { MutatingDots } from 'react-loader-spinner'
-import { Wave } from '../../components/Wave/Wave'
 
 export type ShoeType = {
   id: number,
@@ -125,7 +124,6 @@ function Home() {
           }
         </ShoesContainer>
       </TextWrapper>
-      <Wave />
     </>
   )
 }

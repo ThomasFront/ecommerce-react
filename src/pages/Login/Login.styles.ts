@@ -120,3 +120,7 @@ export const LoginButtons = styled.button`
     font-size: 12px;
   }
   `
+
+export const LoginPageWrapper = styled.div`
+  
+`

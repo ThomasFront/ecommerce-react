@@ -7,7 +7,6 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, registerWithEmailAndPassword } from '../../firebase/firebase';
 import { useNavigate } from 'react-router';
-import { Wave } from '../../components/Wave/Wave';
 import Blob from '../../components/Blob/Blob';
 
 type Inputs = {
@@ -68,7 +67,6 @@ function Register() {
           </RegisterWrapper>
         </Container>
       </TextWrapper>
-      <Wave/>
     </>
   )
 }
