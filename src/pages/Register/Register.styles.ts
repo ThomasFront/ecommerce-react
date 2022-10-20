@@ -53,12 +53,21 @@ export const RegisterWrapper = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  position: relative;
   height: 350px;
   max-width: 700px;
   width: 100%;
   border-radius: 6px;
   box-shadow: 0 0 10px gray;
   background-color: white;
+
+  img {
+    display: none;
+
+    @media (min-width: 576px){
+    display: block;
+    }
+  }
 
   form {
     display: flex;

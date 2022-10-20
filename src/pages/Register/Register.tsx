@@ -8,6 +8,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, registerWithEmailAndPassword } from '../../firebase/firebase';
 import { useNavigate } from 'react-router';
 import { Wave } from '../../components/Wave/Wave';
+import Blob from '../../components/Blob/Blob';
 
 type Inputs = {
   email: string,
@@ -63,6 +64,7 @@ function Register() {
               <ErrorMsg>{errors.name?.message}</ErrorMsg>
               <button>Register</button>
             </form>
+            <Blob/>
           </RegisterWrapper>
         </Container>
       </TextWrapper>
