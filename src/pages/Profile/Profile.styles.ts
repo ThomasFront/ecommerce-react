@@ -1,4 +1,8 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+
+type DeleteModalProps = {
+  showModal?: boolean
+}
 
 export const ProfileContainer = styled.div`
   display: flex;
@@ -85,12 +89,20 @@ export const DeleteAccountInfo = styled.div`
   }
 `
 
-export const DeleteModal = styled.div`
+export const DeleteModal = styled.div<DeleteModalProps>`
   position: fixed;
   top: 0;
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.6);
+  transform: translateX(-105%);
+  opacity: 0;
+  transition: transform 0.3s, opacity 0.3s;
+
+  ${({showModal}) => showModal && css`
+    transform: translateX(0);
+    opacity: 1;
+  `}
 `
 
 export const ModalWrapper = styled.div`
