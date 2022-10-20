@@ -1,4 +1,4 @@
-import { BurgerIcon, CartContainer, LinkItem, LoginButton, NavbarDesign, RightSection, Wrapper } from './Navbar.styles'
+import { BurgerIcon, CartContainer, LinkItem, LoginButton, LogoContainer, NavbarDesign, RightSection, Wrapper } from './Navbar.styles'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { FaShoppingCart } from 'react-icons/fa'
 import { BsFillPersonFill } from 'react-icons/bs'
@@ -24,7 +24,9 @@ export function Navbar() {
           <section>
             {location.pathname === '/' && <BurgerIcon isOpen={burgerSelector} onClick={() => dispatch(toggleShow())}><GiHamburgerMenu /></BurgerIcon>}
           </section>
-          <LinkItem to="/" style={{ fontSize: '20px', textAlign: 'center', display: 'flex', alignItems: 'center', fontWeight: 'bold' }}><GiConverseShoe />FUTURE</LinkItem>
+          <LogoContainer>
+            <LinkItem to="/"><GiConverseShoe />FUTURE</LinkItem>
+          </LogoContainer>
           <RightSection>
             <LoginButton onClick={() => user ? logout() : navigate('/login')}>{user ? 'log out' : 'log in'}</LoginButton>
             {user && <LinkItem to="/profile"><BsFillPersonFill /></LinkItem>}
