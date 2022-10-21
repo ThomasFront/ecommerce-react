@@ -166,3 +166,10 @@ export const ProfilePageWrapper = styled.div`
   position: relative;
   min-height: 100vh;
 `
+
+export const LoadingWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+`
