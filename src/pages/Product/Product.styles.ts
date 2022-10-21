@@ -127,3 +127,8 @@ h2 {
   }
 }
 `
+
+export const ProductPageWrapper = styled.div`
+  position: relative;
+  min-height: 100vh;
+`
