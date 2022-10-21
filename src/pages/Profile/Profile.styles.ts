@@ -161,3 +161,8 @@ align-items: center;
     }
   }
 `
+
+export const ProfilePageWrapper = styled.div`
+  position: relative;
+  min-height: 100vh;
+`

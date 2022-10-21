@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { TextWrapper } from '../../components/TextWrapper/TextWrapper'
-import { Container, ErrorMsg, LoginButtons, LogInWrapper, RegisterButton, RegisterText } from './Login.styles'
+import { Container, ErrorMsg, LoginButtons, LoginPageWrapper, LogInWrapper, RegisterButton, RegisterText } from './Login.styles'
 import { SubmitHandler, useForm } from "react-hook-form";
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -8,6 +8,7 @@ import { auth, logInWithEmailAndPassword, signInWithGoogle } from '../../firebas
 import { useNavigate } from 'react-router';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import profilePhoto from '../../assets/undraw_pic_profile_re_1865.svg'
+import { Wave } from '../../components/Wave/Wave';
 
 type Inputs = {
   email: string,
@@ -39,7 +40,7 @@ function Login() {
 
 
   return (
-    <>
+    <LoginPageWrapper>
     <TextWrapper>
       <Container>
         <LogInWrapper>
@@ -63,7 +64,8 @@ function Login() {
         </LogInWrapper>
       </Container>
     </TextWrapper>
-    </>
+    <Wave/>
+    </LoginPageWrapper>
   )
 }
 

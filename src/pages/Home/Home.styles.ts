@@ -123,3 +123,6 @@ export const SelectContainer = styled.div`
     margin-top: 10px;
   }
 `
+export const HomePageWrapper = styled.div`
+  position: relative;
+`

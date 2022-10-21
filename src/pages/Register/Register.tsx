@@ -1,13 +1,14 @@
 import React, { useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { TextWrapper } from '../../components/TextWrapper/TextWrapper'
-import { Container, ErrorMsg, RegisteredText, RegisterWrapper } from './Register.styles'
+import { Container, ErrorMsg, RegisteredText, RegisterPageWrapper, RegisterWrapper } from './Register.styles'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, registerWithEmailAndPassword } from '../../firebase/firebase';
 import { useNavigate } from 'react-router';
 import Blob from '../../components/Blob/Blob';
+import { Wave } from '../../components/Wave/Wave';
 
 type Inputs = {
   email: string,
@@ -41,7 +42,7 @@ function Register() {
   }
 
   return (
-    <>
+    <RegisterPageWrapper>
       <TextWrapper>
         <Container>
           <RegisterWrapper>
@@ -63,11 +64,12 @@ function Register() {
               <ErrorMsg>{errors.name?.message}</ErrorMsg>
               <button>Register</button>
             </form>
-            <Blob/>
+            <Blob />
           </RegisterWrapper>
         </Container>
       </TextWrapper>
-    </>
+      <Wave />
+    </RegisterPageWrapper>
   )
 }
 

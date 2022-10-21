@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import ProductsCategories from '../../components/ProductsCategories/ProductsCategories'
 import { TextWrapper } from '../../components/TextWrapper/TextWrapper'
 import { brandSelector, changeBrand, toggleShowSelector } from '../../store/slices/categoriesSlice'
-import { Brand, Brands, BrandTitle, Categories, Category, CategoryTitle, SelectContainer, ShoesContainer } from './Home.styles'
+import { Brand, Brands, BrandTitle, Categories, Category, CategoryTitle, HomePageWrapper, SelectContainer, ShoesContainer } from './Home.styles'
 import ShoeItem from '../../components/ShoeItem/ShoeItem'
 import { useDispatch } from 'react-redux'
 import { useAuthState } from 'react-firebase-hooks/auth'
@@ -11,6 +11,7 @@ import { auth, db } from '../../firebase/firebase'
 import { addDoc, collection, doc, getDocs, query, where } from 'firebase/firestore'
 import { addUserInfo, userInfoType } from '../../store/slices/userSlice'
 import { MutatingDots } from 'react-loader-spinner'
+import { Wave } from '../../components/Wave/Wave'
 
 export type ShoeType = {
   id: number,
@@ -25,7 +26,7 @@ export type ShoeType = {
 export type ShoesType = Array<{
   id: number,
   price: number,
-  category:string,
+  category: string,
   brand: string,
   shortBrand: string,
   description: string,
@@ -80,7 +81,7 @@ function Home() {
   }
 
   return (
-    <>
+    <HomePageWrapper>
       <ProductsCategories />
       <TextWrapper>
         <CategoryTitle>Category:</CategoryTitle>
@@ -124,7 +125,8 @@ function Home() {
           }
         </ShoesContainer>
       </TextWrapper>
-    </>
+      <Wave />
+    </HomePageWrapper>
   )
 }
 

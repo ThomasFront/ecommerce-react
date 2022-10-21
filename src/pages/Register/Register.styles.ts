@@ -121,4 +121,7 @@ export const RegisterWrapper = styled.div`
       height: 400px;
     }
   `
-  
+  export const RegisterPageWrapper = styled.div`
+  position: relative;
+  min-height: 100vh;
+`
