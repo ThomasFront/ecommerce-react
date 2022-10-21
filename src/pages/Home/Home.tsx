@@ -9,7 +9,6 @@ import { useDispatch } from 'react-redux'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth, db } from '../../firebase/firebase'
 import { addDoc, collection, doc, getDocs, query, where } from 'firebase/firestore'
-import { addUserInfo, userInfoType } from '../../store/slices/userSlice'
 import { MutatingDots } from 'react-loader-spinner'
 import { Wave } from '../../components/Wave/Wave'
 
@@ -44,14 +43,6 @@ function Home() {
   const [allShoes, setAllShoes] = useState<ShoesType | null>(null)
   const [loading, setLoading] = useState(true)
 
-
-  const getUser = async () => {
-    const q = query(collection(db, "users"), where("uid", "==", user?.uid));
-    const docs = await getDocs(q);
-    const userData = docs.docs[0].data() as userInfoType
-    dispatch(addUserInfo(userData))
-  }
-
   const getAllShoes = async () => {
     const docs = await getDocs(collection(db, "products"))
     const data = docs.docs.map((product) => {
@@ -63,10 +54,6 @@ function Home() {
 
   useEffect(() => {
     getAllShoes()
-  }, [])
-
-  useEffect(() => {
-    getUser()
   }, [])
 
   const handleSort = (a: ShoeType, b: ShoeType) => {

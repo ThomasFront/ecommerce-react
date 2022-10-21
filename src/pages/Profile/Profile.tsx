@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { TextWrapper } from '../../components/TextWrapper/TextWrapper'
 import { auth, db, logout } from '../../firebase/firebase';
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from 'react-router';
 import { useSelector } from 'react-redux';
-import { userInfoSelector } from '../../store/slices/userSlice';
-import { AccountDetails, ButtonsWrapper, DeleteAccountInfo, DeleteModal, ModalWrapper, ProfileContainer, ProfilePageWrapper, ProfileWrapper } from './Profile.styles';
+import { AccountDetails, ButtonsWrapper, DeleteAccountInfo, DeleteModal, LoadingWrapper, ModalWrapper, ProfileContainer, ProfilePageWrapper, ProfileWrapper } from './Profile.styles';
 import { GrMail } from 'react-icons/gr'
 import { BsTrashFill } from 'react-icons/bs'
 import { useDispatch } from 'react-redux';
@@ -13,14 +12,23 @@ import { modalSelector, openModal } from '../../store/slices/categoriesSlice';
 import { collection, deleteDoc, doc, getDocs, query, where } from 'firebase/firestore';
 import { deleteUser, getAuth, User } from 'firebase/auth';
 import { Wave } from '../../components/Wave/Wave';
+import { MutatingDots } from 'react-loader-spinner';
+
+type UserInformationType = {
+  email: string,
+  name: string,
+  uid: string,
+  signUpDate: number
+}
 
 
 function Profile() {
-  const [user, loading, error] = useAuthState(auth);
+  const [user, error] = useAuthState(auth);
   const navigate = useNavigate()
-  const userInfo = useSelector(userInfoSelector)
   const dispatch = useDispatch()
   const modal = useSelector(modalSelector)
+  const [userInformation, setUserInformation] = useState<UserInformationType | null>(null)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     if (!user) {
@@ -39,19 +47,41 @@ function Profile() {
     logout()
   }
 
+  const getUser = async () => {
+    const q = query(collection(db, "users"), where("uid", "==", user?.uid));
+    const docs = await getDocs(q);
+    const userData = docs.docs[0].data() as UserInformationType
+    setUserInformation(userData)
+    setLoading(false)
+  }
+
+  useEffect(() => {
+    getUser()
+  }, [])
+
   return (
     <ProfilePageWrapper>
       <TextWrapper>
         <ProfileContainer>
           <ProfileWrapper>
-            <p>Hello <span>{userInfo?.name}</span>!</p>
-            <AccountDetails>
-              <GrMail />
-              <p><span>{userInfo?.email}</span></p>
-            </AccountDetails>
-            <DeleteAccountInfo>
-              <button onClick={() => dispatch(openModal(true))}><BsTrashFill />Delete account</button>
-            </DeleteAccountInfo>
+            {loading ?
+              <LoadingWrapper>
+                <MutatingDots
+                  color='#ef5454'
+                  secondaryColor='#ef5454'
+                />
+              </LoadingWrapper> :
+              <>
+                <p>Hello <span>{userInformation?.name}</span>!</p>
+                <AccountDetails>
+                  <GrMail />
+                  <p><span>{userInformation?.email}</span></p>
+                </AccountDetails>
+                <DeleteAccountInfo>
+                  <button onClick={() => dispatch(openModal(true))}><BsTrashFill />Delete account</button>
+                </DeleteAccountInfo>
+              </>
+            }
           </ProfileWrapper>
         </ProfileContainer>
       </TextWrapper>
@@ -64,7 +94,7 @@ function Profile() {
           </ButtonsWrapper>
         </ModalWrapper>
       </DeleteModal>
-      <Wave/>
+      <Wave />
     </ProfilePageWrapper>
   )
 }
