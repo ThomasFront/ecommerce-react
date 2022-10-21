@@ -45,6 +45,7 @@ function Profile() {
     await deleteUser(user as User)
     dispatch(openModal(false))
     logout()
+    navigate('/')
   }
 
   const getUser = async () => {

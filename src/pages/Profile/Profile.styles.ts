@@ -77,10 +77,11 @@ export const DeleteAccountInfo = styled.div`
     margin-bottom: 5px;
     border-radius: 6px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.3s;
 
     &:hover {
-      background-color: red;
+      transform: scale(1.05);
+      background-color: rgb(245, 59, 59);
     }
 
     @media (min-width: 576px){
