@@ -5,13 +5,14 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from 'react-router';
 import { useSelector } from 'react-redux';
 import { userInfoSelector } from '../../store/slices/userSlice';
-import { AccountDetails, ButtonsWrapper, DeleteAccountInfo, DeleteModal, ModalWrapper, ProfileContainer, ProfileWrapper } from './Profile.styles';
+import { AccountDetails, ButtonsWrapper, DeleteAccountInfo, DeleteModal, ModalWrapper, ProfileContainer, ProfilePageWrapper, ProfileWrapper } from './Profile.styles';
 import { GrMail } from 'react-icons/gr'
 import { BsTrashFill } from 'react-icons/bs'
 import { useDispatch } from 'react-redux';
 import { modalSelector, openModal } from '../../store/slices/categoriesSlice';
 import { collection, deleteDoc, doc, getDocs, query, where } from 'firebase/firestore';
 import { deleteUser, getAuth, User } from 'firebase/auth';
+import { Wave } from '../../components/Wave/Wave';
 
 
 function Profile() {
@@ -39,7 +40,7 @@ function Profile() {
   }
 
   return (
-    <>
+    <ProfilePageWrapper>
       <TextWrapper>
         <ProfileContainer>
           <ProfileWrapper>
@@ -54,17 +55,17 @@ function Profile() {
           </ProfileWrapper>
         </ProfileContainer>
       </TextWrapper>
-      
-        <DeleteModal showModal={modal}>
-          <ModalWrapper>
-            <p>Are you sure you want to delete your account?</p>
-            <ButtonsWrapper>
-              <button onClick={handleDeleteAccount}>Yes</button>
-              <button onClick={() => dispatch(openModal(false))}>No</button>
-            </ButtonsWrapper>
-          </ModalWrapper>
-        </DeleteModal>
-    </>
+      <DeleteModal showModal={modal}>
+        <ModalWrapper>
+          <p>Are you sure you want to delete your account?</p>
+          <ButtonsWrapper>
+            <button onClick={handleDeleteAccount}>Yes</button>
+            <button onClick={() => dispatch(openModal(false))}>No</button>
+          </ButtonsWrapper>
+        </ModalWrapper>
+      </DeleteModal>
+      <Wave/>
+    </ProfilePageWrapper>
   )
 }
 
