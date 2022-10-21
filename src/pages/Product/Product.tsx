@@ -3,7 +3,7 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import { useParams } from 'react-router'
 import { TextWrapper } from '../../components/TextWrapper/TextWrapper'
 import { auth, db } from '../../firebase/firebase'
-import { AboutProduct, BigImage, Container, Images, ShoeImage, SmallImages, SpaceContainer } from './Product.styles'
+import { AboutProduct, BigImage, Container, Images, ProductPageWrapper, ShoeImage, SmallImages, SpaceContainer } from './Product.styles'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch } from 'react-redux'
@@ -12,6 +12,7 @@ import { useSelector } from 'react-redux'
 import { ShoeType } from '../Home/Home'
 import { collection, getDocs, query, where } from 'firebase/firestore'
 import { MutatingDots } from 'react-loader-spinner'
+import { Wave } from '../../components/Wave/Wave'
 
 
 function Product() {
@@ -67,63 +68,66 @@ function Product() {
   }
 
   return (
-    <TextWrapper>
-      <Container>
-        <Images>
-          {loading ?
-            <MutatingDots
-            color='#ef5454'
-            secondaryColor='#ef5454'
-          />
-            :
-            <>
-              {activeImage && <BigImage src={activeImage} alt="default image" />}
-              <SmallImages>
-                <ShoeImage
-                  src={product?.images[0]}
-                  alt="default mini image"
-                  onClick={() => handleImage(product?.images[0] as string)}
-                  isHighlighted={activeImage === product?.images[0]}
-                />
-                <ShoeImage
-                  src={product?.images[1]}
-                  alt="example mini image 1"
-                  onClick={() => handleImage(product?.images[1] as string)}
-                  isHighlighted={activeImage === product?.images[1]}
-                />
-                <ShoeImage
-                  src={product?.images[2]}
-                  alt="example mini image 2"
-                  onClick={() => handleImage(product?.images[2] as string)}
-                  isHighlighted={activeImage === product?.images[2]}
-                />
-                <ShoeImage
-                  src={product?.images[3]}
-                  alt="example mini image 3"
-                  onClick={() => handleImage(product?.images[3] as string)}
-                  isHighlighted={activeImage === product?.images[3]}
-                />
-                <ShoeImage
-                  src={product?.images[4]}
-                  alt="example mini image 4"
-                  onClick={() => handleImage(product?.images[4] as string)}
-                  isHighlighted={activeImage === product?.images[4]}
-                />
-              </SmallImages>
-            </>
-          }
-        </Images>
-        <AboutProduct>
-          <h1>{product?.brand}</h1>
-          <h2>{product?.description}</h2>
-          <SpaceContainer>
-            <h3>${product?.price}</h3>
-            <button onClick={() => product && addProductToCart(product)}>Add to cart</button>
-          </SpaceContainer>
-        </AboutProduct>
-      </Container>
-      <ToastContainer />
-    </TextWrapper>
+    <ProductPageWrapper>
+      <TextWrapper>
+        <Container>
+          <Images>
+            {loading ?
+              <MutatingDots
+                color='#ef5454'
+                secondaryColor='#ef5454'
+              />
+              :
+              <>
+                {activeImage && <BigImage src={activeImage} alt="default image" />}
+                <SmallImages>
+                  <ShoeImage
+                    src={product?.images[0]}
+                    alt="default mini image"
+                    onClick={() => handleImage(product?.images[0] as string)}
+                    isHighlighted={activeImage === product?.images[0]}
+                  />
+                  <ShoeImage
+                    src={product?.images[1]}
+                    alt="example mini image 1"
+                    onClick={() => handleImage(product?.images[1] as string)}
+                    isHighlighted={activeImage === product?.images[1]}
+                  />
+                  <ShoeImage
+                    src={product?.images[2]}
+                    alt="example mini image 2"
+                    onClick={() => handleImage(product?.images[2] as string)}
+                    isHighlighted={activeImage === product?.images[2]}
+                  />
+                  <ShoeImage
+                    src={product?.images[3]}
+                    alt="example mini image 3"
+                    onClick={() => handleImage(product?.images[3] as string)}
+                    isHighlighted={activeImage === product?.images[3]}
+                  />
+                  <ShoeImage
+                    src={product?.images[4]}
+                    alt="example mini image 4"
+                    onClick={() => handleImage(product?.images[4] as string)}
+                    isHighlighted={activeImage === product?.images[4]}
+                  />
+                </SmallImages>
+              </>
+            }
+          </Images>
+          <AboutProduct>
+            <h1>{product?.brand}</h1>
+            <h2>{product?.description}</h2>
+            <SpaceContainer>
+              <h3>${product?.price}</h3>
+              <button onClick={() => product && addProductToCart(product)}>Add to cart</button>
+            </SpaceContainer>
+          </AboutProduct>
+        </Container>
+        <ToastContainer />
+      </TextWrapper>
+      <Wave />
+    </ProductPageWrapper>
   )
 }
 export default Product
