@@ -125,3 +125,11 @@ export const RegisterWrapper = styled.div`
   position: relative;
   min-height: 100vh;
 `
+export const RegisterText = styled.p`
+  margin-bottom: 10px;
+
+  @media (min-width: 768px) {
+    margin-bottom: 20px;
+    font-size: 20px;
+  }
+`

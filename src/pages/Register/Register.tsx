@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { TextWrapper } from '../../components/TextWrapper/TextWrapper'
-import { Container, ErrorMsg, RegisteredText, RegisterPageWrapper, RegisterWrapper } from './Register.styles'
+import { Container, ErrorMsg, RegisteredText, RegisterPageWrapper, RegisterText, RegisterWrapper } from './Register.styles'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -46,6 +46,7 @@ function Register() {
       <TextWrapper>
         <Container>
           <RegisterWrapper>
+            <RegisterText>Register account</RegisterText>
             <form onSubmit={handleSubmit(onSubmit)}>
               <input
                 type="email"

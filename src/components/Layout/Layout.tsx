@@ -1,4 +1,5 @@
 import React from 'react'
+import { Footer } from '../Footer/Footer'
 import { Navbar } from '../Navbar/Navbar'
 import { MainWrapper } from './Layout.styles'
 
@@ -11,6 +12,7 @@ function Layout({ children }: ChildrenType) {
     <>
       <Navbar />
       <MainWrapper>{children}</MainWrapper>
+      <Footer />
     </>
   )
 }
