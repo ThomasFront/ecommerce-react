@@ -1,8 +1,13 @@
 import styled, { css } from "styled-components";
+import { BsFillArrowUpCircleFill } from "react-icons/bs";
 
 type ButtonProps = {
   isActive?: boolean
   isHighlighted?: boolean
+}
+
+type ArrowIconProps = {
+  showArrowIcon?: boolean
 }
 
 export const Categories = styled.div`
@@ -125,4 +130,28 @@ export const SelectContainer = styled.div`
 `
 export const HomePageWrapper = styled.div`
   position: relative;
+`
+
+export const ArrowIcon = styled(BsFillArrowUpCircleFill)<ArrowIconProps>`
+    position: fixed;
+    bottom: -50px;
+    right: 20px;
+    font-size: 25px;
+    cursor: pointer;
+    transition: bottom 0.3s;
+    ${({showArrowIcon}) => showArrowIcon && css`
+      bottom: 20px;
+    `}
+
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    @media (min-width: 768px){
+    font-size: 40px;
+    }
+
+    @media (min-width: 1024px){
+    font-size: 45px;
+    }
 `
