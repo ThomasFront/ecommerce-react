@@ -9,7 +9,7 @@ display: flex;
 justify-content: flex-start;
 align-items: center;
 flex-direction: column;
-  height: 500px;
+min-height: 500px;
 
   @media (min-width: 992px) {
     flex-direction: row;
@@ -99,10 +99,18 @@ export const AboutProduct = styled.div`
 display: flex;
 flex-direction: column;
 align-items: center;
-margin: 100px auto 0;
+margin: 40px auto 90px;
 max-width: 500px;
 width: 100%;
 text-align: left;
+
+@media (min-width: 700px){
+  padding-bottom: 50px;
+}
+
+@media (min-width: 992px){
+  padding-bottom: 0px;
+}
 
 h1 {
   text-transform: uppercase;
@@ -131,4 +139,21 @@ h2 {
 export const ProductPageWrapper = styled.div`
   position: relative;
   min-height: 100vh;
+`
+
+export const Sizes = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  width: 100%;
+
+  @media (min-width: 992px){
+    margin-left: 25px;
+  }
+
+  @media (min-width: 1050px){
+    margin-left: 0;
+  }
 `
