@@ -27,7 +27,7 @@ function Cart() {
                 </CartHeader>
               </CartItems>
               <OrderSummary>
-                {cart.map((item) => <CartItem item={item} />)}
+                {cart.map((item) => <CartItem key={item.id} item={item} />)}
               </OrderSummary>
               <Total>
                 <CostContainer>
