@@ -164,12 +164,19 @@ export const CartContainer = styled.div`
 p {
   position: absolute;
   top: -5px;
-  right: 10px;
+  right: 0px;
   background-color: red;
-  width: 20px;
-  height: 20px;
+  width: 15px;
+  height: 15px;
   border-radius: 50%;
   text-align: center;
-  font-size: 14px;
+  font-size: 12px;
+
+  @media (min-width: 768px){
+    width: 20px;
+    height: 20px;
+    font-size: 16px;
+    right: 10px;
+  }
 }
 `
