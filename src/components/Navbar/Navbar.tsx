@@ -5,9 +5,10 @@ import { BsFillPersonFill } from 'react-icons/bs'
 import { GiHamburgerMenu, GiConverseShoe } from 'react-icons/gi'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
-import { cartSelector, toggleShow, toggleShowSelector } from '../../store/slices/categoriesSlice'
+import { toggleShow, toggleShowSelector } from '../../store/slices/categoriesSlice'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth, logout } from '../../firebase/firebase'
+import { cartSelector } from '../../store/slices/cartSlice'
 
 
 export function Navbar() {

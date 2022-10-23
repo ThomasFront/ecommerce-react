@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { CartItem } from '../../components/CartItem/CartItem'
 import { TextWrapper } from '../../components/TextWrapper/TextWrapper'
 import { Wave } from '../../components/Wave/Wave'
-import { cartSelector, clearCart } from '../../store/slices/categoriesSlice'
+import { cartSelector, clearCart } from '../../store/slices/cartSlice'
 import { ButtonsContainer, CartHeader, CartItems, CartPageWrapper, CheckoutButton, Container, CostContainer, EmptyCartText, OrderSummary, Total, TotalName, TotalPrice } from './Cart.styles'
 
 

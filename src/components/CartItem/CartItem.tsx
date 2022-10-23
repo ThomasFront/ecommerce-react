@@ -1,6 +1,8 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router'
 import { ShoeType } from '../../pages/Home/Home'
+import { deleteItemFromCart } from '../../store/slices/cartSlice'
 import { BrandName, DeleteIcon, Description, Details, ItemContainer, PriceDesktop, PriceDetails } from './CartItem.styles'
 
 
@@ -11,6 +13,8 @@ type CartItemProps = {
 export const CartItem = ({ item }: CartItemProps) => {
   const { description, id, price, shortBrand, images } = item
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+
   return (
     <ItemContainer>
       <Details>
@@ -18,7 +22,7 @@ export const CartItem = ({ item }: CartItemProps) => {
         <div>
           <BrandName>{shortBrand}</BrandName>
           <Description>{description}</Description>
-          <DeleteIcon/>
+          <DeleteIcon onClick={() => dispatch(deleteItemFromCart(id))} />
         </div>
         <PriceDesktop>${price}</PriceDesktop>
         <PriceDetails>
