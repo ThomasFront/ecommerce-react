@@ -3,7 +3,7 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import { useParams } from 'react-router'
 import { TextWrapper } from '../../components/TextWrapper/TextWrapper'
 import { auth, db } from '../../firebase/firebase'
-import { AboutProduct, BigImage, Container, Images, ProductPageWrapper, ShoeImage, SmallImages, SpaceContainer } from './Product.styles'
+import { AboutProduct, BigImage, Container, Images, ProductPageWrapper, ShoeImage, Sizes, SmallImages, SpaceContainer } from './Product.styles'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch } from 'react-redux'
@@ -13,6 +13,7 @@ import { ShoeType } from '../Home/Home'
 import { collection, getDocs, query, where } from 'firebase/firestore'
 import { MutatingDots } from 'react-loader-spinner'
 import { Wave } from '../../components/Wave/Wave'
+import { Size } from '../../components/Size/Size'
 
 
 function Product() {
@@ -22,6 +23,9 @@ function Product() {
   const [loading, setLoading] = useState(true)
   const dispatch = useDispatch()
   const [product, setProduct] = useState<ShoeType | null>(null)
+  const [checkedSize, setCheckedSize] = useState<number>(36)
+
+  const sizes = [36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47]
 
   const handleImage = (clickedImage: string) => {
     setActiveImage(clickedImage)
@@ -118,6 +122,9 @@ function Product() {
           <AboutProduct>
             <h1>{product?.brand}</h1>
             <h2>{product?.description}</h2>
+            <Sizes>
+              {sizes.map((size) => <Size key={size} size={size} setCheckedSize={setCheckedSize} checkedSize={checkedSize}/>)}
+            </Sizes>
             <SpaceContainer>
               <h3>${product?.price}</h3>
               <button onClick={() => product && addProductToCart(product)}>Add to cart</button>
