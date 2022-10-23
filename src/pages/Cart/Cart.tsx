@@ -10,7 +10,7 @@ import { CartHeader, CartItems, CartPageWrapper, Container, EmptyCartText, Order
 
 function Cart() {
   const cart = useSelector(cartSelector)
-  const totalPrice = cart.reduce((prev, curr) => prev + curr.price, 0)
+  const totalPrice = cart.reduce((prev, curr) => prev + curr.price, 0).toFixed(2)
 
 
   return (
