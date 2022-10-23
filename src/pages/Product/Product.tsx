@@ -7,13 +7,13 @@ import { AboutProduct, BigImage, Container, Images, ProductPageWrapper, ShoeImag
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch } from 'react-redux'
-import { addItemToCart } from '../../store/slices/categoriesSlice'
 import { useSelector } from 'react-redux'
 import { ShoeType } from '../Home/Home'
 import { collection, getDocs, query, where } from 'firebase/firestore'
 import { MutatingDots } from 'react-loader-spinner'
 import { Wave } from '../../components/Wave/Wave'
 import { Size } from '../../components/Size/Size'
+import { addItemToCart } from '../../store/slices/cartSlice'
 
 
 function Product() {
