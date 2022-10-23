@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import ProductsCategories from '../../components/ProductsCategories/ProductsCategories'
 import { TextWrapper } from '../../components/TextWrapper/TextWrapper'
 import { brandSelector, changeBrand, toggleShowSelector } from '../../store/slices/categoriesSlice'
-import { Brand, Brands, BrandTitle, Categories, Category, CategoryTitle, HomePageWrapper, SelectContainer, ShoesContainer } from './Home.styles'
+import { ArrowIcon, Brand, Brands, BrandTitle, Categories, Category, CategoryTitle, HomePageWrapper, SelectContainer, ShoesContainer } from './Home.styles'
 import ShoeItem from '../../components/ShoeItem/ShoeItem'
 import { useDispatch } from 'react-redux'
 import { useAuthState } from 'react-firebase-hooks/auth'
@@ -11,6 +11,7 @@ import { auth, db } from '../../firebase/firebase'
 import { addDoc, collection, doc, getDocs, query, where } from 'firebase/firestore'
 import { MutatingDots } from 'react-loader-spinner'
 import { Wave } from '../../components/Wave/Wave'
+import { BsFillArrowUpCircleFill } from "react-icons/bs";
 
 export type ShoeType = {
   id: number,
@@ -42,6 +43,7 @@ function Home() {
   const [user, error] = useAuthState(auth)
   const [allShoes, setAllShoes] = useState<ShoesType | null>(null)
   const [loading, setLoading] = useState(true)
+  const [scrollPosition, setScrollPosition] = useState(0)
 
   const getAllShoes = async () => {
     const docs = await getDocs(collection(db, "products"))
@@ -56,6 +58,22 @@ function Home() {
     getAllShoes()
   }, [])
 
+  useEffect(() => {
+    const updatePosition = () => {
+      setScrollPosition(window.pageYOffset)
+    }
+    window.addEventListener('scroll', updatePosition)
+    updatePosition()
+    return () => window.removeEventListener('scroll', updatePosition)
+  }, [])
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
   const handleSort = (a: ShoeType, b: ShoeType) => {
     switch (selectedValue) {
       case 'Lowest':
@@ -66,6 +84,7 @@ function Home() {
         return 0
     }
   }
+
 
   return (
     <HomePageWrapper>
@@ -112,6 +131,7 @@ function Home() {
           }
         </ShoesContainer>
       </TextWrapper>
+      <ArrowIcon onClick={scrollToTop} showArrowIcon={scrollPosition >= 500}/>
       {!loading && <Wave />}
     </HomePageWrapper>
   )
