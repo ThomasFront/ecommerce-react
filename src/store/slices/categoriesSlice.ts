@@ -45,7 +45,7 @@ export const categoriesSlice = createSlice({
     },
     openModal: (state, action: PayloadAction<boolean>) => {
       state.showModal = action.payload
-    }
+    },
   },
 })
 
