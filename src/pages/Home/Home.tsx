@@ -112,7 +112,7 @@ function Home() {
           }
         </ShoesContainer>
       </TextWrapper>
-      <Wave />
+      {!loading && <Wave />}
     </HomePageWrapper>
   )
 }
