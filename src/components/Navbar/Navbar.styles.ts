@@ -26,7 +26,6 @@ font-size: 30px;
   color: #eeeeee;
   cursor: pointer;
 
-
   &.active {
     color: #F05454;
   }
@@ -171,5 +170,6 @@ p {
   height: 20px;
   border-radius: 50%;
   text-align: center;
+  font-size: 14px;
 }
 `
