@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { CartItem } from '../../components/CartItem/CartItem'
 import { TextWrapper } from '../../components/TextWrapper/TextWrapper'
 import { Wave } from '../../components/Wave/Wave'
-import { cartSelector } from '../../store/slices/categoriesSlice'
+import { cartSelector, clearCart } from '../../store/slices/categoriesSlice'
 import { ButtonsContainer, CartHeader, CartItems, CartPageWrapper, CheckoutButton, Container, CostContainer, EmptyCartText, OrderSummary, Total, TotalName, TotalPrice } from './Cart.styles'
 
 
@@ -11,7 +12,7 @@ import { ButtonsContainer, CartHeader, CartItems, CartPageWrapper, CheckoutButto
 function Cart() {
   const cart = useSelector(cartSelector)
   const totalPrice = cart.reduce((prev, curr) => prev + curr.price, 0).toFixed(2)
-
+  const dispatch = useDispatch()
 
   return (
     <CartPageWrapper>
@@ -34,7 +35,7 @@ function Cart() {
                   <TotalPrice>${totalPrice}</TotalPrice>
                 </CostContainer>
                 <ButtonsContainer>
-                  <button>Delete all</button>
+                  <button onClick={() => dispatch(clearCart())}>Delete all</button>
                   <CheckoutButton>Checkout</CheckoutButton>
                 </ButtonsContainer>
               </Total>

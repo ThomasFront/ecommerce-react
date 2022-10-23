@@ -46,10 +46,13 @@ export const categoriesSlice = createSlice({
     openModal: (state, action: PayloadAction<boolean>) => {
       state.showModal = action.payload
     },
+    clearCart: (state) => { 
+      state.cart = [] 
+    }
   },
 })
 
-export const { toggleShow, changeBrand, addItemToCart, openModal } = categoriesSlice.actions
+export const { toggleShow, changeBrand, addItemToCart, openModal, clearCart } = categoriesSlice.actions
 export const toggleShowSelector = (state: RootState) => state.categories.isShow
 export const modalSelector = (state: RootState) => state.categories.showModal
 export const brandSelector = (state: RootState) => state.categories.selectedBrand
