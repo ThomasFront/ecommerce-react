@@ -30,8 +30,9 @@ export const OrderSummary = styled.div`
 
 export const Total = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  flex-direction: column;
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;
   background-color: #ffffff;
@@ -62,4 +63,49 @@ export const EmptyCartText = styled.p`
   font-weight: bold;
   height: 80vh;
   font-size: 26px;
+`
+
+export const CostContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+`
+
+export const ButtonsContainer = styled.div`
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media (min-width: 768px){
+      margin-top: 40px;
+    }
+
+  button{
+    margin: 0 20px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: transform 0.3s;
+    font-family: 'Montserrat', sans-serif;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+
+    @media (min-width: 768px){
+      font-size: 18px;
+      padding: 9px 18px;
+    }
+  }
+`
+
+export const CheckoutButton = styled.button`
+  background-color: #f05454;
+  transition: background-color 0.3s;
+  &:hover {
+      background-color: rgb(245, 59, 59);
+    }
 `

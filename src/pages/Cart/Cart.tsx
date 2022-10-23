@@ -4,7 +4,7 @@ import { CartItem } from '../../components/CartItem/CartItem'
 import { TextWrapper } from '../../components/TextWrapper/TextWrapper'
 import { Wave } from '../../components/Wave/Wave'
 import { cartSelector } from '../../store/slices/categoriesSlice'
-import { CartHeader, CartItems, CartPageWrapper, Container, EmptyCartText, OrderSummary, Total, TotalName, TotalPrice } from './Cart.styles'
+import { ButtonsContainer, CartHeader, CartItems, CartPageWrapper, CheckoutButton, Container, CostContainer, EmptyCartText, OrderSummary, Total, TotalName, TotalPrice } from './Cart.styles'
 
 
 
@@ -29,8 +29,14 @@ function Cart() {
                 {cart.map((item) => <CartItem item={item} />)}
               </OrderSummary>
               <Total>
-                <TotalName>Total Cost:</TotalName>
-                <TotalPrice>${totalPrice}</TotalPrice>
+                <CostContainer>
+                  <TotalName>Total Cost:</TotalName>
+                  <TotalPrice>${totalPrice}</TotalPrice>
+                </CostContainer>
+                <ButtonsContainer>
+                  <button>Delete all</button>
+                  <CheckoutButton>Checkout</CheckoutButton>
+                </ButtonsContainer>
               </Total>
             </>
             :
