@@ -130,6 +130,7 @@ export const SelectContainer = styled.div`
 `
 export const HomePageWrapper = styled.div`
   position: relative;
+  min-height: 100vh;
 `
 
 export const ArrowIcon = styled(BsFillArrowUpCircleFill)<ArrowIconProps>`

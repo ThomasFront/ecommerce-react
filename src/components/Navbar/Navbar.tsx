@@ -32,7 +32,7 @@ export function Navbar() {
             {user && <LinkItem to="/profile"><BsFillPersonFill /></LinkItem>}
             <CartContainer>
               <LinkItem to="/cart"><FaShoppingCart /></LinkItem>
-              {cartAmount.length > 0 ? <p>{cartAmount.length}</p> : ''}
+              {cartAmount.length > 0 && <p>{cartAmount.length}</p>}
             </CartContainer>
           </RightSection>
         </Wrapper>
