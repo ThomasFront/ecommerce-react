@@ -138,7 +138,7 @@ export const ArrowIcon = styled(BsFillArrowUpCircleFill)<ArrowIconProps>`
     right: 20px;
     font-size: 25px;
     cursor: pointer;
-    transition: bottom 0.3s;
+    transition: bottom 0.3s, transform 0.3s;
     ${({showArrowIcon}) => showArrowIcon && css`
       bottom: 20px;
     `}
