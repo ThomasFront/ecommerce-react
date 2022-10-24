@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router'
 import { ShoeType } from '../../pages/Home/Home'
 import { deleteItemFromCart } from '../../store/slices/cartSlice'
-import { BrandName, DeleteIcon, Description, Details, ItemContainer, PriceDesktop, PriceDetails, ShoeSize } from './CartItem.styles'
+import { BrandName, DeleteIcon, Description, Details, ImgWrapper, ItemContainer, PriceDesktop, PriceDetails, ProductInformation, ShoeSize } from './CartItem.styles'
 
 
 type CartItemProps = {
@@ -18,13 +18,13 @@ export const CartItem = ({ item }: CartItemProps) => {
   return (
     <ItemContainer>
       <Details>
-        <img src={images[0]} alt="shoe image" onClick={() => navigate(`/product/${id}`)} />
-        <div>
+       <ImgWrapper> <img src={images[0]} alt="shoe image" onClick={() => navigate(`/product/${id}`)} /></ImgWrapper>
+        <ProductInformation>
           <BrandName>{shortBrand}</BrandName>
           <Description>{description}</Description>
           <ShoeSize>size: {size}</ShoeSize>
           <DeleteIcon onClick={() => dispatch(deleteItemFromCart(id))} />
-        </div>
+        </ProductInformation>
         <PriceDesktop>${price}</PriceDesktop>
         <PriceDetails>
           <p>${price}</p>

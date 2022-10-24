@@ -171,6 +171,7 @@ p {
   border-radius: 50%;
   text-align: center;
   font-size: 12px;
+  pointer-events: none;
 
   @media (min-width: 768px){
     width: 20px;

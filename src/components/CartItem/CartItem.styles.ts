@@ -22,7 +22,12 @@ export const Details = styled.div`
 
   @media (min-width: 768px){
     flex-direction: row;
-    justify-content: space-between;
+  }
+`
+
+export const ProductInformation = styled.div`
+@media (min-width: 768px){
+    width: 33%;
   }
 `
 
@@ -59,6 +64,7 @@ export const PriceDesktop = styled.p`
   
   @media (min-width: 768px){
     display: block;
+    width: 33%;
   }
 `
 
@@ -84,5 +90,11 @@ export const ShoeSize = styled.p`
 
   @media (max-width: 767px){
     margin-bottom: 20px;
+  }
+`
+
+export const ImgWrapper = styled.div`
+@media (min-width: 768px){
+    width: 33%;
   }
 `
