@@ -8,10 +8,11 @@ import ShoeItem from '../../components/ShoeItem/ShoeItem'
 import { useDispatch } from 'react-redux'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth, db } from '../../firebase/firebase'
-import { addDoc, collection, doc, getDocs, query, where } from 'firebase/firestore'
+import { addDoc, collection, doc, getDocs, query, setDoc, where } from 'firebase/firestore'
 import { MutatingDots } from 'react-loader-spinner'
 import { Wave } from '../../components/Wave/Wave'
 import { BsFillArrowUpCircleFill } from "react-icons/bs";
+import { cartSelector, getCart, randomNumSelector } from '../../store/slices/cartSlice'
 
 export type ShoeType = {
   id: number,
@@ -38,13 +39,15 @@ export type ShoesType = Array<{
 function Home() {
   const toggleVisible = useSelector(toggleShowSelector)
   const brandSelect = useSelector(brandSelector)
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<any>()
   const [activeCategory, setActiveCategory] = useState('')
   const [selectedValue, setSelectedValue] = useState('Popular')
   const [user, error] = useAuthState(auth)
   const [allShoes, setAllShoes] = useState<ShoesType | null>(null)
   const [loading, setLoading] = useState(true)
   const [scrollPosition, setScrollPosition] = useState(0)
+  const randomnum = useSelector(randomNumSelector)
+  const cart = useSelector(cartSelector)
 
   const getAllShoes = async () => {
     const docs = await getDocs(collection(db, "products"))
@@ -132,7 +135,7 @@ function Home() {
           }
         </ShoesContainer>
       </TextWrapper>
-      <ArrowIcon onClick={scrollToTop} showArrowIcon={scrollPosition >= 500}/>
+      <ArrowIcon onClick={scrollToTop} showArrowIcon={scrollPosition >= 500} />
       {!loading && <Wave />}
     </HomePageWrapper>
   )
