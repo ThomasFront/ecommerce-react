@@ -127,7 +127,7 @@ function Product() {
             </Sizes>
             <SpaceContainer>
               <h3>${product?.price}</h3>
-              <button onClick={() => product && addProductToCart(product)}>Add to cart</button>
+              <button onClick={() => product && addProductToCart({...product, size: checkedSize})}>Add to cart</button>
             </SpaceContainer>
           </AboutProduct>
         </Container>
