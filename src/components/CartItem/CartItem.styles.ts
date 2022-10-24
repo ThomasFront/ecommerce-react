@@ -78,3 +78,11 @@ export const DeleteIcon = styled(BsTrashFill)`
     font-size: 24px;
   }
 `
+
+export const ShoeSize = styled.p`
+  font-size: 12px;
+
+  @media (max-width: 767px){
+    margin-bottom: 20px;
+  }
+`

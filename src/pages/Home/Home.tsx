@@ -21,6 +21,7 @@ export type ShoeType = {
   shortBrand: string,
   description: string,
   images: Array<string>
+  size?: number
 }
 
 export type ShoesType = Array<{
