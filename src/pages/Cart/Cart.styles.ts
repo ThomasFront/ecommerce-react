@@ -109,3 +109,17 @@ export const CheckoutButton = styled.button`
       background-color: rgb(245, 59, 59);
     }
 `
+
+export const OrderingText = styled.p`
+  margin-top: 20px;
+  color: green;
+`
+
+export const RedirectingInfo = styled.p`
+  text-align: center;
+  font-size: 10px;
+
+  @media (min-width: 768px){
+    font-size: 12px;
+  }
+`
