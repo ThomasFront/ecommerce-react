@@ -13,7 +13,7 @@ import { collection, getDocs, query, where } from 'firebase/firestore'
 import { MutatingDots } from 'react-loader-spinner'
 import { Wave } from '../../components/Wave/Wave'
 import { Size } from '../../components/Size/Size'
-import { addItemToCart } from '../../store/slices/cartSlice'
+import { cartSelector, updateCart } from '../../store/slices/cartSlice'
 
 
 function Product() {
@@ -21,9 +21,10 @@ function Product() {
   const [activeImage, setActiveImage] = useState<string | null>(null)
   const [user, error] = useAuthState(auth);
   const [loading, setLoading] = useState(true)
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<any>()
   const [product, setProduct] = useState<ShoeType | null>(null)
   const [checkedSize, setCheckedSize] = useState<number>(36)
+  const cart = useSelector(cartSelector)
 
   const sizes = [36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47]
 
@@ -57,7 +58,11 @@ function Product() {
         theme: "dark",
       });
     } else {
-      dispatch(addItemToCart(product))
+      dispatch(updateCart({
+        userId: user.uid as string,
+        cart,
+        product
+      }))
       toast.success('The product has been added to the cart', {
         position: "bottom-left",
         autoClose: 4000,

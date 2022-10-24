@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
+import { useAuthState } from 'react-firebase-hooks/auth'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
 import { CartItem } from '../../components/CartItem/CartItem'
 import { TextWrapper } from '../../components/TextWrapper/TextWrapper'
 import { Wave } from '../../components/Wave/Wave'
-import { cartSelector, clearCart } from '../../store/slices/cartSlice'
+import { auth } from '../../firebase/firebase'
+import { cartSelector, clearCart, deleteAllCart } from '../../store/slices/cartSlice'
 import { ButtonsContainer, CartHeader, CartItems, CartPageWrapper, CheckoutButton, Container, CostContainer, EmptyCartText, OrderingText, OrderSummary, RedirectingInfo, Total, TotalName, TotalPrice } from './Cart.styles'
 
 
@@ -14,13 +16,14 @@ function Cart() {
   const cart = useSelector(cartSelector)
   const totalPrice = cart.reduce((prev, curr) => prev + curr.price, 0).toFixed(2)
   const [showParagraf, setShowParagraf] = useState(false)
+  const [user] = useAuthState(auth)
   const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<any>()
 
   const handleCheckout = () => {
     setShowParagraf(true)
     setTimeout(() => {
-      dispatch(clearCart())
+      dispatch(deleteAllCart(user?.uid as string))
       navigate('/')
     }, 3000)
   }
@@ -38,7 +41,7 @@ function Cart() {
                 </CartHeader>
               </CartItems>
               <OrderSummary>
-                {cart.map((item) => <CartItem key={item.id} item={item} />)}
+                {cart.map((item, index) => <CartItem index={index} key={`${item.id}_${index}`} item={item} />)}
               </OrderSummary>
               <Total>
                 <CostContainer>
@@ -46,7 +49,7 @@ function Cart() {
                   <TotalPrice>${totalPrice}</TotalPrice>
                 </CostContainer>
                 <ButtonsContainer>
-                  <button onClick={() => dispatch(clearCart())}>Delete all</button>
+                  <button onClick={() => dispatch(deleteAllCart(user?.uid as string))}>Delete all</button>
                   <CheckoutButton onClick={handleCheckout}>Checkout</CheckoutButton>
                 </ButtonsContainer>
                 {showParagraf &&
