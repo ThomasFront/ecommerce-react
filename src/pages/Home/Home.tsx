@@ -12,7 +12,7 @@ import { addDoc, collection, doc, getDocs, query, setDoc, where } from 'firebase
 import { MutatingDots } from 'react-loader-spinner'
 import { Wave } from '../../components/Wave/Wave'
 import { BsFillArrowUpCircleFill } from "react-icons/bs";
-import { cartSelector, getCart, randomNumSelector } from '../../store/slices/cartSlice'
+import { cartSelector, getCart } from '../../store/slices/cartSlice'
 
 export type ShoeType = {
   id: number,
@@ -46,7 +46,6 @@ function Home() {
   const [allShoes, setAllShoes] = useState<ShoesType | null>(null)
   const [loading, setLoading] = useState(true)
   const [scrollPosition, setScrollPosition] = useState(0)
-  const randomnum = useSelector(randomNumSelector)
   const cart = useSelector(cartSelector)
 
   const getAllShoes = async () => {

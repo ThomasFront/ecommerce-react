@@ -188,11 +188,6 @@ export const cartSlice = createSlice({
   }
 })
 
-export const { clearCart, deleteItemFromCart } = cartSlice.actions
-export const cartSelector = (state: RootState) => state.user.cart
-export const randomNumSelector = (state: RootState) => ({
-  value: state.user.randomNum,
-  error: state.user.errors.replaceRandomNumber,
-  loading: state.user.loading.replaceRandomNumber
-})
+export const { clearCart } = cartSlice.actions
+export const cartSelector = (state: RootState) => state.cart.cart
 export default cartSlice.reducer
