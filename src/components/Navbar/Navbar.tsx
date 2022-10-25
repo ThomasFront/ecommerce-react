@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux'
 import { toggleShow, toggleShowSelector } from '../../store/slices/categoriesSlice'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth, logout } from '../../firebase/firebase'
-import { cartSelector } from '../../store/slices/cartSlice'
+import { cartSelector, clearCart } from '../../store/slices/cartSlice'
 
 
 export function Navbar() {
@@ -18,6 +18,11 @@ export function Navbar() {
   const burgerSelector = useSelector(toggleShowSelector)
   const [user, loading, error] = useAuthState(auth);
   const cartAmount = useSelector(cartSelector)
+
+  const handleLogout = () => {
+    logout()
+    dispatch(clearCart())
+  }
   return (
     <>
       <NavbarDesign>
@@ -29,7 +34,7 @@ export function Navbar() {
             <LinkItem to="/"><GiConverseShoe />FUTURE</LinkItem>
           </LogoContainer>
           <RightSection>
-            <LoginButton onClick={() => user ? logout() : navigate('/login')}>{user ? 'log out' : 'log in'}</LoginButton>
+            <LoginButton onClick={() => user ? handleLogout() : navigate('/login')}>{user ? 'log out' : 'log in'}</LoginButton>
             {user && <LinkItem to="/profile"><BsFillPersonFill /></LinkItem>}
             <CartContainer>
               <LinkItem to="/cart"><FaShoppingCart /></LinkItem>

@@ -13,14 +13,15 @@ import { collection, deleteDoc, doc, getDocs, query, where } from 'firebase/fire
 import { deleteUser, getAuth, User } from 'firebase/auth';
 import { Wave } from '../../components/Wave/Wave';
 import { MutatingDots } from 'react-loader-spinner';
+import { differenceInDays, differenceInMonths, differenceInYears } from 'date-fns';
+import { clearCart } from '../../store/slices/cartSlice';
 
 type UserInformationType = {
   email: string,
   name: string,
   uid: string,
-  signUpDate: number
+  signUpDate: any
 }
-
 
 function Profile() {
   const [user, error] = useAuthState(auth);
@@ -45,14 +46,34 @@ function Profile() {
     await deleteUser(user as User)
     dispatch(openModal(false))
     logout()
+    dispatch(clearCart())
     navigate('/')
+  }
+
+  const handleTimestamp = (timestamp: number) => {
+    const diffInYears = differenceInYears(Date.now(), timestamp)
+    const diffInMonths = differenceInMonths(Date.now(), timestamp)
+    const diffInDays = differenceInDays(Date.now(), timestamp)
+    if (diffInYears) {
+      return `${diffInYears} ${diffInYears === 1 ? 'year ago' : 'years ago'}`
+    }
+    if (diffInMonths) {
+      return `${diffInMonths} ${diffInMonths === 1 ? 'month ago' : 'months ago'}`
+    }
+    if (diffInDays) {
+      return `${diffInDays} ${diffInDays === 1 ? 'day ago' : 'days ago'}`
+    }
+    return 'less than 1 day ago'
   }
 
   const getUser = async () => {
     const q = query(collection(db, "users"), where("uid", "==", user?.uid));
     const docs = await getDocs(q);
     const userData = docs.docs[0].data() as UserInformationType
-    setUserInformation(userData)
+    setUserInformation({
+      ...userData,
+      signUpDate: handleTimestamp(userData.signUpDate)
+    })
     setLoading(false)
   }
 
@@ -74,6 +95,7 @@ function Profile() {
               </LoadingWrapper> :
               <>
                 <p>Hello <span>{userInformation?.name}</span>!</p>
+                <p>registered: <span>{userInformation?.signUpDate}</span></p>
                 <AccountDetails>
                   <GrMail />
                   <p><span>{userInformation?.email}</span></p>

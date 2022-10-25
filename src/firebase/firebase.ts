@@ -19,7 +19,6 @@ export const auth = getAuth(app)
 export const db = getFirestore(app)
 
 // GOOGLE
-
 const googleProvider = new GoogleAuthProvider();
 export const signInWithGoogle = async () => {
   try {
@@ -33,14 +32,13 @@ export const signInWithGoogle = async () => {
         email: user.email,
         name: user.displayName,
         authProvider: "google",
+        signUpDate: Date.now()
       });
     }
   } catch (err) {
     console.error(err);
   }
 };
-
-// GOOGLE LOGIN
 
 export const logInWithEmailAndPassword = async (email: string, password: string) => {
   try {
@@ -51,8 +49,6 @@ export const logInWithEmailAndPassword = async (email: string, password: string)
 };
 
 // REGISTER WITH EMAIL AND PASSWORD
-
-
 export const registerWithEmailAndPassword = async (name: string, email: string, password: string) => {
   try {
     const res = await createUserWithEmailAndPassword(auth, email, password);
@@ -61,6 +57,7 @@ export const registerWithEmailAndPassword = async (name: string, email: string, 
       uid: user.uid,
       email,
       name,
+      signUpDate: Date.now()
     });
   } catch (err) {
     console.error(err);
@@ -68,7 +65,6 @@ export const registerWithEmailAndPassword = async (name: string, email: string, 
 };
 
 // LOGOUT
-
 export const logout = () => {
   signOut(auth);
 };
