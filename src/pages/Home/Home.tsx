@@ -13,6 +13,7 @@ import { MutatingDots } from 'react-loader-spinner'
 import { Wave } from '../../components/Wave/Wave'
 import { BsFillArrowUpCircleFill } from "react-icons/bs";
 import { cartSelector, getCart } from '../../store/slices/cartSlice'
+import { motion } from 'framer-motion'
 
 export type ShoeType = {
   id: number,
@@ -90,7 +91,11 @@ function Home() {
 
 
   return (
-    <HomePageWrapper>
+    <HomePageWrapper
+    as={motion.div}
+    initial={{width: 0}}
+    animate={{width: "100%"}}
+    >
       <ProductsCategories />
       <TextWrapper>
         <CategoryTitle>Category:</CategoryTitle>

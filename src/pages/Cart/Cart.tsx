@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion'
 import React, { useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useDispatch } from 'react-redux'
@@ -31,7 +32,10 @@ function Cart() {
   return (
     <CartPageWrapper>
       <TextWrapper>
-        <Container>
+        <Container
+          as={motion.div}
+          initial={{ scale: 0}}
+          animate={{ scale: 1 }}>
           {cart.length ?
             <>
               <CartItems>

@@ -14,6 +14,7 @@ import { MutatingDots } from 'react-loader-spinner'
 import { Wave } from '../../components/Wave/Wave'
 import { Size } from '../../components/Size/Size'
 import { cartSelector, updateCart } from '../../store/slices/cartSlice'
+import { motion } from 'framer-motion'
 
 
 function Product() {
@@ -88,8 +89,19 @@ function Product() {
               />
               :
               <>
-                {activeImage && <BigImage src={activeImage} alt="default image" />}
-                <SmallImages>
+                {activeImage &&
+                  <BigImage
+                    src={activeImage}
+                    alt="default image"
+                    as={motion.img}
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                  />}
+                <SmallImages
+                  as={motion.div}
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                >
                   <ShoeImage
                     src={product?.images[0]}
                     alt="default mini image"
@@ -128,11 +140,11 @@ function Product() {
             <h1>{product?.brand}</h1>
             <h2>{product?.description}</h2>
             <Sizes>
-              {sizes.map((size) => <Size key={size} size={size} setCheckedSize={setCheckedSize} checkedSize={checkedSize}/>)}
+              {sizes.map((size) => <Size key={size} size={size} setCheckedSize={setCheckedSize} checkedSize={checkedSize} />)}
             </Sizes>
             <SpaceContainer>
               <h3>${product?.price}</h3>
-              <button onClick={() => product && addProductToCart({...product, size: checkedSize})}>Add to cart</button>
+              <button onClick={() => product && addProductToCart({ ...product, size: checkedSize })}>Add to cart</button>
             </SpaceContainer>
           </AboutProduct>
         </Container>
