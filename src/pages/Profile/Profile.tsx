@@ -15,6 +15,7 @@ import { Wave } from '../../components/Wave/Wave';
 import { MutatingDots } from 'react-loader-spinner';
 import { differenceInDays, differenceInMonths, differenceInYears } from 'date-fns';
 import { clearCart } from '../../store/slices/cartSlice';
+import { motion } from 'framer-motion';
 
 type UserInformationType = {
   email: string,
@@ -84,7 +85,11 @@ function Profile() {
   return (
     <ProfilePageWrapper>
       <TextWrapper>
-        <ProfileContainer>
+        <ProfileContainer
+          as={motion.div}
+          initial={{ scale: 0}}
+          animate={{ scale:1 }}
+        >
           <ProfileWrapper>
             {loading ?
               <LoadingWrapper>
