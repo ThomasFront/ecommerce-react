@@ -24,8 +24,12 @@ function Login() {
   };
 
   const schema = yup.object().shape({
-    email: yup.string().required(),
-    password: yup.string().required(),
+    email: yup.string()
+    .email('Please enter a valid email schema')
+    .required('Please enter your email'),
+    password: yup.string()
+    .required('Please enter your password')
+    .min(3, 'Password must have more than 3 characters'),
   })
 
   const { register, handleSubmit, formState: { errors } } = useForm<Inputs>({
@@ -60,7 +64,7 @@ function Login() {
           <p>or</p>
           <LoginButtons onClick={signInWithGoogle}>Login with Google</LoginButtons>
           <RegisterText>Don't have an account? <RegisterButton onClick={() => navigate('/register')}>Register</RegisterButton> now</RegisterText>
-          <img src={profilePhoto} alt="" />
+          <img src={profilePhoto} alt="profile image" />
         </LogInWrapper>
       </Container>
     </TextWrapper>

@@ -13,6 +13,7 @@ import { Wave } from '../../components/Wave/Wave';
 type Inputs = {
   email: string,
   password: string,
+  confirmPassword: string,
   name: string,
 };
 
@@ -26,9 +27,19 @@ function Register() {
   };
 
   const schema = yup.object().shape({
-    email: yup.string().email().required(),
-    password: yup.string().required().min(3).max(20),
-    name: yup.string().required().min(3),
+    email: yup.string()
+      .email('Please enter a valid email schema')
+      .required('Please enter your email'),
+    password: yup.string()
+      .required('Please enter your password')
+      .min(3, 'Password must have more than 3 characters')
+      .max(20, 'Password must have less than 20 characters'),
+      confirmPassword: yup.string()
+      .oneOf([yup.ref('password'), null], 'Passwords must match')
+      .required('Please confirm your password'),
+    name: yup.string()
+      .required('Please enter your name')
+      .min(3, 'Name must have more than 3 character'),
   })
   const { register, handleSubmit, watch, formState: { errors } } = useForm<Inputs>({
     resolver: yupResolver(schema)
@@ -46,7 +57,7 @@ function Register() {
       <TextWrapper>
         <Container>
           <RegisterWrapper>
-            <RegisterText>Register account</RegisterText>
+            <RegisterText>Register an account</RegisterText>
             <form onSubmit={handleSubmit(onSubmit)}>
               <input
                 type="email"
@@ -58,6 +69,11 @@ function Register() {
                 placeholder='Password'
                 {...register('password')} />
               <ErrorMsg>{errors.password?.message}</ErrorMsg>
+              <input
+                type="password"
+                placeholder='Confirm Password'
+                {...register('confirmPassword')} />
+              <ErrorMsg>{errors.confirmPassword?.message}</ErrorMsg>
               <input
                 type="text"
                 placeholder='Name'
