@@ -29,6 +29,11 @@ position: relative;
   box-shadow: 0 0 10px gray;
   background-color: white;
 
+p {
+  color: black;
+  margin: 10px 0;
+}
+
   img {
     display: none;
 
@@ -68,11 +73,6 @@ position: relative;
     @media (min-width: 576px) {
    font-size: 18px;
   }
-  }
-
-  p {
-    color: black;
-    margin: 10px 0;
   }
 `
 
@@ -116,10 +116,12 @@ export const LoginButtons = styled.button`
   `
 
   export const ErrorMsg = styled.p`
-  font-size: 8px;
+    color: red;
+    text-align: center;
+    font-size: 8px;
   
   @media (min-width: 576px) {
-    font-size: 12px;
+    font-size: 10px;
   }
   `
 

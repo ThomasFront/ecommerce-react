@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import profilePhoto from '../../assets/undraw_pic_profile_re_1865.svg'
 import { Wave } from '../../components/Wave/Wave';
+import { motion } from 'framer-motion';
 
 type Inputs = {
   email: string,
@@ -47,7 +48,10 @@ function Login() {
     <LoginPageWrapper>
     <TextWrapper>
       <Container>
-        <LogInWrapper>
+        <LogInWrapper
+          as={motion.div}
+          initial={{ scale: 0}}
+          animate={{ scale:1 }}>
           <form onSubmit={handleSubmit(onSubmit)}>
             <input
               type="email"
