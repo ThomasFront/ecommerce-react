@@ -4,13 +4,14 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 70vh;
+  min-height: 70vh;
 `
 
 export const ErrorMsg = styled.p`
   font-size: 10px;
   border-bottom: 1px solid #F05454;
   color: black;
+  text-align: center;
   
   @media (min-width: 576px) {
     font-size: 12px;
@@ -53,9 +54,9 @@ export const RegisterWrapper = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  position: relative;
-  height: 350px;
+  padding: 30px;
   max-width: 700px;
+  position: relative;
   width: 100%;
   border-radius: 6px;
   box-shadow: 0 0 10px gray;
@@ -99,8 +100,8 @@ export const RegisterWrapper = styled.div`
   }
 
   input {
-    margin: 10px 0;
-    padding: 10px 20px;
+    margin: 5px 0;
+    padding: 8px 16px;
     border-radius: 6px;
     background-color: rgba(0, 0, 0, 0.8);
     box-shadow: 0 0 10px gray;

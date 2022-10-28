@@ -9,7 +9,7 @@ export const Container = styled.div`
 
 export const RegisterText = styled.p`
 font-size: 10px;
-  padding: 10px;
+padding-top: 20px;
 
   @media (min-width: 576px) {
    font-size: 20px;
@@ -33,7 +33,10 @@ position: relative;
     display: none;
 
     @media (min-width: 576px){
-    display: block;
+      display: block;
+    position: absolute;
+    top: 10px;
+    right: 10px;
     width: 75px;
     height: 75px;
     }
@@ -63,7 +66,7 @@ position: relative;
     }
 
     @media (min-width: 576px) {
-   font-size: 20px;
+   font-size: 18px;
   }
   }
 
@@ -74,7 +77,7 @@ position: relative;
 `
 
 export const LoginButtons = styled.button`
-    padding: 5px 10px;
+    padding: 4px 8px;
     border-radius: 6px;
     width: 100px;
     border: none;
@@ -91,7 +94,7 @@ export const LoginButtons = styled.button`
 
     @media (min-width: 576px) {
       width: 160px;
-    padding: 10px 20px;
+      padding: 10px 20px;
   }
   `
   export const RegisterButton = styled.button`
@@ -113,8 +116,7 @@ export const LoginButtons = styled.button`
   `
 
   export const ErrorMsg = styled.p`
-  font-size: 10px;
-  border-bottom: 1px solid #F05454;
+  font-size: 8px;
   
   @media (min-width: 576px) {
     font-size: 12px;
