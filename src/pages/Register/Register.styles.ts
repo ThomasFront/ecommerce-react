@@ -8,13 +8,12 @@ export const Container = styled.div`
 `
 
 export const ErrorMsg = styled.p`
-  font-size: 10px;
-  border-bottom: 1px solid #F05454;
-  color: black;
+  color: crimson;
   text-align: center;
+  font-size: 8px;
   
   @media (min-width: 576px) {
-    font-size: 12px;
+    font-size: 10px;
   }
   `
 
@@ -23,7 +22,7 @@ export const ErrorMsg = styled.p`
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 80vh;
+    min-height: 80vh;
 
     button {
       margin-top: 10px;
@@ -54,7 +53,7 @@ export const RegisterWrapper = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: 30px;
+  padding: 20px;
   max-width: 700px;
   position: relative;
   width: 100%;
@@ -64,7 +63,6 @@ export const RegisterWrapper = styled.div`
 
   img {
     display: none;
-
     @media (min-width: 576px){
     display: block;
     }
@@ -101,7 +99,7 @@ export const RegisterWrapper = styled.div`
 
   input {
     margin: 5px 0;
-    padding: 8px 16px;
+    padding: 6px 12px;
     border-radius: 6px;
     background-color: rgba(0, 0, 0, 0.8);
     box-shadow: 0 0 10px gray;
@@ -117,20 +115,34 @@ export const RegisterWrapper = styled.div`
    font-size: 20px;
   }
   }
-  
-  @media (min-width: 576px) {
-      height: 400px;
-    }
   `
   export const RegisterPageWrapper = styled.div`
   position: relative;
   min-height: 100vh;
 `
 export const RegisterText = styled.p`
-  margin-bottom: 10px;
+  margin-bottom: 7px;
 
   @media (min-width: 768px) {
     margin-bottom: 20px;
+    padding-top: 20px;
     font-size: 20px;
+  }
+`
+
+export const CheckboxContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px 0;
+  font-size: 10px;
+
+  p{
+    margin-right: 10px;
+  }
+
+  input {
+    padding: 2px;
+    box-shadow: none;
   }
 `
