@@ -118,10 +118,10 @@ export const LoginButtons = styled.button`
   export const ErrorMsg = styled.p`
     color: red;
     text-align: center;
-    font-size: 8px;
+    font-size: 10px;
   
   @media (min-width: 576px) {
-    font-size: 10px;
+    font-size: 12px;
   }
   `
 
