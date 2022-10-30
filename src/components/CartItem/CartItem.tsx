@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router'
 import { auth } from '../../firebase/firebase'
 import { ShoeType } from '../../pages/Home/Home'
-import { cartSelector, deleteFromCart, deleteItemFromCart } from '../../store/slices/cartSlice'
+import { cartSelector, deleteFromCart } from '../../store/slices/cartSlice'
 import { BrandName, DeleteIcon, Description, Details, ImgWrapper, ItemContainer, PriceDesktop, PriceDetails, ProductInformation, ShoeSize } from './CartItem.styles'
 
 
@@ -28,7 +28,6 @@ export const CartItem = ({ item, index }: CartItemProps) => {
         <ProductInformation>
           <BrandName>{shortBrand}</BrandName>
           <Description>{description}</Description>
-          <ShoeSize>size: {size}</ShoeSize>
           <DeleteIcon onClick={() => dispatch(deleteFromCart({
             userId: user?.uid as string,
             cart,
