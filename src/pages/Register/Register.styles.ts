@@ -10,10 +10,10 @@ export const Container = styled.div`
 export const ErrorMsg = styled.p`
   color: crimson;
   text-align: center;
-  font-size: 8px;
+  font-size: 10px;
   
   @media (min-width: 576px) {
-    font-size: 10px;
+    font-size: 12px;
   }
   `
 
@@ -144,5 +144,6 @@ export const CheckboxContainer = styled.div`
   input {
     padding: 2px;
     box-shadow: none;
+    cursor: pointer;
   }
 `
