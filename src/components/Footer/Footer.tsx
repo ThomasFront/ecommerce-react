@@ -1,4 +1,3 @@
-import React from 'react'
 import { FooterWrapper, TextContainer } from './Footer.styles'
 
 export const Footer = () => {

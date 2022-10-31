@@ -1,4 +1,3 @@
-import React from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
@@ -22,8 +21,8 @@ type ShoeItemType = {
 
 
 function ShoeItem({ shoe }: ShoeItemType) {
-  const { id, price, category, brand, shortBrand, description, images } = shoe
-  const [user, error] = useAuthState(auth);
+  const { id, price, brand, description, images } = shoe
+  const [user] = useAuthState(auth);
   const cart = useSelector(cartSelector)
   const dispatch = useDispatch()
   const navigate = useNavigate()

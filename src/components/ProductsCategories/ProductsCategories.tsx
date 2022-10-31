@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { brandSelector, changeBrand, toggleShow, toggleShowSelector } from '../../store/slices/categoriesSlice'

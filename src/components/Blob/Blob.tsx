@@ -1,4 +1,3 @@
-import React from 'react'
 import { BlobSvg } from './Blob.styles'
 import blob from '../../assets/blob.svg'
 

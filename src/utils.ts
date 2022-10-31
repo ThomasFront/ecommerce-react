@@ -1,7 +1,7 @@
 import { User } from "firebase/auth";
 import { toast, ToastOptions } from "react-toastify";
 import { ShoeType } from "./pages/Home/Home";
-import { ProductType, updateCart } from "./store/slices/cartSlice";
+import {  deleteFromCart, updateCart } from "./store/slices/cartSlice";
 
 const toastOptions: ToastOptions = {
   position: "bottom-left",
@@ -18,7 +18,7 @@ export const addProductToCart = async (
   product: ShoeType,
   user: User | null | undefined,
   dispatch: any,
-  cart: Array<ProductType>
+  cart: Array<ShoeType>
 ) => {
   if (!user) {
     toast.error('You must log in to add a product', toastOptions);
@@ -30,6 +30,20 @@ export const addProductToCart = async (
     }))
     toast.success('The product has been added to the cart', toastOptions)
   }
+}
+
+export const deleteProductFromCart = async (
+  user: User | null | undefined,
+  cart: Array<ShoeType>,
+  index: number,
+  dispatch: any,
+) => {
+  dispatch(deleteFromCart({
+    userId: user?.uid as string,
+    cart,
+    indexToDelete: index
+  }))
+  toast.info('The product has been removed from the cart', toastOptions)
 }
 
 export const categories = [
