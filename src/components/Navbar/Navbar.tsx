@@ -28,13 +28,23 @@ export function Navbar() {
       <NavbarDesign>
         <Wrapper>
           <section>
-            {location.pathname === '/' && <BurgerIcon isOpen={burgerSelector} onClick={() => dispatch(toggleShow())}><GiHamburgerMenu /></BurgerIcon>}
+            {location.pathname === '/' &&
+              <BurgerIcon isOpen={burgerSelector}
+                onClick={() => dispatch(toggleShow())}
+              >
+                <GiHamburgerMenu />
+              </BurgerIcon>
+            }
           </section>
           <LogoContainer>
             <LinkItem to="/"><GiConverseShoe />FUTURE</LinkItem>
           </LogoContainer>
           <RightSection>
-            <LoginButton onClick={() => user ? handleLogout() : navigate('/login')}>{user ? 'log out' : 'log in'}</LoginButton>
+            <LoginButton
+              onClick={() => user ? handleLogout() : navigate('/login')}
+            >
+              {user ? 'log out' : 'log in'}
+            </LoginButton>
             {user && <LinkItem to="/profile"><BsFillPersonFill /></LinkItem>}
             <CartContainer>
               <LinkItem to="/cart"><FaShoppingCart /></LinkItem>

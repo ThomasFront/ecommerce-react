@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { brandSelector, changeBrand, toggleShow, toggleShowSelector } from '../../store/slices/categoriesSlice'
+import { brands } from '../../utils'
 import { TextWrap } from '../TextWrapper/TextWrapper.styles'
 import { CategoriesList, Category, CategoryBox, CategoryContainer, CategoryName } from './ProductsCategories.styles'
 
@@ -20,11 +21,14 @@ function ProductsCategories() {
         <CategoryContainer>
           <CategoryBox>
             <CategoryName>Brand:</CategoryName>
-            <Category onClick={() => handleCategory('')} isHighlighted={brandSelect === ''}>All</Category>
-            <Category onClick={() => handleCategory('Adidas')} isHighlighted={brandSelect === 'Adidas'}>Adidas</Category>
-            <Category onClick={() => handleCategory('Nike')} isHighlighted={brandSelect === 'Nike'}>Nike</Category>
-            <Category onClick={() => handleCategory('New Balance')} isHighlighted={brandSelect === 'New Balance'}>New Balance</Category>
-            <Category onClick={() => handleCategory('Vans')} isHighlighted={brandSelect === 'Vans'}>Vans</Category>
+            {brands.map(({label, value}) => (
+              <Category
+                onClick={() => handleCategory(value)}
+                isHighlighted={brandSelect === value}
+              >
+                {label}
+              </Category>
+            ))}
           </CategoryBox>
         </CategoryContainer>
       </TextWrap>

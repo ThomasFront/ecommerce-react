@@ -5,7 +5,7 @@ import { collection, doc, getDoc, getDocs, query, updateDoc, where } from 'fireb
 import { db } from '../../firebase/firebase'
 import { ShoeType } from '../../pages/Home/Home'
 
-type ProductType = {
+export type ProductType = {
   id: number,
   price: number,
   shortBrand: string,
@@ -92,7 +92,6 @@ export const deleteAllCart = createAsyncThunk(
 
 export interface InitialTypes {
   cart: Array<ProductType>
-  randomNum: null | number
   loading: {
     replaceRandomNumber: boolean
     updateCart: boolean
@@ -109,7 +108,6 @@ export interface InitialTypes {
 
 const initialState: InitialTypes = {
   cart: [],
-  randomNum: null,
   loading: {
     replaceRandomNumber: false,
     updateCart: false,

@@ -1,6 +1,8 @@
 import styled from "styled-components";
+import { FaShoppingCart } from 'react-icons/fa'
 
 export const ShoeCard = styled.div`
+position: relative;
 overflow: hidden;
 border-radius: 10px;
 width: 250px;
@@ -45,4 +47,30 @@ export const Desc = styled.p`
   padding: 4px 0;
   color: #eeeeee;
   font-size: 12px;
+`
+
+export const CartContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  top: 0;
+  right: 10px;
+  background-color: #222831;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: gray;
+  }
+`
+
+export const CartIcon = styled(FaShoppingCart)`
+  color: white;
+  font-size: 30px;
+  pointer-events: none;
 `
