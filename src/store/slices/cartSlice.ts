@@ -5,25 +5,15 @@ import { collection, doc, getDoc, getDocs, query, updateDoc, where } from 'fireb
 import { db } from '../../firebase/firebase'
 import { ShoeType } from '../../pages/Home/Home'
 
-export type ProductType = {
-  id: number,
-  price: number,
-  shortBrand: string,
-  description: string,
-  brand: string,
-  category: string,
-  images: Array<string>
-}
-
 type UpdateCartType = {
   userId: string
-  cart: Array<ProductType>
-  product: ProductType
+  cart: Array<ShoeType>
+  product: ShoeType
 }
 
 type DeleteFromCartType = {
   userId: string,
-  cart: Array<ProductType>,
+  cart: Array<ShoeType>,
   indexToDelete: number
 }
 
@@ -57,7 +47,7 @@ export const getCart = createAsyncThunk(
     const products = await Promise.all(
       refs.map(async (ref) => {
         const productDoc = await getDoc(ref)
-        return productDoc.data() as ProductType
+        return productDoc.data() as ShoeType
       })
     )
     return products
@@ -91,7 +81,7 @@ export const deleteAllCart = createAsyncThunk(
 )
 
 export interface InitialTypes {
-  cart: Array<ProductType>
+  cart: Array<ShoeType>
   loading: {
     replaceRandomNumber: boolean
     updateCart: boolean
