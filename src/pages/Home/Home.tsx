@@ -14,6 +14,7 @@ import { Wave } from '../../components/Wave/Wave'
 import { BsFillArrowUpCircleFill } from "react-icons/bs";
 import { cartSelector, getCart } from '../../store/slices/cartSlice'
 import { motion } from 'framer-motion'
+import { brands, categories } from '../../utils'
 
 export type ShoeType = {
   id: number,
@@ -26,15 +27,7 @@ export type ShoeType = {
   size?: number
 }
 
-export type ShoesType = Array<{
-  id: number,
-  price: number,
-  category: string,
-  brand: string,
-  shortBrand: string,
-  description: string,
-  images: Array<string>
-}>
+export type ShoesType = Array<ShoeType>
 
 
 function Home() {
@@ -89,7 +82,6 @@ function Home() {
     }
   }
 
-
   return (
     <HomePageWrapper
     as={motion.div}
@@ -100,18 +92,25 @@ function Home() {
       <TextWrapper>
         <CategoryTitle>Category:</CategoryTitle>
         <Categories>
-          <Category onClick={() => setActiveCategory('')} isActive={!activeCategory}>All</Category>
-          <Category onClick={() => setActiveCategory('woman')} isActive={activeCategory === 'woman'}>Women</Category>
-          <Category onClick={() => setActiveCategory('man')} isActive={activeCategory === 'man'}>Men</Category>
-          <Category onClick={() => setActiveCategory('kids')} isActive={activeCategory === 'kids'}>Kids</Category>
+          {categories.map(({value, label}) => (
+            <Category 
+              onClick={() => setActiveCategory(value)} 
+              isActive={activeCategory === value}
+            >
+              {label}
+            </Category>
+          ))}
         </Categories>
         <BrandTitle>Brand:</BrandTitle>
         <Brands>
-          <Brand onClick={() => dispatch(changeBrand(''))} isHighlighted={!brandSelect}>All</Brand>
-          <Brand onClick={() => dispatch(changeBrand('Adidas'))} isHighlighted={brandSelect === 'Adidas'}>Adidas</Brand>
-          <Brand onClick={() => dispatch(changeBrand('Nike'))} isHighlighted={brandSelect === 'Nike'}>Nike</Brand>
-          <Brand onClick={() => dispatch(changeBrand('New Balance'))} isHighlighted={brandSelect === 'New Balance'}>New Balance</Brand>
-          <Brand onClick={() => dispatch(changeBrand('Vans'))} isHighlighted={brandSelect === 'Vans'}>Vans</Brand>
+          {brands.map(({value, label}) => (
+            <Brand
+            onClick={() => dispatch(changeBrand(value))}
+            isHighlighted={brandSelect === value}
+            >
+              {label}
+            </Brand>
+          ))}
         </Brands>
         <SelectContainer>
           <CategoryTitle>Sort by:</CategoryTitle>

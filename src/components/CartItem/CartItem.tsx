@@ -24,11 +24,18 @@ export const CartItem = ({ item, index }: CartItemProps) => {
   return (
     <ItemContainer>
       <Details>
-       <ImgWrapper> <img src={images[0]} alt="shoe image" onClick={() => navigate(`/product/${id}`)} /></ImgWrapper>
+        <ImgWrapper>
+          <img 
+          src={images[0]} 
+          alt="shoe image" 
+          onClick={() => navigate(`/product/${id}`)} 
+          />
+        </ImgWrapper>
         <ProductInformation>
           <BrandName>{shortBrand}</BrandName>
           <Description>{description}</Description>
-          <DeleteIcon onClick={() => dispatch(deleteFromCart({
+          <DeleteIcon 
+          onClick={() => dispatch(deleteFromCart({
             userId: user?.uid as string,
             cart,
             indexToDelete: index

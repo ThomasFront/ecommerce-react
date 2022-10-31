@@ -9,6 +9,11 @@ type SizeType = {
 
 export const Size = ({ size, setCheckedSize, checkedSize }: SizeType) => {
   return (
-    <SizeNumber onClick={() => setCheckedSize(size)} checked={checkedSize === size}>{size}</SizeNumber>
+    <SizeNumber
+      onClick={() => setCheckedSize(size)}
+      checked={checkedSize === size}
+    >
+      {size}
+    </SizeNumber>
   )
 }

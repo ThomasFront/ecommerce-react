@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
+import { ToastContainer } from 'react-toastify'
 import { auth } from '../../firebase/firebase'
 import { cartSelector, getCart } from '../../store/slices/cartSlice'
 import { Footer } from '../Footer/Footer'
@@ -27,6 +28,7 @@ function Layout({ children }: ChildrenType) {
     <>
       <Navbar />
       <MainWrapper>{children}</MainWrapper>
+      <ToastContainer />
       <Footer />
     </>
   )

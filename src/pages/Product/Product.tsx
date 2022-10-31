@@ -15,6 +15,7 @@ import { Wave } from '../../components/Wave/Wave'
 import { Size } from '../../components/Size/Size'
 import { cartSelector, updateCart } from '../../store/slices/cartSlice'
 import { motion } from 'framer-motion'
+import { addProductToCart } from '../../utils'
 
 
 function Product() {
@@ -46,36 +47,7 @@ function Product() {
     getProduct()
   }, [])
 
-  const addProductToCart = async (product: ShoeType) => {
-    if (!user) {
-      toast.error('You must log in to add a product', {
-        position: "bottom-left",
-        autoClose: 4000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
-    } else {
-      dispatch(updateCart({
-        userId: user.uid as string,
-        cart,
-        product
-      }))
-      toast.success('The product has been added to the cart', {
-        position: "bottom-left",
-        autoClose: 4000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      })
-    }
-  }
+ 
 
   return (
     <ProductPageWrapper>
@@ -102,36 +74,14 @@ function Product() {
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                 >
-                  <ShoeImage
-                    src={product?.images[0]}
-                    alt="default mini image"
-                    onClick={() => handleImage(product?.images[0] as string)}
-                    isHighlighted={activeImage === product?.images[0]}
-                  />
-                  <ShoeImage
-                    src={product?.images[1]}
-                    alt="example mini image 1"
-                    onClick={() => handleImage(product?.images[1] as string)}
-                    isHighlighted={activeImage === product?.images[1]}
-                  />
-                  <ShoeImage
-                    src={product?.images[2]}
-                    alt="example mini image 2"
-                    onClick={() => handleImage(product?.images[2] as string)}
-                    isHighlighted={activeImage === product?.images[2]}
-                  />
-                  <ShoeImage
-                    src={product?.images[3]}
-                    alt="example mini image 3"
-                    onClick={() => handleImage(product?.images[3] as string)}
-                    isHighlighted={activeImage === product?.images[3]}
-                  />
-                  <ShoeImage
-                    src={product?.images[4]}
-                    alt="example mini image 4"
-                    onClick={() => handleImage(product?.images[4] as string)}
-                    isHighlighted={activeImage === product?.images[4]}
-                  />
+                  {product?.images.map((image, index) => (
+                    <ShoeImage 
+                      src={image}
+                      alt={index === 0 ? 'default mini image' : `example mini image ${index}`}
+                      onClick={() => handleImage(image)}
+                      isHighlighted={activeImage === image}
+                    />
+                  ))}
                 </SmallImages>
               </>
             }
@@ -144,11 +94,10 @@ function Product() {
             </Sizes>
             <SpaceContainer>
               <h3>${product?.price}</h3>
-              <button onClick={() => product && addProductToCart({ ...product, size: checkedSize })}>Add to cart</button>
+              <button onClick={() => product && addProductToCart({ ...product, size: checkedSize }, user, dispatch, cart)}>Add to cart</button>
             </SpaceContainer>
           </AboutProduct>
         </Container>
-        <ToastContainer />
       </TextWrapper>
       <Wave />
     </ProductPageWrapper>
