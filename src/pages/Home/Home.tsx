@@ -92,8 +92,9 @@ function Home() {
       <TextWrapper>
         <CategoryTitle>Category:</CategoryTitle>
         <Categories>
-          {categories.map(({value, label}) => (
+          {categories.map(({value, label, id}) => (
             <Category 
+              key={id}
               onClick={() => setActiveCategory(value)} 
               isActive={activeCategory === value}
             >
@@ -103,8 +104,9 @@ function Home() {
         </Categories>
         <BrandTitle>Brand:</BrandTitle>
         <Brands>
-          {brands.map(({value, label}) => (
+          {brands.map(({value, label, id}) => (
             <Brand
+            key={id}
             onClick={() => dispatch(changeBrand(value))}
             isHighlighted={brandSelect === value}
             >
