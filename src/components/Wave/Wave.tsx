@@ -1,4 +1,3 @@
-import React from 'react'
 import { WaveItem } from './Wave.styles'
 import waveSvg from '../../assets/wave.svg'
 

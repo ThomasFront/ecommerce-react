@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { TextWrapper } from '../../components/TextWrapper/TextWrapper'
 import { Container, ErrorMsg, LoginButtons, LoginPageWrapper, LogInWrapper, RegisterButton, RegisterText } from './Login.styles'
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -18,7 +18,7 @@ type Inputs = {
 
 function Login() {
   const navigate = useNavigate()
-  const [user, loading, error] = useAuthState(auth);
+  const [user] = useAuthState(auth);
 
   const onSubmit: SubmitHandler<Inputs> = ({email, password}) => {
     logInWithEmailAndPassword(email, password)

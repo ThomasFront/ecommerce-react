@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useParams } from 'react-router'
 import { TextWrapper } from '../../components/TextWrapper/TextWrapper'
 import { auth, db } from '../../firebase/firebase'
 import { AboutProduct, BigImage, Container, Images, ProductPageWrapper, ShoeImage, Sizes, SmallImages, SpaceContainer } from './Product.styles'
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
@@ -13,7 +12,7 @@ import { collection, getDocs, query, where } from 'firebase/firestore'
 import { MutatingDots } from 'react-loader-spinner'
 import { Wave } from '../../components/Wave/Wave'
 import { Size } from '../../components/Size/Size'
-import { cartSelector, updateCart } from '../../store/slices/cartSlice'
+import { cartSelector } from '../../store/slices/cartSlice'
 import { motion } from 'framer-motion'
 import { addProductToCart } from '../../utils'
 

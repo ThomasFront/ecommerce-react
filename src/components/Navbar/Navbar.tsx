@@ -16,7 +16,7 @@ export function Navbar() {
   const location = useLocation()
   const navigate = useNavigate()
   const burgerSelector = useSelector(toggleShowSelector)
-  const [user, loading, error] = useAuthState(auth);
+  const [user] = useAuthState(auth);
   const cartAmount = useSelector(cartSelector)
 
   const handleLogout = () => {

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
@@ -8,7 +8,7 @@ import { CartItem } from '../../components/CartItem/CartItem'
 import { TextWrapper } from '../../components/TextWrapper/TextWrapper'
 import { Wave } from '../../components/Wave/Wave'
 import { auth } from '../../firebase/firebase'
-import { cartSelector, clearCart, deleteAllCart } from '../../store/slices/cartSlice'
+import { cartSelector, deleteAllCart } from '../../store/slices/cartSlice'
 import { ButtonsContainer, CartHeader, CartItems, CartPageWrapper, CheckoutButton, Container, CostContainer, EmptyCartText, OrderingText, OrderSummary, RedirectingInfo, Total, TotalName, TotalPrice } from './Cart.styles'
 
 

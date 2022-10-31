@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { TextWrapper } from '../../components/TextWrapper/TextWrapper'
 import { auth, db, logout } from '../../firebase/firebase';
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -25,7 +25,7 @@ type UserInformationType = {
 }
 
 function Profile() {
-  const [user, error] = useAuthState(auth);
+  const [user] = useAuthState(auth);
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const modal = useSelector(modalSelector)

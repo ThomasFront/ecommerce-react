@@ -1,5 +1,4 @@
 import { AnimatePresence } from 'framer-motion'
-import React from 'react'
 import { useLocation } from 'react-router'
 import { Route, Routes } from 'react-router'
 import Cart from '../../pages/Cart/Cart'

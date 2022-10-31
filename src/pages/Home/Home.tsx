@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import ProductsCategories from '../../components/ProductsCategories/ProductsCategories'
 import { TextWrapper } from '../../components/TextWrapper/TextWrapper'
@@ -8,11 +8,10 @@ import ShoeItem from '../../components/ShoeItem/ShoeItem'
 import { useDispatch } from 'react-redux'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth, db } from '../../firebase/firebase'
-import { addDoc, collection, doc, getDocs, query, setDoc, where } from 'firebase/firestore'
+import { collection, getDocs } from 'firebase/firestore'
 import { MutatingDots } from 'react-loader-spinner'
 import { Wave } from '../../components/Wave/Wave'
-import { BsFillArrowUpCircleFill } from "react-icons/bs";
-import { cartSelector, getCart } from '../../store/slices/cartSlice'
+import { cartSelector } from '../../store/slices/cartSlice'
 import { motion } from 'framer-motion'
 import { brands, categories } from '../../utils'
 
@@ -27,7 +26,6 @@ export type ShoeType = {
   size?: number
 }
 
-export type ShoesType = Array<ShoeType>
 
 
 function Home() {
@@ -37,18 +35,24 @@ function Home() {
   const [activeCategory, setActiveCategory] = useState('')
   const [selectedValue, setSelectedValue] = useState('Popular')
   const [user, error] = useAuthState(auth)
-  const [allShoes, setAllShoes] = useState<ShoesType | null>(null)
+  const [allShoes, setAllShoes] = useState<Array<ShoeType> | null>(null)
   const [loading, setLoading] = useState(true)
   const [scrollPosition, setScrollPosition] = useState(0)
   const cart = useSelector(cartSelector)
+  const [showError, setShowError] = useState(false)
 
   const getAllShoes = async () => {
-    const docs = await getDocs(collection(db, "products"))
-    const data = docs.docs.map((product) => {
+    try {
+      const docs = await getDocs(collection(db, "products"))
+      const data = docs.docs.map((product) => {
       return product.data()
     })
-    setAllShoes(data as ShoesType)
-    setLoading(false)
+      setAllShoes(data as Array<ShoeType>)
+      setLoading(false)
+      setShowError(false)
+    } catch {
+      setShowError(true)
+    }
   }
 
   useEffect(() => {
@@ -130,6 +134,7 @@ function Home() {
             />
             :
             <>
+              {showError && <p>The data didn't load correctly...</p>}
               {allShoes
                 ?.filter(({ category }: ShoeType) => !activeCategory || category === activeCategory)
                 .filter(({ shortBrand }: ShoeType) => shortBrand === brandSelect || !brandSelect)

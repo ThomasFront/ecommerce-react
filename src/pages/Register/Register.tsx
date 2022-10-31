@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { TextWrapper } from '../../components/TextWrapper/TextWrapper'
 import { CheckboxContainer, Container, ErrorMsg, RegisteredText, RegisterPageWrapper, RegisterText, RegisterWrapper } from './Register.styles'
@@ -21,7 +20,7 @@ type Inputs = {
 
 function Register() {
   const navigate = useNavigate()
-  const [user, loading, error] = useAuthState(auth);
+  const [user] = useAuthState(auth);
 
   const onSubmit: SubmitHandler<Inputs> = ({ email, password, name }) => {
     registerWithEmailAndPassword(name, email, password)
