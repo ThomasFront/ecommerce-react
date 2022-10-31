@@ -36,40 +36,49 @@ export const categories = [
   {
     value: '',
     label: 'All',
+    id: 1
   },
   {
     value: 'woman',
     label: 'Women',
+    id: 2
   },
   {
     value: 'man',
     label: 'Men',
+    id: 3
   },
   {
     value: 'kids',
     label: 'Kids',
+    id: 4
   },
 ]
 
 export const brands = [
   {
     value: '',
-    label: 'All'
+    label: 'All',
+    id: 1
   },
   {
     value: 'Adidas',
-    label: 'Adidas'
+    label: 'Adidas',
+    id: 2
   },
   {
     value: 'Nike',
-    label: 'Nike'
+    label: 'Nike',
+    id: 3
   },
   {
     value: 'New Balance',
-    label: 'New Balance'
+    label: 'New Balance',
+    id: 4
   },
   {
     value: 'Vans',
-    label: 'Vans'
+    label: 'Vans',
+    id: 5
   },
 ]

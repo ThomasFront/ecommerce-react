@@ -1,5 +1,9 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { FaShoppingCart } from 'react-icons/fa'
+
+type CartContainerProps = {
+  isInCart?: boolean
+}
 
 export const ShoeCard = styled.div`
 position: relative;
@@ -30,11 +34,11 @@ object-fit: cover;
 `
 
 export const ShoeDescription = styled.div`
-display: flex;
-justify-content: center;
-align-items: flex-start;
-flex-direction: column;
-margin: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  margin: 8px;
   color: white;
   
 `
@@ -49,7 +53,7 @@ export const Desc = styled.p`
   font-size: 12px;
 `
 
-export const CartContainer = styled.div`
+export const CartContainer = styled.div<CartContainerProps>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -63,6 +67,10 @@ export const CartContainer = styled.div`
   height: 50px;
   cursor: pointer;
   transition: background-color 0.3s;
+
+  ${({isInCart}) => isInCart && css`
+    background-color: #F05454;
+  `}
 
   &:hover {
     background-color: gray;

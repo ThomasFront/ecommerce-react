@@ -21,8 +21,9 @@ function ProductsCategories() {
         <CategoryContainer>
           <CategoryBox>
             <CategoryName>Brand:</CategoryName>
-            {brands.map(({label, value}) => (
+            {brands.map(({label, value, id}) => (
               <Category
+                key={id}
                 onClick={() => handleCategory(value)}
                 isHighlighted={brandSelect === value}
               >
