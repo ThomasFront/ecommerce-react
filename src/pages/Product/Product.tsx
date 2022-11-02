@@ -75,6 +75,7 @@ function Product() {
                 >
                   {product?.images.map((image, index) => (
                     <ShoeImage
+                      key={index}
                       src={image}
                       alt={index === 0 ? 'default mini image' : `example mini image ${index}`}
                       onClick={() => handleImage(image)}

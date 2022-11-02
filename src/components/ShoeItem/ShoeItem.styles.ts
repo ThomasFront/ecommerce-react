@@ -65,16 +65,11 @@ export const CartContainer = styled.div<CartContainerProps>`
   background-color: ${({theme}) => theme.colors.secondaryColor};
   width: 50px;
   height: 50px;
-  cursor: pointer;
   transition: background-color 0.3s;
 
   ${({isInCart}) => isInCart && css`
     background-color: ${({theme}) => theme.colors.primaryColor};
   `}
-
-  &:hover {
-    background-color: ${({theme}) => theme.colors.grayColor};
-  }
 `
 
 export const CartIcon = styled(FaShoppingCart)`

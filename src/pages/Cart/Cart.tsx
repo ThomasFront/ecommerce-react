@@ -15,7 +15,7 @@ import { ButtonsContainer, CartHeader, CartItems, CartPageWrapper, CheckoutButto
 
 function Cart() {
   const cart = useSelector(cartSelector)
-  const totalPrice = cart.reduce((prev, curr) => prev + curr.price, 0).toFixed(2)
+  const totalPrice = cart.reduce((prev, curr) => prev + (curr.price * curr.amount), 0).toFixed(2)
   const [showParagraf, setShowParagraf] = useState(false)
   const [user] = useAuthState(auth)
   const navigate = useNavigate()
@@ -34,7 +34,7 @@ function Cart() {
       <TextWrapper>
         <Container
           as={motion.div}
-          initial={{ scale: 0}}
+          initial={{ scale: 0 }}
           animate={{ scale: 1 }}>
           {cart.length ?
             <>

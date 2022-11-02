@@ -28,16 +28,10 @@ function ShoeItem({ shoe }: ShoeItemType) {
   const navigate = useNavigate()
   return (
     <ShoeCard onClick={() => navigate(`/product/${id}`)}>
-      <ShoeImage loading='lazy' width={250} height={360} src={images[0]}/>
-      <CartContainer 
-      isInCart={cart.some(product => product.id === shoe.id)}
-      onClick={e => {
-        e.stopPropagation()
-        if(shoe){
-          addProductToCart(shoe, user, dispatch, cart)
-        }
-      }}>
-        <CartIcon/>
+      <ShoeImage loading='lazy' width={250} height={360} src={images[0]} />
+      <CartContainer
+        isInCart={cart.some(product => product.id === shoe.id)}>
+        <CartIcon />
       </CartContainer>
       <ShoeDescription>
         <p>{brand}</p>
