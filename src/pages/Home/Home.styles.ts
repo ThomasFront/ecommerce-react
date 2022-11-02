@@ -129,6 +129,7 @@ export const SelectContainer = styled.div`
     border-radius: 6px;
     margin-top: 10px;
     font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
   }
 `
 export const HomePageWrapper = styled.div`

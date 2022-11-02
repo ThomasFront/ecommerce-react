@@ -55,8 +55,8 @@ function Product() {
           <Images>
             {loading ?
               <MutatingDots
-                color='${({theme}) => theme.colors.primaryColor};'
-                secondaryColor='${({theme}) => theme.colors.primaryColor};'
+                color='#ef5454'
+                secondaryColor='#ef5454'
               />
               :
               <>
