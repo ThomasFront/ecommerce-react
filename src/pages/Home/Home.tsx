@@ -45,8 +45,8 @@ function Home() {
     try {
       const docs = await getDocs(collection(db, "products"))
       const data = docs.docs.map((product) => {
-      return product.data()
-    })
+        return product.data()
+      })
       setAllShoes(data as Array<ShoeType>)
       setLoading(false)
       setShowError(false)
@@ -88,18 +88,18 @@ function Home() {
 
   return (
     <HomePageWrapper
-    as={motion.div}
-    initial={{width: 0}}
-    animate={{width: "100%"}}
+      as={motion.div}
+      initial={{ width: 0 }}
+      animate={{ width: "100%" }}
     >
       <ProductsCategories />
       <TextWrapper>
         <CategoryTitle>Category:</CategoryTitle>
         <Categories>
-          {categories.map(({value, label, id}) => (
-            <Category 
+          {categories.map(({ value, label, id }) => (
+            <Category
               key={id}
-              onClick={() => setActiveCategory(value)} 
+              onClick={() => setActiveCategory(value)}
               isActive={activeCategory === value}
             >
               {label}
@@ -108,11 +108,11 @@ function Home() {
         </Categories>
         <BrandTitle>Brand:</BrandTitle>
         <Brands>
-          {brands.map(({value, label, id}) => (
+          {brands.map(({ value, label, id }) => (
             <Brand
-            key={id}
-            onClick={() => dispatch(changeBrand(value))}
-            isHighlighted={brandSelect === value}
+              key={id}
+              onClick={() => dispatch(changeBrand(value))}
+              isHighlighted={brandSelect === value}
             >
               {label}
             </Brand>
@@ -129,8 +129,8 @@ function Home() {
         <ShoesContainer>
           {loading ?
             <MutatingDots
-              color='#ef5454'
-              secondaryColor='#ef5454'
+              color='${({theme}) => theme.colors.primaryColor};'
+              secondaryColor='${({theme}) => theme.colors.primaryColor};'
             />
             :
             <>

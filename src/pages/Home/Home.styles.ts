@@ -53,7 +53,7 @@ export const ShoesContainer = styled.div`
 
 export const Category = styled.button<ButtonProps>`
   margin: 10px 5px 20px;
-  background-color: #222831;
+  background-color: ${({theme}) => theme.colors.secondaryColor};
   border: none;
   color: white;
   border-radius: 10px;
@@ -63,12 +63,12 @@ export const Category = styled.button<ButtonProps>`
 
   ${({ isActive }) => isActive && css`
   transform: scale(1.1);
-    background-color: #F05454;
+    background-color: ${({theme}) => theme.colors.primaryColor};
   `}
 
   &:hover {
     transform: scale(1.1);
-    background-color: #F05454;
+    background-color: ${({theme}) => theme.colors.primaryColor};
   }
 
   @media (min-width: 576px){
@@ -86,22 +86,22 @@ export const Category = styled.button<ButtonProps>`
 
 export const Brand = styled.button<ButtonProps>`
   margin: 10px 5px 0;
-  background-color: #222831;
+  background-color: ${({theme}) => theme.colors.secondaryColor};
   border: none;
-  color: white;
+  color: ${({theme}) => theme.colors.whiteColor};
   border-radius: 10px;
   padding: 5px 10px;
   cursor: pointer;
   transition: transform 0.2s, background-color 0.2s;
 
   ${({ isHighlighted }) => isHighlighted && css`
-  transform: scale(1.1);
-    background-color: #F05454;
+    transform: scale(1.1);
+    background-color: ${({theme}) => theme.colors.primaryColor};
   `}
 
   &:hover {
     transform: scale(1.1);
-    background-color: #F05454;
+    background-color: ${({theme}) => theme.colors.primaryColor};
   }
 
   @media (min-width: 576px){
@@ -125,7 +125,10 @@ export const SelectContainer = styled.div`
   margin-top: 20px;
 
   select {
+    padding: 5px 10px;
+    border-radius: 6px;
     margin-top: 10px;
+    font-family: 'Montserrat', sans-serif;
   }
 `
 export const HomePageWrapper = styled.div`

@@ -21,9 +21,9 @@ margin: 0 5px;
   min-width: 250px;
   width: 100%;
   height: 400px;
-  background-color: white;
+  background-color: ${({theme}) => theme.colors.whiteColor};
   border-radius: 10px;
-  box-shadow: 0 0 10px gray;
+  box-shadow: 0 0 10px ${({theme}) => theme.colors.grayColor};
 
   p{
     text-align: center;
@@ -53,7 +53,7 @@ export const AccountDetails = styled.div`
   align-items: center;
 
   @media (min-width: 576px){
-        font-size: 20px;
+    font-size: 20px;
   }
 
   p:first-child {
@@ -71,7 +71,7 @@ export const DeleteAccountInfo = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #f05454;
+    background-color: ${({theme}) => theme.colors.primaryColor};
     padding: 5px 10px;
     border: none;
     margin-bottom: 5px;
@@ -116,7 +116,7 @@ position: absolute;
 top: 50%;
 left: 50%;
 transform: translate(-50%, -50%);
-background-color: white;
+background-color: ${({theme}) => theme.colors.whiteColor};
 min-width: 250px;
 height: 300px;
 border-radius: 10px;
@@ -152,7 +152,7 @@ align-items: center;
     cursor: pointer;
 
     &:hover {
-      background-color: gray;
+      background-color: ${({theme}) => theme.colors.grayColor};
       color: black;
     }
 

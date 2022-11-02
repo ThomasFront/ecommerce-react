@@ -23,7 +23,7 @@ width: 100%;
 max-width: 500px;
 height: 100%;
 border-radius: 6px;
-box-shadow: 0 0 15px gray;
+box-shadow: 0 0 15px ${({theme}) => theme.colors.grayColor};
 
 @media (min-width: 992px) {
     height: 400px;
@@ -84,7 +84,7 @@ export const SpaceContainer = styled.div`
     border-radius: 6px;
     font-weight: bold;
     border: none;
-    background-color: #F05454;
+    background-color: ${({theme}) => theme.colors.primaryColor};
     cursor: pointer;
     transition: transform 0.3s, background-color 0.3s;
 

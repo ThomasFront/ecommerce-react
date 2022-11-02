@@ -8,7 +8,7 @@ type ButtonProps = {
 export const NavbarDesign = styled.nav`
   position: fixed;
   margin: 0 auto;
-  background-color: #222831;
+  background-color: ${({theme}) => theme.colors.secondaryColor};
   height: 60px;
   width: 100%;
   z-index: 100;
@@ -23,11 +23,11 @@ export const NavbarDesign = styled.nav`
 export const LinkItem = styled(NavLink)`
 font-size: 30px;
   text-decoration: none;
-  color: #eeeeee;
+  color: ${({theme}) => theme.colors.whiteColor};
   cursor: pointer;
 
   &.active {
-    color: #F05454;
+    color: ${({theme}) => theme.colors.primaryColor};
   }
 `
 
@@ -59,7 +59,7 @@ export const Wrapper = styled.div`
   }
 
   a:hover, button:hover {
-    color: #F05454;
+    color: ${({theme}) => theme.colors.primaryColor};;
   }
 `
 
@@ -68,9 +68,9 @@ export const BurgerIcon = styled.button<ButtonProps>`
   background-color: transparent;
   font-size: 18px;
   cursor: pointer;
-  color: #eeeeee;
+  color: ${({theme}) => theme.colors.whiteColor};
   ${({ isOpen }) => isOpen && css`
-    color: #F05454;
+    color: ${({theme}) => theme.colors.primaryColor};
   `}
 
   @media (min-width: 370px) {
@@ -108,9 +108,9 @@ align-items: center;
 
 
 export const LogoWrapper = styled.div`
-display: flex;
-align-items: center;
-justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
 `
 
@@ -165,7 +165,7 @@ p {
   position: absolute;
   top: -5px;
   right: 0px;
-  background-color: red;
+  background-color: ${({theme}) => theme.colors.redColor};;
   width: 15px;
   height: 15px;
   border-radius: 50%;

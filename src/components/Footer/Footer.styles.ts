@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 export const FooterWrapper = styled.footer`
   height: 50px;
-  border-top: 1px solid #dddddd;
-  background-color: #f05454;
+  border-top: 1px solid ${({theme}) => theme.colors.lightGrayColor};
+  background-color: ${({theme}) => theme.colors.primaryColor};
 `
 
 export const TextContainer = styled.div`

@@ -87,15 +87,15 @@ function Profile() {
       <TextWrapper>
         <ProfileContainer
           as={motion.div}
-          initial={{ scale: 0}}
-          animate={{ scale:1 }}
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
         >
           <ProfileWrapper>
             {loading ?
               <LoadingWrapper>
                 <MutatingDots
-                  color='#ef5454'
-                  secondaryColor='#ef5454'
+                  color='${({theme}) => theme.colors.primaryColor};'
+                  secondaryColor='${({theme}) => theme.colors.primaryColor};'
                 />
               </LoadingWrapper> :
               <>

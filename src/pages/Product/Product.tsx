@@ -46,7 +46,7 @@ function Product() {
     getProduct()
   }, [])
 
- 
+
 
   return (
     <ProductPageWrapper>
@@ -55,8 +55,8 @@ function Product() {
           <Images>
             {loading ?
               <MutatingDots
-                color='#ef5454'
-                secondaryColor='#ef5454'
+                color='${({theme}) => theme.colors.primaryColor};'
+                secondaryColor='${({theme}) => theme.colors.primaryColor};'
               />
               :
               <>
@@ -74,7 +74,7 @@ function Product() {
                   animate={{ scale: 1 }}
                 >
                   {product?.images.map((image, index) => (
-                    <ShoeImage 
+                    <ShoeImage
                       src={image}
                       alt={index === 0 ? 'default mini image' : `example mini image ${index}`}
                       onClick={() => handleImage(image)}
