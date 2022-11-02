@@ -32,7 +32,7 @@ export const ErrorMsg = styled.p`
     border: none;
     cursor: pointer;
     font-family: 'Montserrat', sans-serif;
-    background-color: #F05454;
+    background-color: ${({theme}) => theme.colors.primaryColor};
     color: black;
     transition: transform 0.3s, background-color 0.3s;
 
@@ -58,8 +58,8 @@ export const RegisterWrapper = styled.div`
   position: relative;
   width: 100%;
   border-radius: 6px;
-  box-shadow: 0 0 10px gray;
-  background-color: white;
+  box-shadow: 0 0 10px ${({theme}) => theme.colors.grayColor};
+  background-color: ${({theme}) => theme.colors.whiteColor};
 
   img {
     display: none;
@@ -82,7 +82,7 @@ export const RegisterWrapper = styled.div`
     border: none;
     cursor: pointer;
     font-family: 'Montserrat', sans-serif;
-    background-color: #F05454;
+    background-color: ${({theme}) => theme.colors.primaryColor};
     color: black;
     transition: transform 0.3s, background-color 0.3s;
 
@@ -102,9 +102,9 @@ export const RegisterWrapper = styled.div`
     padding: 6px 12px;
     border-radius: 6px;
     background-color: rgba(0, 0, 0, 0.8);
-    box-shadow: 0 0 10px gray;
+    box-shadow: 0 0 10px ${({theme}) => theme.colors.grayColor};
     border: 1px solid black;
-    color: white;
+    color: ${({theme}) => theme.colors.whiteColor};
     font-family: 'Montserrat', sans-serif;
 
     &:focus {

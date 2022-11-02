@@ -9,7 +9,7 @@ export const GlobalStyles = createGlobalStyle`
 
   body {
     color: black;
-    background-color: #DDDDDD;
+    background-color: #dddddd;
     font-family: 'Montserrat', sans-serif;
   }
 `

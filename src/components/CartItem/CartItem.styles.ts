@@ -3,7 +3,7 @@ import { BsTrashFill } from 'react-icons/bs'
 
 export const ItemContainer = styled.div`
   position: relative;
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid ${({theme}) => theme.colors.grayColor};
 `
 
 export const Details = styled.div`
@@ -52,7 +52,6 @@ export const BrandName = styled.p`
   }
 `
 
-
 export const Description = styled.p`
   font-size: 12px;
   margin-bottom: 10px;
@@ -78,7 +77,7 @@ export const DeleteIcon = styled(BsTrashFill)`
   transition: transform 0.3s, color 0.3s;
   &:hover {
     transform: scale(1.1);
-    color: gray;
+    color: ${({theme}) => theme.colors.grayColor};
   }
   @media (min-width: 768px){
     font-size: 24px;

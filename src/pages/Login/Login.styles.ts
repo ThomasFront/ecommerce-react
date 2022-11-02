@@ -26,8 +26,8 @@ position: relative;
   max-width: 700px;
   width: 100%;
   border-radius: 6px;
-  box-shadow: 0 0 10px gray;
-  background-color: white;
+  box-shadow: 0 0 10px ${({theme}) => theme.colors.grayColor};;
+  background-color: ${({theme}) => theme.colors.whiteColor};
 
 p {
   color: black;
@@ -64,7 +64,7 @@ p {
     color: white;
     border: 1px solid black;
     font-family: 'Montserrat', sans-serif;
-    box-shadow: 0 0 10px gray;
+    box-shadow: 0 0 10px ${({theme}) => theme.colors.grayColor};
 
     &:focus {
       outline: transparent;
@@ -83,7 +83,7 @@ export const LoginButtons = styled.button`
     border: none;
     cursor: pointer;
     font-family: 'Montserrat', sans-serif;
-    background-color: #F05454;
+    background-color: ${({theme}) => theme.colors.primaryColor};
     color: black;
     transition: transform 0.3s, background-color 0.3s;
 
@@ -100,7 +100,7 @@ export const LoginButtons = styled.button`
   export const RegisterButton = styled.button`
     background-color: transparent;
     border: none;
-    color: #F05454;
+    color: ${({theme}) => theme.colors.primaryColor};
     text-decoration: underline;
     font-weight: bold;
     cursor: pointer;

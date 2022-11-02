@@ -11,7 +11,7 @@ export const Container = styled.div`
 `
 
 export const CartItems = styled.div`
-  background-color: #fff;
+  background-color: ${({theme}) => theme.colors.whiteColor};
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
 `
@@ -35,7 +35,7 @@ export const Total = styled.div`
   flex-direction: column;
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;
-  background-color: #ffffff;
+  background-color: ${({theme}) => theme.colors.whiteColor};
   padding: 50px 25px;
 `
 
@@ -88,7 +88,7 @@ export const ButtonsContainer = styled.div`
     border: none;
     border-radius: 6px;
     cursor: pointer;
-    transition: transform 0.3s;
+    transition: transform 0.2s, background-color 0.2s;
     font-family: 'Montserrat', sans-serif;
 
     &:hover {
@@ -103,7 +103,7 @@ export const ButtonsContainer = styled.div`
 `
 
 export const CheckoutButton = styled.button`
-  background-color: #f05454;
+  background-color: ${({theme}) => theme.colors.primaryColor};
   transition: background-color 0.3s;
   &:hover {
       background-color: rgb(245, 59, 59);

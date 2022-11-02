@@ -12,8 +12,8 @@ border-radius: 10px;
 width: 250px;
 margin: 10px;
 height: 450px;
-background-color: #222831;
-box-shadow: 0 0 5px gray;
+background-color: ${({theme}) => theme.colors.secondaryColor};
+box-shadow: 0 0 5px ${({theme}) => theme.colors.grayColor};;
 cursor: pointer;
 transition: transform 0.2s;
 
@@ -49,7 +49,7 @@ export const Price = styled.p`
 export const Desc = styled.p`
   font-weight: lighter;
   padding: 4px 0;
-  color: #eeeeee;
+  color: ${({theme}) => theme.colors.lightGrayColor};
   font-size: 12px;
 `
 
@@ -62,23 +62,23 @@ export const CartContainer = styled.div<CartContainerProps>`
   border-bottom-right-radius: 6px;
   top: 0;
   right: 10px;
-  background-color: #222831;
+  background-color: ${({theme}) => theme.colors.secondaryColor};
   width: 50px;
   height: 50px;
   cursor: pointer;
   transition: background-color 0.3s;
 
   ${({isInCart}) => isInCart && css`
-    background-color: #F05454;
+    background-color: ${({theme}) => theme.colors.primaryColor};
   `}
 
   &:hover {
-    background-color: gray;
+    background-color: ${({theme}) => theme.colors.grayColor};
   }
 `
 
 export const CartIcon = styled(FaShoppingCart)`
-  color: white;
+  color: ${({theme}) => theme.colors.whiteColor};
   font-size: 30px;
   pointer-events: none;
 `

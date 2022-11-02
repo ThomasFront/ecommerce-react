@@ -15,7 +15,7 @@ margin-bottom: 15px;
 transform: translateX(-105%);
 padding: 20px 0;
 width: 100%;
-background-color: #222831;
+background-color: ${({theme}) => theme.colors.secondaryColor};
 z-index: 100;
 opacity: 0;
 transition: transform 0.3s, opacity 0.3s;
@@ -39,8 +39,8 @@ flex-direction: column;
 `
 
 export const CategoryName = styled.h1`
-color: #F05454;
-border-bottom: 2px solid gray;
+color: ${({theme}) => theme.colors.primaryColor};
+border-bottom: 2px solid ${({theme}) => theme.colors.lightGray};
 font-size: 16px;
 margin-top: 0.5em;
 margin-bottom: 0.5em;
