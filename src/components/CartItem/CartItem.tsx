@@ -7,15 +7,15 @@ import { ShoeType } from '../../pages/Home/Home'
 import { cartSelector } from '../../store/slices/cartSlice'
 import { deleteProductFromCart } from '../../utils'
 import { BrandName, DeleteIcon, Description, Details, ImgWrapper, ItemContainer, PriceDesktop, PriceDetails, ProductInformation } from './CartItem.styles'
-
+import { ShoeTypeWithAmount } from '../../store/slices/cartSlice'
 
 type CartItemProps = {
-  item: ShoeType
+  item: ShoeTypeWithAmount
   index: number
 }
 
 export const CartItem = ({ item, index }: CartItemProps) => {
-  const { description, id, price, shortBrand, images } = item
+  const { description, id, price, shortBrand, images, size, amount } = item
   const navigate = useNavigate()
   const dispatch = useDispatch<any>()
   const [user] = useAuthState(auth)
@@ -34,12 +34,13 @@ export const CartItem = ({ item, index }: CartItemProps) => {
         <ProductInformation>
           <BrandName>{shortBrand}</BrandName>
           <Description>{description}</Description>
+          <p>{size} x {amount}</p>
           <DeleteIcon
-            onClick={() => deleteProductFromCart(user, cart, index, dispatch)} />
+            onClick={() => deleteProductFromCart(user, cart, dispatch, item)} />
         </ProductInformation>
-        <PriceDesktop>${price}</PriceDesktop>
+        <PriceDesktop>${price * amount}</PriceDesktop>
         <PriceDetails>
-          <p>${price}</p>
+          <p>${price * amount}</p>
         </PriceDetails>
       </Details>
     </ItemContainer>

@@ -34,7 +34,7 @@ export const ProductInformation = styled.div`
 export const PriceDetails = styled.div`
 
 p{
-  margin-bottom: 10px;
+  margin: 15px 0;
   font-weight: bold;
   text-align: left;
 }

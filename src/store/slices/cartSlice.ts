@@ -7,14 +7,14 @@ import { ShoeType } from '../../pages/Home/Home'
 
 type UpdateCartType = {
   userId: string
-  cart: Array<ShoeType>
+  cart: Array<ShoeTypeWithAmount>
   product: ShoeType
 }
 
 type DeleteFromCartType = {
   userId: string,
-  cart: Array<ShoeType>,
-  indexToDelete: number
+  cart: Array<ShoeTypeWithAmount>,
+  shoeItem: ShoeTypeWithAmount
 }
 
 export const updateCart = createAsyncThunk(
@@ -24,12 +24,23 @@ export const updateCart = createAsyncThunk(
     cart,
     product
   }: UpdateCartType) => {
-    const newIds = [
-      ...cart.map(item => item.id),
-      product.id
-    ]
+    const newCart = cart.map(item => ({
+      id: item.id,
+      size: item.size,
+      amount: item.amount
+    }))
+    const itemToUpdateIndex = newCart.findIndex(item => item.id === product.id && item.size === product.size)
+    if(itemToUpdateIndex >= 0){
+      newCart[itemToUpdateIndex].amount += 1
+    } else {
+      newCart.push({
+        id: product.id,
+        size: product.size,
+        amount: 1
+      })
+    }
     await updateDoc(doc(db, "users", userId), {
-      cart: newIds
+      cart: newCart
     })
     return product
   }
@@ -41,13 +52,22 @@ export const getCart = createAsyncThunk(
     const q = query(collection(db, "users"), where("uid", "==", userId));
     const docs = await getDocs(q);
     const userData = docs.docs[0].data() as {
-      cart: Array<number>
+      cart: Array<{
+        id: number,
+        size: number,
+        amount: number
+      }>
     }
-    const refs = userData.cart.map(id => doc(db, "products", id.toString()))
+    const refs = userData.cart.map(item => doc(db, "products", item.id.toString()))
     const products = await Promise.all(
-      refs.map(async (ref) => {
+      refs.map(async (ref, index: number) => {
         const productDoc = await getDoc(ref)
-        return productDoc.data() as ShoeType
+        const data = productDoc.data() as ShoeType
+        return ({
+          ...data,
+          amount: userData.cart[index].amount,
+          size: userData.cart[index].size
+        }) as ShoeTypeWithAmount
       })
     )
     return products
@@ -59,15 +79,23 @@ export const deleteFromCart = createAsyncThunk(
   async ({
     userId,
     cart,
-    indexToDelete
+    shoeItem
   }: DeleteFromCartType) => {
-    const newCart = [...cart]
-    newCart.splice(indexToDelete, 1)
-    const newIds = newCart.map(item => item.id)
+    const newCart = cart.map(item => ({
+      id: item.id,
+      size: item.size,
+      amount: item.amount
+    }))
+    const itemToDeleteIndex = newCart.findIndex(item => item.id === shoeItem.id && item.size === shoeItem.size)
+    if(newCart[itemToDeleteIndex].amount > 1){
+      newCart[itemToDeleteIndex].amount -= 1
+    } else {
+      newCart.splice(itemToDeleteIndex, 1)
+    }
     await updateDoc(doc(db, "users", userId), {
-      cart: newIds
+      cart: newCart
     })
-    return newCart
+    return shoeItem
   }
 )
 
@@ -80,8 +108,10 @@ export const deleteAllCart = createAsyncThunk(
   }
 )
 
+export type ShoeTypeWithAmount = ShoeType & {amount: number}
+
 export interface InitialTypes {
-  cart: Array<ShoeType>
+  cart: Array<ShoeTypeWithAmount>
   loading: {
     replaceRandomNumber: boolean
     updateCart: boolean
@@ -127,7 +157,15 @@ export const cartSlice = createSlice({
     builder
       .addCase(updateCart.fulfilled, (state, action) => {
         state.loading.updateCart = false
-        state.cart.push(action.payload)
+        const itemToUpdateIndex = state.cart.findIndex(item => item.id === action.payload.id && item.size === action.payload.size)
+        if(itemToUpdateIndex >= 0){
+          state.cart[itemToUpdateIndex].amount += 1
+        } else {
+          state.cart.push({
+            ...action.payload,
+            amount: 1
+          })
+        }
       })
       .addCase(updateCart.pending, (state) => {
         state.errors.updateCart = null
@@ -151,7 +189,13 @@ export const cartSlice = createSlice({
       })
       .addCase(deleteFromCart.fulfilled, (state, action) => {
         state.loading.deleteFromCart = false
-        state.cart = action.payload
+        
+        const itemToDeleteIndex = state.cart.findIndex(item => item.id === action.payload.id && item.size === action.payload.size)
+        if(state.cart[itemToDeleteIndex].amount > 1){
+          state.cart[itemToDeleteIndex].amount -= 1
+        } else {
+          state.cart.splice(itemToDeleteIndex, 1)
+        }
       })
       .addCase(deleteFromCart.pending, (state) => {
         state.errors.deleteFromCart = null
