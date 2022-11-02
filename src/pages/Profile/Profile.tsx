@@ -94,8 +94,8 @@ function Profile() {
             {loading ?
               <LoadingWrapper>
                 <MutatingDots
-                  color='${({theme}) => theme.colors.primaryColor};'
-                  secondaryColor='${({theme}) => theme.colors.primaryColor};'
+                  color='#ef5454'
+                  secondaryColor='#ef5454'
                 />
               </LoadingWrapper> :
               <>
