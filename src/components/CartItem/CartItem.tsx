@@ -38,9 +38,9 @@ export const CartItem = ({ item, index }: CartItemProps) => {
           <DeleteIcon
             onClick={() => deleteProductFromCart(user, cart, dispatch, item)} />
         </ProductInformation>
-        <PriceDesktop>${price * amount}</PriceDesktop>
+        <PriceDesktop>${(price * amount).toFixed(2)}</PriceDesktop>
         <PriceDetails>
-          <p>${price * amount}</p>
+          <p>${(price * amount).toFixed(2)}</p>
         </PriceDetails>
       </Details>
     </ItemContainer>

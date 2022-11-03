@@ -9,7 +9,7 @@ import { TextWrapper } from '../../components/TextWrapper/TextWrapper'
 import { Wave } from '../../components/Wave/Wave'
 import { auth } from '../../firebase/firebase'
 import { cartSelector, deleteAllCart } from '../../store/slices/cartSlice'
-import { BonusAdded, BonusWrapper, ButtonsContainer, CartHeader, CartItems, CartPageWrapper, CheckoutButton, Container, CostContainer, EmptyCartText, NewPrice, OldPrice, OrderingText, OrderSummary, RedirectingInfo, Total, TotalName, TotalPrice } from './Cart.styles'
+import { BonusAdded, BonusWrapper, ButtonsContainer, CartHeader, CartItems, CartPageWrapper, CheckoutButton, Container, CostContainer, DeleteAllBtn, EmptyCartText, NewPrice, OldPrice, OrderingText, OrderSummary, RedirectingInfo, Total, TotalName, TotalPrice } from './Cart.styles'
 
 
 
@@ -18,12 +18,13 @@ function Cart() {
   const totalPrice = cart.reduce((prev, curr) => prev + (curr.price * curr.amount), 0).toFixed(2)
   const [showParagraf, setShowParagraf] = useState(false)
   const [addBonus, setAddBonus] = useState(false)
-  const [showError, setShowError] = useState(false)
-  const [bonusValue, setBonusValue] = useState('ThomasFront')
+  const [error, setError] = useState('')
+  const [bonusValue, setBonusValue] = useState('')
   const [showBonusCode, setShowBonusCode] = useState(true)
   const [user] = useAuthState(auth)
   const navigate = useNavigate()
   const dispatch = useDispatch<any>()
+  const amountInCart = cart.reduce((curr, acc) => acc.amount + curr ,0)
 
   const handleCheckout = () => {
     setShowParagraf(true)
@@ -34,12 +35,14 @@ function Cart() {
   }
 
   const handleBonusCode = () => {
-    if (bonusValue === 'ThomasFront') {
+    if (bonusValue === 'Thomas10') {
       setAddBonus(true)
-      setShowError(false)
       setShowBonusCode(false)
+      setError('')
+    } else if (!bonusValue){
+      setError('The field cannot be empty')
     } else {
-      setShowError(true)
+      setError('There is no such discount code')
     }
   }
 
@@ -55,7 +58,7 @@ function Cart() {
               <CartItems>
                 <CartHeader>
                   <p>Shopping Cart</p>
-                  <p>{cart.length} Items</p>
+                  <p>{amountInCart} Items</p>
                 </CartHeader>
               </CartItems>
               <OrderSummary>
@@ -70,20 +73,24 @@ function Cart() {
                       <NewPrice>${(parseInt(totalPrice) * 0.9).toFixed(2)}</NewPrice>
                     </>
                     :
-                    <p>{totalPrice}</p>
+                    <p>${totalPrice}</p>
                   }
                   </TotalPrice>
                 </CostContainer>
                 <ButtonsContainer>
                   <div>
-                    <button onClick={() => dispatch(deleteAllCart(user?.uid as string))}>Delete all</button>
+                    <DeleteAllBtn onClick={() => dispatch(deleteAllCart(user?.uid as string))}>Delete all</DeleteAllBtn>
                     <CheckoutButton onClick={handleCheckout}>Checkout</CheckoutButton>
                   </div>
                   {showBonusCode ?
                     <BonusWrapper>
-                      <input type="text" value={bonusValue} onChange={e => setBonusValue(e.target.value)} />
-                      {showError && <p>The code is invalid or empty</p>}
-                      <button type='submit' onClick={handleBonusCode}>Add bonus code</button>
+                      <input 
+                      type="text" 
+                      placeholder='Code: Thomas10'
+                      value={bonusValue} 
+                      onChange={e => setBonusValue(e.target.value)} />
+                      <p>{error}</p>
+                      <button type='submit' onClick={handleBonusCode}>Add discount code</button>
                     </BonusWrapper>
                     :
                     <BonusAdded>10% discount has been added!</BonusAdded>
