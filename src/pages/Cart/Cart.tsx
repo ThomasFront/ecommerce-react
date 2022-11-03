@@ -67,7 +67,7 @@ function Cart() {
                   <TotalPrice>{addBonus ?
                     <>
                       <OldPrice>${totalPrice}</OldPrice>
-                      <NewPrice>${parseInt(totalPrice) * 0.9}</NewPrice>
+                      <NewPrice>${(parseInt(totalPrice) * 0.9).toFixed(2)}</NewPrice>
                     </>
                     :
                     <p>{totalPrice}</p>
