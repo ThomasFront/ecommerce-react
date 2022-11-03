@@ -26,6 +26,10 @@ export const Details = styled.div`
 `
 
 export const ProductInformation = styled.div`
+span {
+  font-weight: bold;
+}
+
 @media (min-width: 768px){
     width: 33%;
   }

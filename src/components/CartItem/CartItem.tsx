@@ -34,7 +34,7 @@ export const CartItem = ({ item, index }: CartItemProps) => {
         <ProductInformation>
           <BrandName>{shortBrand}</BrandName>
           <Description>{description}</Description>
-          <p>{size} x {amount}</p>
+          <p>{size} x <span>{amount}</span></p>
           <DeleteIcon
             onClick={() => deleteProductFromCart(user, cart, dispatch, item)} />
         </ProductInformation>

@@ -9,7 +9,7 @@ import { TextWrapper } from '../../components/TextWrapper/TextWrapper'
 import { Wave } from '../../components/Wave/Wave'
 import { auth } from '../../firebase/firebase'
 import { cartSelector, deleteAllCart } from '../../store/slices/cartSlice'
-import { ButtonsContainer, CartHeader, CartItems, CartPageWrapper, CheckoutButton, Container, CostContainer, EmptyCartText, OrderingText, OrderSummary, RedirectingInfo, Total, TotalName, TotalPrice } from './Cart.styles'
+import { BonusAdded, BonusWrapper, ButtonsContainer, CartHeader, CartItems, CartPageWrapper, CheckoutButton, Container, CostContainer, EmptyCartText, NewPrice, OldPrice, OrderingText, OrderSummary, RedirectingInfo, Total, TotalName, TotalPrice } from './Cart.styles'
 
 
 
@@ -17,6 +17,10 @@ function Cart() {
   const cart = useSelector(cartSelector)
   const totalPrice = cart.reduce((prev, curr) => prev + (curr.price * curr.amount), 0).toFixed(2)
   const [showParagraf, setShowParagraf] = useState(false)
+  const [addBonus, setAddBonus] = useState(false)
+  const [showError, setShowError] = useState(false)
+  const [bonusValue, setBonusValue] = useState('ThomasFront')
+  const [showBonusCode, setShowBonusCode] = useState(true)
   const [user] = useAuthState(auth)
   const navigate = useNavigate()
   const dispatch = useDispatch<any>()
@@ -27,6 +31,16 @@ function Cart() {
       dispatch(deleteAllCart(user?.uid as string))
       navigate('/')
     }, 3000)
+  }
+
+  const handleBonusCode = () => {
+    if (bonusValue === 'ThomasFront') {
+      setAddBonus(true)
+      setShowError(false)
+      setShowBonusCode(false)
+    } else {
+      setShowError(true)
+    }
   }
 
   return (
@@ -50,11 +64,30 @@ function Cart() {
               <Total>
                 <CostContainer>
                   <TotalName>Total Cost:</TotalName>
-                  <TotalPrice>${totalPrice}</TotalPrice>
+                  <TotalPrice>{addBonus ?
+                    <>
+                      <OldPrice>${totalPrice}</OldPrice>
+                      <NewPrice>${parseInt(totalPrice) * 0.9}</NewPrice>
+                    </>
+                    :
+                    <p>{totalPrice}</p>
+                  }
+                  </TotalPrice>
                 </CostContainer>
                 <ButtonsContainer>
-                  <button onClick={() => dispatch(deleteAllCart(user?.uid as string))}>Delete all</button>
-                  <CheckoutButton onClick={handleCheckout}>Checkout</CheckoutButton>
+                  <div>
+                    <button onClick={() => dispatch(deleteAllCart(user?.uid as string))}>Delete all</button>
+                    <CheckoutButton onClick={handleCheckout}>Checkout</CheckoutButton>
+                  </div>
+                  {showBonusCode ?
+                    <BonusWrapper>
+                      <input type="text" value={bonusValue} onChange={e => setBonusValue(e.target.value)} />
+                      {showError && <p>The code is invalid or empty</p>}
+                      <button type='submit' onClick={handleBonusCode}>Add bonus code</button>
+                    </BonusWrapper>
+                    :
+                    <BonusAdded>10% discount has been added!</BonusAdded>
+                  }
                 </ButtonsContainer>
                 {showParagraf &&
                   <>

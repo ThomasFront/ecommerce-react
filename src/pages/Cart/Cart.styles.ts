@@ -77,6 +77,7 @@ export const ButtonsContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 
   @media (min-width: 768px){
       margin-top: 40px;
@@ -84,7 +85,8 @@ export const ButtonsContainer = styled.div`
 
   button{
     margin: 0 20px;
-    padding: 5px 10px;
+    padding: 1px 2px;
+    font-size: 10px;
     border: none;
     border-radius: 6px;
     cursor: pointer;
@@ -95,9 +97,18 @@ export const ButtonsContainer = styled.div`
       transform: scale(1.05);
     }
 
+    @media (min-width: 320px){
+      padding: 2px 4px;
+    }
+
+    @media (min-width: 370px){
+      font-size: 16px;
+      padding: 5px 10px;
+    }
+
     @media (min-width: 768px){
       font-size: 18px;
-      padding: 9px 18px;
+      padding: 7px 14px;
     }
   }
 `
@@ -122,4 +133,45 @@ export const RedirectingInfo = styled.p`
   @media (min-width: 768px){
     font-size: 12px;
   }
+`
+
+
+export const BonusWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+
+  p{
+    color: crimson;
+    font-size: 12px;
+    text-align: center;
+  }
+
+  input {
+    border-radius: 6px;
+    border: 1px solid gray;
+    padding: 2px 4px;
+  }
+
+  button {
+    margin: 5px auto 0;
+    font-size: 12px;
+    background-color: white;
+  }
+`
+
+export const BonusAdded = styled.p`
+  margin-top: 20px;
+  color: green;
+  text-align: center;
+`
+
+export const OldPrice = styled.p`
+  text-decoration: line-through;
+  color: gray;
+  font-size: 14px;
+`
+
+export const NewPrice = styled.p`
+  color: green;
 `
