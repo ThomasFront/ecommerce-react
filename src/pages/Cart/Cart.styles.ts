@@ -157,6 +157,7 @@ export const BonusWrapper = styled.div`
     margin: 5px auto 0;
     font-size: 12px;
     background-color: white;
+    font-family: 'Montserrat', sans-serif;
   }
 `
 
@@ -168,10 +169,19 @@ export const BonusAdded = styled.p`
 
 export const OldPrice = styled.p`
   text-decoration: line-through;
-  color: gray;
+  color: ${({theme}) => theme.colors.grayColor};
   font-size: 14px;
 `
 
 export const NewPrice = styled.p`
   color: green;
+`
+
+export const DeleteAllBtn = styled.button`
+  background-color: ${({theme}) => theme.colors.grayColor};
+  transition: background-color 0.2s;
+  
+  &:hover {
+    background-color: ${({theme}) => theme.colors.lightGrayColor};
+  }
 `

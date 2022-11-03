@@ -18,6 +18,7 @@ export function Navbar() {
   const burgerSelector = useSelector(toggleShowSelector)
   const [user] = useAuthState(auth);
   const cartAmount = useSelector(cartSelector)
+  const amountInCart = cartAmount.reduce((curr, acc) => acc.amount + curr ,0)
 
   const handleLogout = () => {
     logout()
@@ -48,7 +49,7 @@ export function Navbar() {
             {user && <LinkItem to="/profile"><BsFillPersonFill /></LinkItem>}
             <CartContainer>
               <LinkItem to="/cart"><FaShoppingCart /></LinkItem>
-              {cartAmount.length > 0 && <p>{cartAmount.length}</p>}
+              {amountInCart > 0 && <p>{amountInCart}</p>}
             </CartContainer>
           </RightSection>
         </Wrapper>
