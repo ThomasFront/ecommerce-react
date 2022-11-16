@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import { brandSelector, changeBrand, toggleShow, toggleShowSelector } from '../../store/slices/categoriesSlice'
 import { brands } from '../../utils'
 import { TextWrap } from '../TextWrapper/TextWrapper.styles'
-import { CategoriesList, Category, CategoryBox, CategoryContainer, CategoryName } from './ProductsCategories.styles'
+import { BlogText, CategoriesList, Category, CategoryBox, CategoryContainer, CategoryName } from './ProductsCategories.styles'
 
 function ProductsCategories() {
   const dispatch = useDispatch()
@@ -19,8 +19,9 @@ function ProductsCategories() {
       <TextWrap>
         <CategoryContainer>
           <CategoryBox>
+            <BlogText to='/blog'>Check our blog</BlogText>
             <CategoryName>Brand:</CategoryName>
-            {brands.map(({label, value, id}) => (
+            {brands.map(({ label, value, id }) => (
               <Category
                 key={id}
                 onClick={() => handleCategory(value)}

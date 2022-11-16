@@ -1,6 +1,7 @@
 import { AnimatePresence } from 'framer-motion'
 import { useLocation } from 'react-router'
 import { Route, Routes } from 'react-router'
+import Blog from '../../pages/Blog/Blog'
 import Cart from '../../pages/Cart/Cart'
 import Home from '../../pages/Home/Home'
 import Login from '../../pages/Login/Login'
@@ -20,6 +21,7 @@ export const AnimatedRoutes = () => {
         <Route path='/product/:productId' element={<Product />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
+        <Route path='/blog' element={<Blog />} />
       </Routes>
     </AnimatePresence>
   )

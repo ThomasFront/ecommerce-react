@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 
 type CategoryProps =  {
@@ -78,5 +79,20 @@ ${({ isHighlighted }) => isHighlighted && css`
 @media (min-width: 576px) {
   font-size: 18px;
 }
+`
 
+export const BlogText = styled(Link)`
+  margin-bottom: 10px;
+  padding: 3px 6px;
+  font-size: 20px;
+  font-weight: bold;
+  text-decoration: none;
+  color: ${({theme}) => theme.colors.primaryColor};
+  text-transform: uppercase;
+  background-color: #ffffff;
+  border-radius: 10px;
+
+  @media (min-width: 400px){
+    padding: 6px 12px;
+  }
 `
