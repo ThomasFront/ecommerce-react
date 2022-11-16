@@ -136,6 +136,7 @@ export const RightSection = styled.div`
       padding: 0 5px;
     }
   }
+
   
   button {
     font-size: 10px;
@@ -180,4 +181,26 @@ p {
     right: 10px;
   }
 }
+`
+
+export const BlogContainer = styled.div`
+  display: none;
+
+  @media (min-width: 768px){
+    display: flex;
+  }
+`
+
+export const BlogLink = styled(Link)`
+  
+  @media (min-width: 768px){
+    padding: 3px 6px !important;
+    border-radius: 6px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: black;
+    font-size: 20px !important;
+    background-color: white;
+  }
 `

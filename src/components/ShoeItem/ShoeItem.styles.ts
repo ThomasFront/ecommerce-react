@@ -13,7 +13,7 @@ width: 250px;
 margin: 10px;
 height: 450px;
 background-color: ${({theme}) => theme.colors.secondaryColor};
-box-shadow: 0 0 5px ${({theme}) => theme.colors.grayColor};;
+box-shadow: 0 0 5px ${({theme}) => theme.colors.grayColor};
 cursor: pointer;
 transition: transform 0.2s;
 

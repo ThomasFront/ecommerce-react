@@ -1,4 +1,4 @@
-import { BurgerIcon, CartContainer, LinkItem, LoginButton, LogoContainer, NavbarDesign, RightSection, Wrapper } from './Navbar.styles'
+import { BlogContainer, BlogLink, BurgerIcon, CartContainer, LinkItem, LoginButton, LogoContainer, NavbarDesign, RightSection, Wrapper } from './Navbar.styles'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { FaShoppingCart } from 'react-icons/fa'
 import { BsFillPersonFill } from 'react-icons/bs'
@@ -18,7 +18,7 @@ export function Navbar() {
   const burgerSelector = useSelector(toggleShowSelector)
   const [user] = useAuthState(auth);
   const cartAmount = useSelector(cartSelector)
-  const amountInCart = cartAmount.reduce((curr, acc) => acc.amount + curr ,0)
+  const amountInCart = cartAmount.reduce((curr, acc) => acc.amount + curr, 0)
 
   const handleLogout = () => {
     logout()
@@ -46,6 +46,9 @@ export function Navbar() {
             >
               {user ? 'log out' : 'log in'}
             </LoginButton>
+            <BlogContainer>
+              <BlogLink to='/blog'>Blog</BlogLink>
+            </BlogContainer>
             {user && <LinkItem to="/profile"><BsFillPersonFill /></LinkItem>}
             <CartContainer>
               <LinkItem to="/cart"><FaShoppingCart /></LinkItem>
