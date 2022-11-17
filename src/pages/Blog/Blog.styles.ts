@@ -54,15 +54,24 @@ export const ArticleIcon = styled(GrArticle)`
 `
 
 export const ArticlesWrapper = styled(motion.div)`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
   position: relative;
   margin: 40px auto;
   width: 100%;
   max-width: 1200px;
-  background-color: white;
+  background-color: #ffffff;
   border-radius: 6px;
   padding: 20px;
-  min-height: 80vh;
   box-shadow: 0 0 5px ${({theme}) => theme.colors.grayColor};
+
+  @media (min-width: 600px){
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+  }
 
   @media (min-width: 768px){
     padding: 60px;

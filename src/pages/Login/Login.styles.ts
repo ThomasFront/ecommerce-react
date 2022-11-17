@@ -26,7 +26,7 @@ position: relative;
   max-width: 700px;
   width: 100%;
   border-radius: 6px;
-  box-shadow: 0 0 10px ${({theme}) => theme.colors.grayColor};;
+  box-shadow: 0 0 10px ${({theme}) => theme.colors.grayColor};
   background-color: ${({theme}) => theme.colors.whiteColor};
 
 p {
