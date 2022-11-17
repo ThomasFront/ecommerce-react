@@ -8,6 +8,7 @@ import Login from '../../pages/Login/Login'
 import Product from '../../pages/Product/Product'
 import Profile from '../../pages/Profile/Profile'
 import Register from '../../pages/Register/Register'
+import SpecificArticle from '../../pages/SpecificArticle/SpecificArticle'
 
 export const AnimatedRoutes = () => {
   const location = useLocation()
@@ -22,6 +23,7 @@ export const AnimatedRoutes = () => {
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
         <Route path='/blog' element={<Blog />} />
+        <Route path='/blog/:articleId' element={<SpecificArticle />} />
       </Routes>
     </AnimatePresence>
   )
