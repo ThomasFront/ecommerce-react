@@ -2,8 +2,8 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { TextWrapper } from '../../components/TextWrapper/TextWrapper'
 import { ArticleIcon, ArticlesWrapper, TitleContainer, Wrapper } from './Blog.styles'
-import Article from '../../components/Article/Article';
 import { ArticlesType } from '../../types/strapi';
+import Article from '../../components/Article/Article';
 
 function Blog() {
   const [articles, setArticles] = useState<ArticlesType['data']>([])
