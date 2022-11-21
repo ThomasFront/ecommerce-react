@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
+  z-index: 1;
   margin: 10px;
   color: #ffffff;
   max-width: 400px;
