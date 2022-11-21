@@ -9,6 +9,7 @@ import { toggleShow, toggleShowSelector } from '../../store/slices/categoriesSli
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth, logout } from '../../firebase/firebase'
 import { cartSelector, clearCart } from '../../store/slices/cartSlice'
+import { motion } from 'framer-motion'
 
 
 export function Navbar() {
@@ -52,7 +53,12 @@ export function Navbar() {
             {user && <LinkItem to="/profile"><BsFillPersonFill /></LinkItem>}
             <CartContainer>
               <LinkItem to="/cart"><FaShoppingCart /></LinkItem>
-              {amountInCart > 0 && <p>{amountInCart}</p>}
+              {amountInCart > 0 && <motion.p
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={{ opacity: 1, scale: 1 }}
+              >
+                {amountInCart}
+              </motion.p>}
             </CartContainer>
           </RightSection>
         </Wrapper>
