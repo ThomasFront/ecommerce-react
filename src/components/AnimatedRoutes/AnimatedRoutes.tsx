@@ -5,6 +5,7 @@ import Blog from '../../pages/Blog/Blog'
 import Cart from '../../pages/Cart/Cart'
 import Home from '../../pages/Home/Home'
 import Login from '../../pages/Login/Login'
+import { NotFoundPage } from '../../pages/NotFoundPage'
 import Product from '../../pages/Product/Product'
 import Profile from '../../pages/Profile/Profile'
 import Register from '../../pages/Register/Register'
@@ -24,6 +25,7 @@ export const AnimatedRoutes = () => {
         <Route path='/register' element={<Register />} />
         <Route path='/blog' element={<Blog />} />
         <Route path='/blog/:articleId' element={<SpecificArticle />} />
+        <Route path='*' element={<NotFoundPage />} />
       </Routes>
     </AnimatePresence>
   )
