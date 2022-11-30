@@ -1,4 +1,3 @@
-import React from 'react'
 import { LinkItem, Wrapper } from './NotFoundPage.styles'
 import WarningImage from '../../assets/warning.png'
 import { motion } from 'framer-motion'

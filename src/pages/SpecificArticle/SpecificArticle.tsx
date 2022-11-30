@@ -1,8 +1,8 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import { TextWrapper } from '../../components/TextWrapper/TextWrapper'
-import { ArticlesType, StrapiArticleType } from '../../types/strapi'
+import { StrapiArticleType } from '../../types/strapi'
 import { Container, ImageContainer, Wrapper } from './SpecificArticle.styles'
 
 function SpecificArticle() {

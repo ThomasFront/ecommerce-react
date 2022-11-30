@@ -22,7 +22,6 @@ type ShoeItemType = {
 
 function ShoeItem({ shoe }: ShoeItemType) {
   const { id, price, brand, description, images } = shoe
-  const [user] = useAuthState(auth);
   const cart = useSelector(cartSelector)
   const dispatch = useDispatch()
   const navigate = useNavigate()
