@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router'
 import { auth } from '../../firebase/firebase'
-import { ShoeType } from '../../pages/Home/Home'
 import { cartSelector } from '../../store/slices/cartSlice'
 import { deleteProductFromCart } from '../../utils'
 import { BrandName, DeleteIcon, Description, Details, ImgWrapper, ItemContainer, PriceDesktop, PriceDetails, ProductInformation } from './CartItem.styles'
@@ -14,7 +13,7 @@ type CartItemProps = {
   index: number
 }
 
-export const CartItem = ({ item, index }: CartItemProps) => {
+export const CartItem = ({ item }: CartItemProps) => {
   const { description, id, price, shortBrand, images, size, amount } = item
   const navigate = useNavigate()
   const dispatch = useDispatch<any>()

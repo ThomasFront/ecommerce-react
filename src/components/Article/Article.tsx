@@ -1,5 +1,4 @@
 import { format } from 'date-fns'
-import React from 'react'
 import { useNavigate } from 'react-router'
 import { ArticleType, StrapiAttributesType } from '../../types/strapi'
 import { Container, ImageContainer, ShowMoreText, Wrapper } from './Article.styles'

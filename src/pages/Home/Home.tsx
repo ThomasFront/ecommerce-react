@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import ProductsCategories from '../../components/ProductsCategories/ProductsCategories'
 import { TextWrapper } from '../../components/TextWrapper/TextWrapper'
 import { brandSelector, changeBrand, toggleShowSelector } from '../../store/slices/categoriesSlice'
-import { ArrowIcon, Brand, Brands, BrandTitle, Categories, Category, CategoryTitle, HomePageWrapper, SelectContainer, ShoesContainer } from './Home.styles'
+import { Brand, Brands, BrandTitle, Categories, Category, CategoryTitle, HomePageWrapper, IconWrapper, SelectContainer, ShoesContainer } from './Home.styles'
 import ShoeItem from '../../components/ShoeItem/ShoeItem'
 import { useDispatch } from 'react-redux'
 import { useAuthState } from 'react-firebase-hooks/auth'
@@ -12,6 +12,7 @@ import { collection, getDocs } from 'firebase/firestore'
 import { MutatingDots } from 'react-loader-spinner'
 import { Wave } from '../../components/Wave/Wave'
 import { cartSelector } from '../../store/slices/cartSlice'
+import { BsFillArrowUpCircleFill } from 'react-icons/bs'
 import { motion } from 'framer-motion'
 import { brands, categories } from '../../utils'
 
@@ -129,7 +130,7 @@ function Home() {
         <ShoesContainer>
           {loading ?
             <MutatingDots
-              color= '#ef5454'
+              color='#ef5454'
               secondaryColor='#ef5454'
             />
             :
@@ -145,7 +146,9 @@ function Home() {
           }
         </ShoesContainer>
       </TextWrapper>
-      <ArrowIcon onClick={scrollToTop} showArrowIcon={scrollPosition >= 500} />
+      <IconWrapper onClick={scrollToTop} showArrowIcon={scrollPosition >= 500}>
+        <BsFillArrowUpCircleFill />
+      </IconWrapper>
       {!loading && <Wave />}
     </HomePageWrapper>
   )

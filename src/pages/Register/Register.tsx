@@ -44,7 +44,7 @@ function Register() {
     checkbox: yup.boolean()
       .oneOf([true], "You must accept the terms and conditions")
   })
-  const { register, handleSubmit, watch, formState: { errors } } = useForm<Inputs>({
+  const { register, handleSubmit, formState: { errors } } = useForm<Inputs>({
     resolver: yupResolver(schema)
   });
 
