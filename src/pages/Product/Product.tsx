@@ -20,7 +20,7 @@ import { addProductToCart } from '../../utils'
 function Product() {
   const { productId } = useParams()
   const [activeImage, setActiveImage] = useState<string | null>(null)
-  const [user, error] = useAuthState(auth);
+  const [user] = useAuthState(auth);
   const [loading, setLoading] = useState(true)
   const dispatch = useDispatch<any>()
   const [product, setProduct] = useState<ShoeType | null>(null)

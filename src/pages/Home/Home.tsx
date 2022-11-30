@@ -30,16 +30,13 @@ export type ShoeType = {
 
 
 function Home() {
-  const toggleVisible = useSelector(toggleShowSelector)
   const brandSelect = useSelector(brandSelector)
   const dispatch = useDispatch<any>()
   const [activeCategory, setActiveCategory] = useState('')
   const [selectedValue, setSelectedValue] = useState('Popular')
-  const [user, error] = useAuthState(auth)
   const [allShoes, setAllShoes] = useState<Array<ShoeType> | null>(null)
   const [loading, setLoading] = useState(true)
   const [scrollPosition, setScrollPosition] = useState(0)
-  const cart = useSelector(cartSelector)
   const [showError, setShowError] = useState(false)
 
   const getAllShoes = async () => {
