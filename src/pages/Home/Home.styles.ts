@@ -138,7 +138,7 @@ export const HomePageWrapper = styled.div`
 
 export const IconWrapper = styled.div<ArrowIconProps>`
     position: fixed;
-    bottom: -50px;
+    bottom: -60px;
     right: 20px;
     cursor: pointer;
     transition: bottom 0.3s, transform 0.3s;
