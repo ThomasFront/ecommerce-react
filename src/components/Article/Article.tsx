@@ -10,7 +10,7 @@ type ArticleProps = {
 
 function Article({ article, id }: ArticleProps) {
   const { Title, Description, Image, publishedAt } = article
-  const image = `http://localhost:1337${Image.data.attributes.url}`
+  const image = Image.data.attributes.url
   const navigate = useNavigate()
 
   return (

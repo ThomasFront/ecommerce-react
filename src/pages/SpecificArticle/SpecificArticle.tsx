@@ -11,7 +11,7 @@ function SpecificArticle() {
   const image = article?.Image.data.attributes.url
 
   const getArticle = async () => {
-    const response = await axios.get<StrapiArticleType>(`http://localhost:1337/api/articles/${articleId}?populate=*`)
+    const response = await axios.get<StrapiArticleType>(`${import.meta.env.VITE_STRAPI_URL}/api/articles/${articleId}?populate=*`)
     setArticle(response.data.data.attributes)
   }
 
@@ -24,7 +24,7 @@ function SpecificArticle() {
       <TextWrapper>
         <Container>
           <ImageContainer>
-            <img src={`http://localhost:1337${image}`} alt={article?.Title} />
+            <img src={image} alt={article?.Title} />
           </ImageContainer>
           <h2>{article?.Title}</h2>
           <p>{article?.Description}</p>

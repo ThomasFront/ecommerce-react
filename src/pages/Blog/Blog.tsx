@@ -9,7 +9,7 @@ function Blog() {
   const [articles, setArticles] = useState<ArticlesType['data']>([])
 
   const getArticles = async () => {
-    const response = await axios.get<ArticlesType>('http://localhost:1337/api/articles?populate=*')
+    const response = await axios.get<ArticlesType>(`${import.meta.env.VITE_STRAPI_URL}/api/articles?populate=*`)
     setArticles(response.data.data)
   }
 
