@@ -70,7 +70,7 @@ function Login() {
             <RegisterText>Don't have an account? <RegisterButton onClick={() => navigate('/register')}>Register</RegisterButton> now</RegisterText>
             <img src={profilePhoto} alt="profile image" />
             <ContainerTestAccountInfo>
-              <p>Testowy użytkownik:</p>
+              <p>Test account:</p>
               <p>email: test@example.pl</p>
               <p>hasło: test12</p>
             </ContainerTestAccountInfo>
