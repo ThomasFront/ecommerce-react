@@ -17,11 +17,11 @@ padding-top: 20px;
 `
 
 export const LogInWrapper = styled.div`
-display: flex;
-justify-content: center;
-align-items: center;
-flex-direction: column;
-position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
   min-height: 350px;
   max-width: 700px;
   width: 100%;
@@ -128,4 +128,29 @@ export const LoginButtons = styled.button`
 export const LoginPageWrapper = styled.div`
   position: relative;
   min-height: 100vh;
+`
+
+export const ContainerTestAccountInfo = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  margin: 0 2px;
+  border-radius: 6px;
+  background-color: black;
+
+  p{
+    color: white;
+    margin: 2px 4px;
+    font-size: 10px;
+    text-align: center;
+
+    @media (min-width: 576px){
+      font-size: 12px;
+    }
+
+    @media (min-width: 768px){
+      font-size: 15px;
+    }
+  }
 `
