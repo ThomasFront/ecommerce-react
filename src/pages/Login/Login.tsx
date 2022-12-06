@@ -72,7 +72,7 @@ function Login() {
             <ContainerTestAccountInfo>
               <p>Test account:</p>
               <p>email: test@example.pl</p>
-              <p>hasło: test12</p>
+              <p>password: test12</p>
             </ContainerTestAccountInfo>
           </LogInWrapper>
         </Container>
