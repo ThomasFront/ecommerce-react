@@ -26,6 +26,7 @@ type UserInformationType = {
 
 function Profile() {
   const [user] = useAuthState(auth);
+  const [error, setError] = useState(false)
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const modal = useSelector(modalSelector)
@@ -39,16 +40,21 @@ function Profile() {
   }, [user])
 
   const handleDeleteAccount = async () => {
-    const auth = getAuth();
-    const user = auth.currentUser;
-    const q = query(collection(db, "users"), where("uid", "==", user?.uid));
-    const docs = await getDocs(q);
-    await deleteDoc(doc(db, "users", docs.docs[0].id))
-    await deleteUser(user as User)
-    dispatch(openModal(false))
-    logout()
-    dispatch(clearCart())
-    navigate('/')
+    try {
+      const auth = getAuth();
+      const user = auth.currentUser;
+      const q = query(collection(db, "users"), where("uid", "==", user?.uid));
+      const docs = await getDocs(q);
+      await deleteDoc(doc(db, "users", docs.docs[0].id))
+      await deleteUser(user as User)
+      dispatch(openModal(false))
+      logout()
+      dispatch(clearCart())
+      navigate('/')
+      setError(false)
+    } catch (error) {
+      setError(true)
+    }
   }
 
   const handleTimestamp = (timestamp: number) => {
@@ -115,11 +121,23 @@ function Profile() {
       </TextWrapper>
       <DeleteModal showModal={modal}>
         <ModalWrapper>
-          <p>Are you sure you want to delete your account?</p>
-          <ButtonsWrapper>
-            <button onClick={handleDeleteAccount}>Yes</button>
-            <button onClick={() => dispatch(openModal(false))}>No</button>
-          </ButtonsWrapper>
+          {user?.uid === 'yEWcF9iziza3FOr2JCv8istPYOt2' ?
+            <>
+              <p>You can't delete the test account</p>
+              <ButtonsWrapper>
+                <button onClick={() => dispatch(openModal(false))}>Close information</button>
+              </ButtonsWrapper>
+            </>
+            :
+            <>
+              <p>Are you sure you want to delete your account?</p>
+              {error && <p>Account couldn't be deleted</p>}
+              <ButtonsWrapper>
+                <button onClick={handleDeleteAccount}>Yes</button>
+                <button onClick={() => dispatch(openModal(false))}>No</button>
+              </ButtonsWrapper>
+            </>
+          }
         </ModalWrapper>
       </DeleteModal>
       <Wave />

@@ -18,6 +18,7 @@ function SpecificArticle() {
       const response = await axios.get<StrapiArticleType>(`${import.meta.env.VITE_STRAPI_URL}/api/articles/${articleId}?populate=*`)
       setArticle(response.data.data.attributes)
       setLoading(false)
+      setError(false)
     } catch (error) {
       setError(true)
     }
@@ -32,7 +33,7 @@ function SpecificArticle() {
       <TextWrapper>
         {loading ?
           <LoadingContainer>
-            {error && 'Pobieranie artykułów się nie powiodło... Spróbuj ponownie później.'}
+            {error && <p>Pobieranie artykułów się nie powiodło... Spróbuj ponownie później.</p>}
             <MutatingDots
               color='#ef5454'
               secondaryColor='#ef5454'

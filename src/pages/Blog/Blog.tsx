@@ -36,7 +36,7 @@ function Blog() {
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
         >
-          {error && 'Pobieranie artykułów się nie powiodło... Spróbuj ponownie później.'}
+          {error && <p>Pobieranie artykułów się nie powiodło... Spróbuj ponownie później.</p>}
           <ArticleIcon />
           {loading ?
             <MutatingDots

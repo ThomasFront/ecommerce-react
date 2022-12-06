@@ -157,6 +157,7 @@ export const BonusWrapper = styled.div`
     margin: 5px auto 0;
     font-size: 12px;
     background-color: white;
+    color: black;
     font-family: 'Montserrat', sans-serif;
   }
 `
