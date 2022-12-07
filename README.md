@@ -11,6 +11,8 @@ in React + Typescript. Saves data in a database
 - Ability to add a discount code
 - Form validation
 
+<b>Live version:</b> https://cosmic-alfajores-12805c.netlify.app/
+
 <b>Sample screenshots:</b>
 ![future1](https://user-images.githubusercontent.com/101347573/206222303-bb36aa35-b9a2-445b-a06c-8bb20f4f3367.png)
 ![future2](https://user-images.githubusercontent.com/101347573/206222308-400ef59b-83d8-4d14-8c1c-c32660347392.png)
