@@ -9,18 +9,20 @@ import { Container, ImageContainer, LoadingContainer, Wrapper } from './Specific
 function SpecificArticle() {
   const { articleId } = useParams()
   const [article, setArticle] = useState<StrapiArticleType['data']['attributes'] | null>(null)
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
   const image = article?.Image.data.attributes.url
 
   const getArticle = async () => {
     try {
+      setLoading(true)
       const response = await axios.get<StrapiArticleType>(`${import.meta.env.VITE_STRAPI_URL}/api/articles/${articleId}?populate=*`)
       setArticle(response.data.data.attributes)
       setLoading(false)
       setError(false)
     } catch (error) {
       setError(true)
+      setLoading(false)
     }
   }
 
@@ -33,7 +35,7 @@ function SpecificArticle() {
       <TextWrapper>
         {loading ?
           <LoadingContainer>
-            {error && <p>Pobieranie artykułów się nie powiodło... Spróbuj ponownie później.</p>}
+            {error && <p>Proszę odśwież stronę... Pobieranie danych nie powiodło się.</p>}
             <MutatingDots
               color='#ef5454'
               secondaryColor='#ef5454'
