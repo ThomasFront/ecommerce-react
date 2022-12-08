@@ -8,16 +8,19 @@ import { MutatingDots } from 'react-loader-spinner';
 
 function Blog() {
   const [articles, setArticles] = useState<ArticlesType['data']>([])
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
 
   const getArticles = async () => {
     try {
+      setLoading(true)
       const response = await axios.get<ArticlesType>(`${import.meta.env.VITE_STRAPI_URL}/api/articles?populate=*`)
       setArticles(response.data.data)
       setLoading(false)
+      setError(false)
     } catch (error) {
       setError(true)
+      setLoading(false)
     }
   }
 
@@ -36,7 +39,7 @@ function Blog() {
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
         >
-          {error && <p>Pobieranie artykułów się nie powiodło... Spróbuj ponownie później.</p>}
+          {error && <p>Proszę odśwież stronę... Pobieranie danych nie powiodło się.</p>}
           <ArticleIcon />
           {loading ?
             <MutatingDots
